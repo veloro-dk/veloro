@@ -1,0 +1,21 @@
+.auth__page__Q2m7p0 {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.auth__card__H6j3k0 {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(var(--color-bg-secondary), 1);
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow-stack-low);
+}
+
+.auth__title__T2k9p0 {
+    margin-bottom: 16px;
+}
