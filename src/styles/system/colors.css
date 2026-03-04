@@ -1,0 +1,136 @@
+:root {
+    --color-bg-selection: 114, 114, 255;
+    --color-text-selection: 255, 255, 255;
+
+    --dvh: 1dvh;
+
+    --header-top: 16px;
+    --header-height: 48px;
+    --header-radius: 16px;
+
+    --system-padding: 24px;
+    --system-padding-default: 96px var(--system-padding) 0;
+    --system-max-width: 1024px;
+
+    --layer-max: 10000;
+    --layer-tooltip: 20000;
+    --layer-header: 1000;
+    --layer-overlay: 900;
+    --layer-dialog: 700;
+    --layer-dialog-overlay: 600;
+    --layer-popover: 500;
+    --layer-scrollbar: 400;
+    --layer-footer: 300;
+
+    --radius-rounded: 9999px;
+
+    --font-monospace: ui-monospace, "SF Mono", "Menlo", monospace;
+    --font-regular: apple-system-body, BlinkMacSystemFont, sans-serif;
+    --font-weight-light: 340;
+    --font-weight-normal: 400;
+    --font-weight-medium: 460;
+    --font-weight-semibold: 500;
+    --font-weight-bold: 540;
+
+    --color-blue: #007aff;
+    --color-red: #ec6a5e;
+    --color-green: #62c755;
+    --color-orange: #f4bf50;
+    --mask-on: #000;
+    --mask-off: transparent;
+
+    --font-size-small: clamp(0.78125rem, calc(0.72917rem + 0.13021vw), 0.8125rem);
+    --font-size-smallPlus: clamp(0.78125rem, calc(0.72917rem + 0.13021vw), 0.8125rem);
+    --font-size-regular: clamp(0.84375rem, calc(0.79167rem + 0.13021vw), 0.875rem);
+    --font-size-regularPlus: clamp(0.875rem, calc(0.77083rem + 0.26042vw), 0.9375rem);
+    --font-size-large: clamp(1rem, calc(0.79167rem + 0.52083vw), 1.125rem);
+    --font-size-largePlus: clamp(1.125rem, calc(0.9375rem + 0.46875vw), 1.3125rem);
+    --font-size-title4: clamp(1rem, calc(0.75rem + 1.25vw), 1.5rem);
+    --font-size-title3: clamp(1.5rem, calc(0.5rem + 3.125vw), 2.5rem);
+    --font-size-title2: clamp(2rem, calc(-0.5rem + 6.25vw), 3.5rem);
+    --font-size-title1: clamp(2.5rem, calc(-0.41667rem + 7.29167vw), 4.25rem);
+
+    --ease-out-quad: cubic-bezier(0.26, 0.49, 0.42, 0.95);
+    --ease-in-quad: cubic-bezier(0.51, 0.06, 0.66, 0.19);
+
+    --shadow-stack-low: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-stack-medium: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --shadow-stack-high: 0 10px 30px rgba(0, 0, 0, 0.15);
+
+    --icon-size-default: 16px;
+}
+
+.light {
+    --color-button-translucent: #00000008;
+    --color-bg-header: 255, 255, 255;
+    --color-bg-header-active: 246, 246, 246;
+    --color-border-header: 13, 13, 13, 0.08;
+    --color-bg-primary: 255, 255, 255;
+    --color-bg-secondary: 249, 248, 249;
+    --color-bg-tertiary: 244, 243, 244;
+    --color-bg-quaternary: 238, 237, 239;
+    --color-bg-quinary: 233, 232, 234;
+    --color-primary-inverted: 25, 25, 27;
+    --color-secondary-inverted: 12, 12, 12;
+    --color-border-primary: 233, 232, 234;
+    --color-border-secondary: 228, 227, 228;
+    --color-border-tertiary: 220, 219, 221;
+    --color-toggle: 189, 192, 197;
+    --color-text-primary: 40, 42, 48;
+    --color-text-secondary: 84, 90, 99;
+    --color-text-tertiary: 134, 132, 141;
+    --color-text-quaternary: 89, 90, 92;
+    --color-overlay-primary: 255, 255, 255, 0.6;
+    --color-link-primary: 0, 122, 255;
+    --color-link-hover: 66, 81, 222;
+    --color-bg-brand: 100, 103, 197;
+    --color-brand-text: 255, 255, 255;
+}
+
+.dark {
+    --color-button-translucent: #ffffff10;
+    --color-bg-header: 9, 9, 9;
+    --color-bg-header-active: 13, 13, 13;
+    --color-border-header: 242, 242, 242, 0.08;
+    --color-bg-primary: 8, 9, 10;
+    --color-bg-secondary: 16, 17, 19;
+    --color-bg-tertiary: 28, 28, 31;
+    --color-bg-quaternary: 35, 35, 38;
+    --color-bg-quinary: 40, 40, 44;
+    --color-primary-inverted: 228, 230, 230;
+    --color-secondary-inverted: 243, 243, 243;
+    --color-border-primary: 35, 37, 42;
+    --color-border-secondary: 52, 52, 58;
+    --color-border-tertiary: 62, 62, 68;
+    --color-toggle: 92, 102, 109;
+    --color-text-primary: 247, 248, 248;
+    --color-text-secondary: 208, 214, 216;
+    --color-text-tertiary: 138, 143, 152;
+    --color-text-quaternary: 89, 90, 92;
+    --color-overlay-primary: 0, 0, 0, 0.6;
+    --color-link-primary: 0, 122, 255;
+    --color-link-hover: 66, 81, 222;
+    --color-bg-brand: 100, 103, 197;
+    --color-brand-text: 255, 255, 255;
+}
+
+body {
+    min-height: 100vh;
+    color: rgba(var(--color-text-primary), 1);
+    background-color: rgba(var(--color-bg-primary), 1);
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+::selection {
+    background-color: rgba(var(--color-bg-selection), 1);
+    color: rgba(var(--color-text-selection), 1);
+}
+
+svg {
+    width: var(--icon-size-default);
+    height: var(--icon-size-default);
+}
+
+.shadow-input {
+    box-shadow: 0px 2px 3px -1px rgba(0, 0, 0, 0.1), 0px 1px 0px 0px rgba(25, 28, 33, 0.02), 0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+}

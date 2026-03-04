@@ -1,0 +1,168 @@
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    vertical-align: baseline;
+}
+
+*,
+:after,
+:before {
+    box-sizing: border-box;
+}
+
+*::-moz-selection {
+    background: rgba(var(--color-bg-selection), 1);
+    color: rgba(var(--color-text-selection), 1);
+}
+
+*::selection {
+    background: rgba(var(--color-bg-selection), 1);
+    color: rgba(var(--color-text-selection), 1);
+}
+
+body,
+button,
+html,
+input,
+optgroup,
+select,
+textarea {
+    font-family: var(--font-regular);
+}
+
+body {
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    background: rgba(var(--color-bg-primary), 1);
+    -webkit-text-size-adjust: none;
+    overflow-x: hidden;
+}
+
+svg:focus-visible,
+select:focus-visible {
+    outline: none;
+}
+
+html,
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: 100vh;
+    background: rgba(var(--color-bg-primary), 1);
+    -webkit-tap-highlight-color: transparent;
+}
+
+ul {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+li {
+    margin-bottom: 8px;
+    margin-left: 24px;
+}
+
+li::marker {
+    color: rgba(var(--color-text-tertiary), 1);
+    font-family: var(--font-regular);
+}
+
+strong {
+    font-weight: var(--font-weight-bold);
+}
+
+code,
+pre {
+    font-family: var(--font-monospace);
+    font-size: var(--font-size-small);
+}
