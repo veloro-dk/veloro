@@ -1,0 +1,235 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+enum UserStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum Currency {
+  EUR
+  USD
+  DKK
+}
+
+enum ItemStatus {
+  IN_STOCK
+  SOLD
+  RESERVED
+  ARCHIVED
+}
+
+enum AttrType {
+  TEXT
+  NUMBER
+  DATE
+  BOOLEAN
+  SELECT
+  CURRENCY
+}
+
+enum PurchaseLineType {
+  ITEM
+}
+
+enum SaleLineType {
+  ITEM
+}
+
+model User {
+  id           String     @id @default(uuid())
+  employeeId   String     @unique @db.VarChar(64)
+  passwordHash String     @db.VarChar(255)
+  role         UserRole   @default(USER)
+  status       UserStatus @default(ACTIVE)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  sessions     Session[]
+  settings     UserSettings?
+  auditLogs    AuditLog[]
+  purchases    Purchase[]
+  sales        Sale[]
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  tokenHash String   @unique @db.VarChar(255)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  lastSeenAt DateTime?
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model UserSettings {
+  userId            String   @id
+  preferredLanguage String   @default("en") @db.VarChar(8)
+  preferredCurrency Currency @default(EUR)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id          String              @id @default(uuid())
+  name        String              @db.VarChar(80)
+  isActive    Boolean             @default(true)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  attributes  CategoryAttribute[]
+  items       InventoryItem[]
+
+  @@unique([name])
+}
+
+model CategoryAttribute {
+  id          String    @id @default(uuid())
+  categoryId  String
+  key         String    @db.VarChar(64)
+  label       String    @db.VarChar(80)
+  type        AttrType
+  required    Boolean   @default(false)
+  options     Json?
+  orderIndex  Int       @default(0)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, key])
+  @@index([categoryId, orderIndex])
+}
+
+model InventoryItem {
+  id            String     @id @default(uuid())
+  categoryId    String
+  inventoryCode String?    @unique @db.VarChar(32)
+  status        ItemStatus @default(IN_STOCK)
+  quantity      Int        @default(1)
+  attributes    Json       @default("{}")
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  category      Category   @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  services      ServiceEvent[]
+  purchaseLines PurchaseLine[]
+  saleLines     SaleLine[]
+
+  @@index([categoryId])
+  @@index([status])
+}
+
+model ServiceEvent {
+  id         String   @id @default(uuid())
+  itemId     String
+  date       DateTime
+  vendor     String?  @db.VarChar(120)
+  description String  @db.Text
+  costAmount Int
+  currency   Currency @default(EUR)
+  createdAt  DateTime @default(now())
+
+  item       InventoryItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([itemId, date])
+}
+
+model Purchase {
+  id           String   @id @default(uuid())
+  purchaseDate DateTime
+  currency     Currency @default(EUR)
+  supplierName String?  @db.VarChar(160)
+  notes        String?  @db.Text
+  createdById  String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  createdBy    User     @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  lines        PurchaseLine[]
+
+  @@index([purchaseDate])
+  @@index([createdById])
+}
+
+model PurchaseLine {
+  id          String          @id @default(uuid())
+  purchaseId  String
+  lineType    PurchaseLineType @default(ITEM)
+  itemId      String
+  quantity    Int             @default(1)
+  unitCost    Int
+  totalCost   Int
+  createdAt   DateTime        @default(now())
+
+  purchase    Purchase        @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  item        InventoryItem   @relation(fields: [itemId], references: [id], onDelete: Restrict)
+
+  @@index([purchaseId])
+  @@index([itemId])
+}
+
+model Sale {
+  id         String   @id @default(uuid())
+  saleDate   DateTime
+  currency   Currency @default(EUR)
+  notes      String?  @db.Text
+  createdById String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  createdBy  User     @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  lines      SaleLine[]
+
+  @@index([saleDate])
+  @@index([createdById])
+}
+
+model SaleLine {
+  id         String       @id @default(uuid())
+  saleId     String
+  lineType   SaleLineType @default(ITEM)
+  itemId     String
+  quantity   Int          @default(1)
+  unitPrice  Int
+  totalPrice Int
+  createdAt  DateTime     @default(now())
+
+  sale       Sale         @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  item       InventoryItem @relation(fields: [itemId], references: [id], onDelete: Restrict)
+
+  @@index([saleId])
+  @@index([itemId])
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  actorId   String
+  action    String   @db.VarChar(80)
+  entity    String   @db.VarChar(80)
+  entityId  String?  @db.VarChar(80)
+  meta      Json?
+  createdAt DateTime @default(now())
+
+  actor     User     @relation(fields: [actorId], references: [id], onDelete: Restrict)
+
+  @@index([actorId, createdAt])
+  @@index([action])
+}
