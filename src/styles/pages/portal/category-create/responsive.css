@@ -1,0 +1,33 @@
+@media (max-width: 768px) {
+    .portalCategoryCreateActions__D4m8Q2 {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .portalCategoryCreateSectionHeader__H8m2Q4 {
+        align-items: flex-start;
+    }
+
+    .portalCategoryCreateSupplyToolbar__J2m8Q9 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalCategoryCreatePickerToolbar__P6m8Q1,
+    .portalCategoryCreateBrowseToolbar__N4m8Q9 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalCategoryCreateBrowseToolbar__N4m8Q9 .portalCategoryCreateSearchByField__U2m8Q4 {
+        min-width: 0;
+    }
+
+    .portalCategoryCreateConditionRow__V4m8Q5,
+    .portalCategoryCreateConditionRowWithDelete__M2m8Q5 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalCategoryCreateMatchMode__A8m2Q3 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

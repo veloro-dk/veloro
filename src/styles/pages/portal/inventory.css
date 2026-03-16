@@ -1,0 +1,5 @@
+@import "./inventory/layout.css";
+@import "./inventory/detail.css";
+@import "./inventory/list.css";
+@import "./inventory/form.css";
+@import "./inventory/responsive.css";

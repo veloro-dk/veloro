@@ -1,0 +1,10 @@
+.portalCategoryCreateActionsCard__M2m9Q1 {
+    gap: var(--space-2);
+}
+
+.portalCategoryCreateActions__D4m8Q2 {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--space-2);
+}

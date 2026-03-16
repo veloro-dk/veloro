@@ -1,0 +1,191 @@
+.portalSettingsBody__R8p1H6 {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(220px, 268px) minmax(0, 1fr);
+}
+
+.portalSettingsNav__S2m5V9 {
+    border-right: 1px solid rgba(var(--color-border-primary), 1);
+    padding: var(--space-4) var(--space-4) var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalSettingsProfileButton__M2n8V4 {
+    width: 100%;
+    min-height: 54px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.16s var(--ease-out-quad), border-color 0.16s var(--ease-out-quad);
+}
+
+.portalSettingsProfileButton__M2n8V4:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalSettingsProfileButtonActive__R6k1T7,
+.portalSettingsProfileButtonActive__R6k1T7:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalSettingsProfileAvatar__Q4d9L2 {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: var(--font-weight-semibold);
+    color: rgba(var(--color-bg-primary), 1);
+    background: rgba(var(--color-blue), 1);
+    flex: 0 0 auto;
+}
+
+.portalSettingsProfileMeta__W7m3P1 {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portalSettingsProfileName__E8t2K6 {
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-primary), 1);
+    line-height: 1.2;
+}
+
+.portalSettingsProfileEmployee__L5p9D3 {
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+    line-height: 1.2;
+}
+
+.portalSettingsSearch__B7k4D3 {
+    position: relative;
+    display: block;
+}
+
+.portalSettingsSearchIcon__L6n2P8 {
+    position: absolute;
+    left: var(--space-2);
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    transform: translateY(-50%);
+    color: rgba(var(--color-text-tertiary), 1);
+    pointer-events: none;
+}
+
+.portalSettingsSearchSpinner__J4m8R1 {
+    position: absolute;
+    left: var(--space-2);
+    top: 50%;
+    margin-top: -7px;
+    width: 14px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(var(--color-text-tertiary), 1);
+    pointer-events: none;
+}
+
+.portalSettingsNavList__V4f8R2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portalSettingsSearchResults__A5n2Q7 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: min(56vh, 460px);
+    overflow-y: auto;
+    padding-right: 2px;
+}
+
+.portalSettingsSearchResultItem__N7v3P4 {
+    width: 100%;
+}
+
+.portalSettingsSearchResultText__W2m7Q6 {
+    min-width: 0;
+    display: block;
+}
+
+.portalSettingsSearchResultTitle__R9n1D5 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.portalSettingsSearchEmpty__D3m8R2 {
+    min-height: 28px;
+    padding: 0 var(--space-1);
+    display: inline-flex;
+    align-items: center;
+    color: rgba(var(--color-text-tertiary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalSettingsNavSection__A7m1D4 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-top: var(--space-1);
+}
+
+.portalSettingsNavSectionLabel__Q4n8V1 {
+    margin: 0;
+    padding: 0 var(--space-1);
+    color: rgba(var(--color-text-tertiary), 1);
+    font-size: var(--font-size-xs);
+}
+
+.portalSettingsNavItem__X5n1K7 {
+    min-height: 28px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 var(--space-3);
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.16s var(--ease-out-quad), color 0.16s var(--ease-out-quad);
+}
+
+.portalSettingsNavItem__X5n1K7:hover {
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalSettingsNavItemActive__U9r2D6,
+.portalSettingsNavItemActive__U9r2D6:hover {
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalSettingsNavIcon__P8t3C5 {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 auto;
+}

@@ -1,0 +1,95 @@
+.portalSettingsLoginLogsScroller__C8m2V5 {
+    max-height: 340px;
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+    border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.portalSettingsLoginLogsList__J1m9Q4 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.portalSettingsLoginLogItem__N6p2R8 {
+    min-height: 34px;
+    padding: 0 var(--space-2);
+    margin-left: 0;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-secondary), 1);
+    border: 0;
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 0;
+    background: rgba(var(--color-bg-tertiary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), inset 0 -1px 0 rgba(0, 0, 0, 0.14);
+    transition: background-color 0.16s var(--ease-out-quad), color 0.16s var(--ease-out-quad);
+}
+
+.portalSettingsLoginLogsList__J1m9Q4 li:first-child {
+    border-top: 0;
+}
+
+.portalSettingsLoginLogItem__N6p2R8:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSettingsLoginLogsList__J1m9Q4 li {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.portalSettingsLoginLogsSentinel__T4m7P2 {
+    height: 1px;
+}
+
+.portalSettingsLoginLogsLoadMore__Q8n3V1 {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalSettingsLoginLogName__S4n8D3 {
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalSettingsLoginLogMeta__P2v7M1 {
+    white-space: nowrap;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSettingsLoginLogTime__H7m3Q9 {
+    margin-left: auto;
+    white-space: nowrap;
+    color: rgba(var(--color-text-secondary), 1);
+    font-variant-numeric: tabular-nums;
+}
+
+.light .portalSettingsLoginLogItem__N6p2R8 {
+    background: rgba(var(--color-bg-secondary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.light .portalSettingsLoginLogItem__N6p2R8:hover {
+    background: rgba(var(--color-bg-tertiary), 1);
+}

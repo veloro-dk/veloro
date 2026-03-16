@@ -1,0 +1,18 @@
+.portalCategoriesField__R8m2Q3 {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.portalCategoriesField__R8m2Q3 > span,
+.portalCategoriesVariantAdd__T8m2Q4 > span {
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalCategoriesError__C6m2Q8 {
+    margin: 0;
+    color: rgba(var(--color-red), 1);
+    font-size: var(--font-size-small);
+}

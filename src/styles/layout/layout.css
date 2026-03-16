@@ -86,19 +86,3 @@
         display: none !important;
     }
 }
-
-@media (max-width: 768px) {
-
-    [data-hide="mobile"],
-    .hide-tablet {
-        display: none !important;
-    }
-}
-
-@media (min-width: 769px) {
-
-    [data-show="mobile"],
-    .show-tablet {
-        display: none !important;
-    }
-}

@@ -1,0 +1,98 @@
+.ui-surface-card {
+    --ui-surface-bg: rgba(var(--color-bg-secondary), 1);
+    --ui-surface-border: rgba(var(--color-border-primary), 1);
+    --ui-surface-radius: 12px;
+    --ui-surface-shadow: var(--shadow-stack-low);
+
+    background: var(--ui-surface-bg);
+    border: 1px solid var(--ui-surface-border);
+    border-radius: var(--ui-surface-radius);
+    box-shadow: var(--ui-surface-shadow);
+    transition: border-color 0.16s var(--ease-out-quad), box-shadow 0.16s var(--ease-out-quad), background-color 0.16s var(--ease-out-quad);
+}
+
+.light .ui-surface-card {
+    --ui-surface-bg: rgba(var(--color-bg-primary), 1);
+    --ui-surface-border: rgba(var(--color-border-primary), 1);
+    --ui-surface-shadow: 0 1px 0 rgba(255, 255, 255, 0.94), 0 6px 14px -14px rgba(15, 23, 42, 0.26), 0 1px 4px -4px rgba(15, 23, 42, 0.14);
+}
+
+.dark .ui-surface-card {
+    --ui-surface-bg: rgba(var(--color-bg-secondary), 1);
+    --ui-surface-border: rgba(var(--color-border-primary), 1);
+    --ui-surface-shadow: 0 1px 0 rgba(255, 255, 255, 0.02), 0 12px 24px -20px rgba(0, 122, 255, 0.14), 0 10px 20px -16px rgba(0, 0, 0, 0.8);
+}
+
+.ui-surface-card--raised {
+    --ui-surface-shadow: var(--shadow-stack-medium);
+}
+
+.light .ui-surface-card--raised {
+    --ui-surface-shadow: 0 1px 0 rgba(255, 255, 255, 0.95), 0 9px 20px -16px rgba(15, 23, 42, 0.28), 0 2px 6px -5px rgba(15, 23, 42, 0.14);
+}
+
+.dark .ui-surface-card--raised {
+    --ui-surface-shadow: 0 1px 0 rgba(255, 255, 255, 0.03), 0 14px 28px -18px rgba(0, 122, 255, 0.18), 0 14px 24px -16px rgba(0, 0, 0, 0.82);
+}
+
+.ui-interactive-row {
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition:
+        background-color 0.16s var(--ease-out-quad),
+        border-color 0.16s var(--ease-out-quad),
+        color 0.16s var(--ease-out-quad),
+        transform 0.16s var(--ease-out-quad);
+}
+
+.ui-interactive-row:hover {
+    border-color: rgba(var(--color-border-secondary), 1);
+    background: rgba(var(--color-bg-tertiary), 1);
+    color: rgba(var(--color-text-primary), 1);
+    box-shadow: 0 8px 16px -16px rgba(0, 122, 255, 0.5);
+}
+
+.light .ui-interactive-row:hover {
+    box-shadow: 0 8px 16px -16px rgba(15, 23, 42, 0.22);
+}
+
+.ui-interactive-row:focus-visible {
+    outline: none;
+    border-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}
+
+.light .ui-surface-card:hover,
+.light .ui-surface-card.ui-interactive-row:hover {
+    background: var(--ui-surface-bg);
+}
+
+.ui-unordered-list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+    line-height: 1.45;
+}
+
+.ui-unordered-list li {
+    position: relative;
+    padding-left: 14px;
+}
+
+.ui-unordered-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(var(--color-text-secondary), 1);
+    box-sizing: border-box;
+    transform: translateY(-50%);
+}

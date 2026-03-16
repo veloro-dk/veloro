@@ -1,0 +1,46 @@
+name: Migration Guardrails
+
+on:
+  schedule:
+    - cron: "30 5 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  migration-guardrails:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      MIGRATION_GUARD_ALLOW_PENDING: "false"
+      MIGRATION_GUARD_OUTPUT_FILE: "tmp/migration-guardrails-report.json"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Skip when DATABASE_URL is missing
+        if: env.DATABASE_URL == ''
+        run: echo "DATABASE_URL secret is not configured. Skipping migration guardrails."
+
+      - name: Install dependencies
+        if: env.DATABASE_URL != ''
+        run: npm ci
+
+      - name: Run migration guardrails
+        if: env.DATABASE_URL != ''
+        run: npm run db:migration:guard
+
+      - name: Upload migration guardrail report
+        if: env.DATABASE_URL != '' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: migration-guardrails-report
+          path: tmp/migration-guardrails-report.json
+          if-no-files-found: ignore

@@ -1,0 +1,87 @@
+.portalCategoriesVariantAdd__T8m2Q4 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalCategoriesVariantCreate__U6m2Q1 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalCategoriesVariantCreateGrid__P5m2Q8 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+
+.portalCategoriesVariantCreateRequired__L7m2Q5 {
+    margin-left: 0;
+    min-height: 36px;
+}
+
+.portalCategoriesVariantCreateActions__G2m8Q6 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalCategoriesVariantAddList__J2m8Q6 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.portalCategoriesVariantPickerList__A9m2Q5 {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-height: 260px;
+    max-height: 320px;
+    overflow: auto;
+    padding-right: 2px;
+}
+
+.portalCategoriesVariantPickerSection__J5m8Q4 {
+    margin-top: 0;
+}
+
+.portalCategoriesVariantRuleRequiredInline__B7m2Q5 {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-xs);
+}
+
+.portalCategoriesVariantRuleRequiredInline__B7m2Q5 input {
+    --checkbox-size: 14px;
+    margin: 0;
+}
+
+.portalCategoriesVariantAddButton__M9m2Q3 {
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 10px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-primary), 1);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    transition: background-color 0.14s var(--ease-out-quad), border-color 0.14s var(--ease-out-quad), color 0.14s var(--ease-out-quad);
+}
+
+.portalCategoriesVariantAddButton__M9m2Q3 svg {
+    width: 14px;
+    height: 14px;
+}
+
+.portalCategoriesVariantAddButton__M9m2Q3:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+    border-color: rgba(var(--color-border-secondary), 1);
+    color: rgba(var(--color-text-primary), 1);
+}

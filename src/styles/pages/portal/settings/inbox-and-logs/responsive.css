@@ -1,0 +1,21 @@
+@media (max-width: 640px) {
+    .portalSettingsTeamItem__A1m8D7 {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .portalSettingsLoginLogItem__N6p2R8 {
+        flex-wrap: wrap;
+        row-gap: 2px;
+    }
+
+    .portalSettingsLoginLogName__S4n8D3 {
+        max-width: none;
+        width: 100%;
+    }
+
+    .portalSettingsLoginLogTime__H7m3Q9 {
+        margin-left: 0;
+        width: 100%;
+    }
+}

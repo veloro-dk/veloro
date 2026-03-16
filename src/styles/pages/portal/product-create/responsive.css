@@ -1,0 +1,57 @@
+@media (max-width: 768px) {
+    .portalProductCreateLayout__F7m2Q1 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalProductCreateGrid__W2m9Q4,
+    .portalProductCreateIdentifiersGrid__M4m2Q8,
+    .portalProductCreateVariantGrid__C7m2Q6 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalProductEditStockSections__B4m2Q7 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalProductEditSectionHeaderRow__Q8m2Q4 {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .portalProductCreateFooter__D6m2Q9 {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .portalProductCreateStockVariantRow__W2m8Q6 {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .portalProductCreateStockVariantRow__W2m8Q6 .button__root__ZxcvB0 {
+        grid-column: 1 / -1;
+        justify-self: flex-start;
+    }
+
+    .portalProductCreateExistingRow__H8m2Q7 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalProductCreateExistingActions__X8m2Q5 {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .portalProductTimelineItem__W4m2Q8 {
+        grid-template-columns: 24px minmax(0, 1fr);
+        gap: var(--space-2);
+    }
+
+    .portalProductTimelineTimestamp__Y2m8Q5 {
+        grid-column: 2;
+        white-space: normal;
+    }
+
+    .portalProductTimelineComposer__P6m2Q8 {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+}

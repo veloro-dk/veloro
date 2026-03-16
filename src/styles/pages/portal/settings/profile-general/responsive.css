@@ -1,0 +1,9 @@
+@media (max-width: 640px) {
+    .portalSettingsTiles__E4h8P1 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalSettingsFieldRow__R8m4P2 {
+        grid-template-columns: 1fr;
+    }
+}

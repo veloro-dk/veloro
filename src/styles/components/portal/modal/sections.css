@@ -1,0 +1,42 @@
+.portalModalHeader__D2m8R6 {
+    min-height: 50px;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.portalModalTitle__H6m2Q4 {
+    margin: 0;
+    min-width: 0;
+}
+
+.portalModalClose__P7m2D3 {
+    width: 28px;
+    min-width: 28px;
+    justify-content: center;
+    padding: 0;
+}
+
+.portalModalBody__R3m8Q2 {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.portalModalBodyTall__M2m8Q4 {
+    min-height: 350px;
+}
+
+.portalModalFooter__L5m2V9 {
+    min-height: 52px;
+    padding: var(--space-2) var(--space-3);
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
+}

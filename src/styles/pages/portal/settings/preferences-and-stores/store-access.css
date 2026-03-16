@@ -1,0 +1,108 @@
+.portalSettingsStoreAccess__Q9m2D4 {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.portalSettingsStoreAccessGrid__S7n1P5 {
+    display: grid;
+    grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+    gap: var(--space-3);
+    min-height: 300px;
+}
+
+.portalSettingsStoreUsers__T4m8Q2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalSettingsStoreUserItem__L5d2R8 {
+    width: 100%;
+    min-height: 46px;
+    border: 0;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    text-align: left;
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    cursor: pointer;
+    transition: background-color 0.16s var(--ease-out-quad), color 0.16s var(--ease-out-quad);
+}
+
+.portalSettingsStoreUserItem__L5d2R8:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalSettingsStoreUserItemActive__P1t8V6,
+.portalSettingsStoreUserItemActive__P1t8V6:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalSettingsStoreUserName__W2k6M9 {
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSettingsStoreUserMeta__N6q3D1 {
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSettingsStoreEditor__K8r3V1 {
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-primary), 1);
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.portalSettingsStoreEditorTitle__A4n7P2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalSettingsStoreEditorSlug__M7p2Q5 {
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSettingsStoreDetailGrid__B3n8R2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.portalSettingsStoreDetailItem__H6m1Q7 {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portalSettingsStoreDetailItemFull__P5m2V8 {
+    grid-column: 1 / -1;
+}
+
+.portalSettingsStoreDetailLabel__D9k4V2 {
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSettingsStoreDetailValue__R2m7P4 {
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-primary), 1);
+    overflow-wrap: anywhere;
+}

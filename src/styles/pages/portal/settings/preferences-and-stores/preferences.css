@@ -1,0 +1,35 @@
+.portalSettingsPreferences__K5m2V8 {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.portalSettingsPreferenceField__L8n4D1 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalSettingsPreferenceLabel__W2m9P5 {
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalSettingsPreferenceControl__R6k1T3 {
+    position: relative;
+}
+
+.portalSettingsPreferenceSelect__V4n8Q2 {
+    height: 36px;
+    padding-right: calc(var(--space-7) + var(--space-2));
+}
+
+.portalSettingsPreferenceSpinner__D3m7R1 {
+    position: absolute;
+    right: var(--space-2);
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(var(--color-text-secondary), 1);
+    pointer-events: none;
+}

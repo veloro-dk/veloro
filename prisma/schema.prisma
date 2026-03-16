@@ -8,7 +8,8 @@ datasource db {
 
 enum UserRole {
   ADMIN
-  USER
+  MANAGER
+  EMPLOYEE
 }
 
 enum UserStatus {
@@ -20,6 +21,13 @@ enum Currency {
   EUR
   USD
   DKK
+  GBP
+  CAD
+  AUD
+  SEK
+  NOK
+  CHF
+  JPY
 }
 
 enum ItemStatus {
@@ -46,11 +54,22 @@ enum SaleLineType {
   ITEM
 }
 
+enum FeedbackKind {
+  ISSUE
+  IDEA
+}
+
 model User {
   id           String     @id @default(uuid())
   employeeId   String     @unique @db.VarChar(64)
+  name         String     @db.VarChar(120)
+  firstName    String     @db.VarChar(80)
+  lastName     String     @db.VarChar(80)
+  email        String?    @db.VarChar(190)
+  phone        String?    @db.VarChar(32)
   passwordHash String     @db.VarChar(255)
-  role         UserRole   @default(USER)
+  requiresPasswordReset Boolean @default(false)
+  role         UserRole   @default(EMPLOYEE)
   status       UserStatus @default(ACTIVE)
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
@@ -60,17 +79,20 @@ model User {
   auditLogs    AuditLog[]
   purchases    Purchase[]
   sales        Sale[]
+  feedback     FeedbackMessage[]
+  storeAccess  UserStoreAccess[]
 }
 
 model Session {
-  id        String   @id @default(uuid())
-  userId    String
-  tokenHash String   @unique @db.VarChar(255)
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-  lastSeenAt DateTime?
+  id         String   @id @default(uuid())
+  userId     String
+  tokenHash  String   @unique @db.VarChar(255)
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastSeenAt DateTime @default(now())
+  rotatedAt  DateTime @default(now())
 
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@index([expiresAt])
@@ -78,41 +100,116 @@ model Session {
 
 model UserSettings {
   userId            String   @id
+  activeStoreId     String?
   preferredLanguage String   @default("en") @db.VarChar(8)
+  preferredCurrencyCode String? @db.VarChar(3)
+  timeZone          String   @default("Europe/Copenhagen") @db.VarChar(64)
+  dateFormat        String   @default("DD/MM/YYYY") @db.VarChar(20)
+  weekStartDay      String   @default("MONDAY") @db.VarChar(12)
+  defaultTimeZone   String   @default("Europe/Copenhagen") @db.VarChar(64)
+  defaultCurrency   Currency @default(EUR)
   preferredCurrency Currency @default(EUR)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  activeStore       Store?   @relation(fields: [activeStoreId], references: [id], onDelete: SetNull)
+
+  @@index([activeStoreId])
+}
+
+model Store {
+  id                            String           @id @default(uuid())
+  name                          String           @unique @db.VarChar(120)
+  slug                          String           @unique @db.VarChar(160)
+  isActive                      Boolean          @default(true)
+  defaultCurrency               Currency         @default(EUR)
+  backupRegionCountry           String?          @db.VarChar(120)
+  unitSystem                    String           @default("METRIC") @db.VarChar(16)
+  timeZone                      String           @default("Europe/Copenhagen") @db.VarChar(64)
+  productCodePrefix             String?          @db.VarChar(12)
+  productCodeSuffix             String?          @db.VarChar(12)
+  businessCountry               String?          @db.VarChar(120)
+  businessType                  String?          @db.VarChar(48)
+  legalFirstName                String?          @db.VarChar(80)
+  legalLastName                 String?          @db.VarChar(80)
+  businessStreet                String?          @db.VarChar(180)
+  businessHouseNumber           String?          @db.VarChar(40)
+  businessAddressLine2          String?          @db.VarChar(120)
+  businessPostalCode            String?          @db.VarChar(32)
+  businessCity                  String?          @db.VarChar(120)
+  businessEmail                 String?          @db.VarChar(190)
+  businessPhone                 String?          @db.VarChar(32)
+  createdAt                     DateTime         @default(now())
+  updatedAt                     DateTime         @updatedAt
+
+  userAccess UserStoreAccess[]
+  usersWithActiveStore UserSettings[]
+  catalogState StoreCatalogState?
+  categories Category[]
+  items      InventoryItem[]
+  purchases  Purchase[]
+  sales      Sale[]
+}
+
+model StoreCatalogState {
+  storeId             String   @id
+  variantDefinitions  Json     @default("[]")
+  categoryDefinitions Json     @default("[]")
+  products            Json     @default("[]")
+  inventoryBatches    Json     @default("[]")
+  inventorySales      Json     @default("[]")
+  purchaseOrders      Json     @default("[]")
+  suppliers           Json     @default("[]")
+  version             Int      @default(1)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  store               Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+}
+
+model UserStoreAccess {
+  userId     String
+  storeId    String
+  createdAt  DateTime @default(now())
+
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  store      Store  @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+  @@id([userId, storeId])
+  @@index([storeId, userId])
 }
 
 model Category {
-  id          String              @id @default(uuid())
-  name        String              @db.VarChar(80)
-  isActive    Boolean             @default(true)
-  createdAt   DateTime            @default(now())
-  updatedAt   DateTime            @updatedAt
+  id         String              @id @default(uuid())
+  storeId    String
+  name       String              @db.VarChar(80)
+  isActive   Boolean             @default(true)
+  createdAt  DateTime            @default(now())
+  updatedAt  DateTime            @updatedAt
 
-  attributes  CategoryAttribute[]
-  items       InventoryItem[]
+  store      Store               @relation(fields: [storeId], references: [id], onDelete: Restrict)
+  attributes CategoryAttribute[]
+  items      InventoryItem[]
 
-  @@unique([name])
+  @@unique([storeId, name])
+  @@index([storeId])
 }
 
 model CategoryAttribute {
-  id          String    @id @default(uuid())
-  categoryId  String
-  key         String    @db.VarChar(64)
-  label       String    @db.VarChar(80)
-  type        AttrType
-  required    Boolean   @default(false)
-  options     Json?
-  orderIndex  Int       @default(0)
-  isActive    Boolean   @default(true)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id         String   @id @default(uuid())
+  categoryId String
+  key        String   @db.VarChar(64)
+  label      String   @db.VarChar(80)
+  type       AttrType
+  required   Boolean  @default(false)
+  options    Json?
+  orderIndex Int      @default(0)
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   @@unique([categoryId, key])
   @@index([categoryId, orderIndex])
@@ -120,6 +217,7 @@ model CategoryAttribute {
 
 model InventoryItem {
   id            String     @id @default(uuid())
+  storeId       String
   categoryId    String
   inventoryCode String?    @unique @db.VarChar(32)
   status        ItemStatus @default(IN_STOCK)
@@ -128,32 +226,35 @@ model InventoryItem {
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 
-  category      Category   @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  store         Store         @relation(fields: [storeId], references: [id], onDelete: Restrict)
+  category      Category      @relation(fields: [categoryId], references: [id], onDelete: Restrict)
   services      ServiceEvent[]
   purchaseLines PurchaseLine[]
   saleLines     SaleLine[]
 
+  @@index([storeId])
   @@index([categoryId])
   @@index([status])
 }
 
 model ServiceEvent {
-  id         String   @id @default(uuid())
-  itemId     String
-  date       DateTime
-  vendor     String?  @db.VarChar(120)
-  description String  @db.Text
-  costAmount Int
-  currency   Currency @default(EUR)
-  createdAt  DateTime @default(now())
+  id          String   @id @default(uuid())
+  itemId      String
+  date        DateTime
+  vendor      String?  @db.VarChar(120)
+  description String   @db.Text
+  costAmount  Int
+  currency    Currency @default(EUR)
+  createdAt   DateTime @default(now())
 
-  item       InventoryItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  item        InventoryItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
 
   @@index([itemId, date])
 }
 
 model Purchase {
   id           String   @id @default(uuid())
+  storeId      String
   purchaseDate DateTime
   currency     Currency @default(EUR)
   supplierName String?  @db.VarChar(160)
@@ -162,57 +263,62 @@ model Purchase {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
+  store        Store    @relation(fields: [storeId], references: [id], onDelete: Restrict)
   createdBy    User     @relation(fields: [createdById], references: [id], onDelete: Restrict)
   lines        PurchaseLine[]
 
+  @@index([storeId])
   @@index([purchaseDate])
   @@index([createdById])
 }
 
 model PurchaseLine {
-  id          String          @id @default(uuid())
-  purchaseId  String
-  lineType    PurchaseLineType @default(ITEM)
-  itemId      String
-  quantity    Int             @default(1)
-  unitCost    Int
-  totalCost   Int
-  createdAt   DateTime        @default(now())
+  id         String           @id @default(uuid())
+  purchaseId String
+  lineType   PurchaseLineType @default(ITEM)
+  itemId     String
+  quantity   Int              @default(1)
+  unitCost   Int
+  totalCost  Int
+  createdAt  DateTime         @default(now())
 
-  purchase    Purchase        @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
-  item        InventoryItem   @relation(fields: [itemId], references: [id], onDelete: Restrict)
+  purchase   Purchase       @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  item       InventoryItem  @relation(fields: [itemId], references: [id], onDelete: Restrict)
 
   @@index([purchaseId])
   @@index([itemId])
 }
 
 model Sale {
-  id         String   @id @default(uuid())
-  saleDate   DateTime
-  currency   Currency @default(EUR)
-  notes      String?  @db.Text
+  id          String   @id @default(uuid())
+  storeId     String
+  saleDate    DateTime
+  currency    Currency @default(EUR)
+  notes       String?  @db.Text
   createdById String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  createdBy  User     @relation(fields: [createdById], references: [id], onDelete: Restrict)
-  lines      SaleLine[]
+  store       Store    @relation(fields: [storeId], references: [id], onDelete: Restrict)
+  createdBy   User     @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  lines       SaleLine[]
 
+  @@index([storeId])
   @@index([saleDate])
   @@index([createdById])
 }
 
 model SaleLine {
-  id         String       @id @default(uuid())
+  id         String        @id @default(uuid())
   saleId     String
-  lineType   SaleLineType @default(ITEM)
+  lineType   SaleLineType  @default(ITEM)
   itemId     String
-  quantity   Int          @default(1)
+  quantity   Int           @default(1)
   unitPrice  Int
   totalPrice Int
-  createdAt  DateTime     @default(now())
+  createdAt  DateTime      @default(now())
 
-  sale       Sale         @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  sale       Sale          @relation(fields: [saleId], references: [id], onDelete: Cascade)
   item       InventoryItem @relation(fields: [itemId], references: [id], onDelete: Restrict)
 
   @@index([saleId])
@@ -232,4 +338,31 @@ model AuditLog {
 
   @@index([actorId, createdAt])
   @@index([action])
+}
+
+model LoginAttempt {
+  id         String   @id @default(uuid())
+  ipHash     String   @db.VarChar(64)
+  employeeId String?  @db.VarChar(64)
+  ok         Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  @@index([ipHash, createdAt])
+  @@index([employeeId, createdAt])
+}
+
+model FeedbackMessage {
+  id          String       @id @default(uuid())
+  createdById String
+  kind        FeedbackKind
+  pagePath    String       @db.VarChar(255)
+  message     String       @db.Text
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  createdBy   User         @relation(fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@index([createdById, createdAt])
+  @@index([kind, createdAt])
+  @@index([createdAt])
 }

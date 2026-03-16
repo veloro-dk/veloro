@@ -1,0 +1,126 @@
+.light .form__container__H8j3p0 {
+    background: rgba(var(--color-bg-primary), 1);
+    border-color: rgba(215, 218, 224, 1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.94), 0 10px 26px -24px rgba(15, 23, 42, 0.5), 0 2px 8px -8px rgba(15, 23, 42, 0.25);
+}
+
+.light .form__label__B9f4k0 {
+    color: rgba(62, 68, 78, 1);
+}
+
+.light .form__input__Z3n7q0,
+.light .form__textarea__Q6p3f0,
+.light .form__select__P9j2k0 {
+    color: rgba(34, 39, 47, 1);
+    background-color: rgba(var(--color-bg-secondary), 1);
+    border-color: rgba(var(--color-border-primary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.99);
+}
+
+.light .form__input__Z3n7q0::placeholder,
+.light .form__textarea__Q6p3f0::placeholder {
+    color: rgba(122, 128, 138, 1);
+}
+
+.light .form__select__P9j2k0 {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23666B75' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.light .form__select__P9j2k0 option {
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(34, 39, 47, 1);
+}
+
+.light .form__select__P9j2k0.is-placeholder {
+    color: rgba(122, 128, 138, 1);
+}
+
+.light .form__input__Z3n7q0:hover,
+.light .form__textarea__Q6p3f0:hover,
+.light .form__select__P9j2k0:hover {
+    background-color: rgba(var(--color-bg-secondary), 1);
+    border-color: rgba(var(--color-border-secondary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 3px 8px -10px rgba(15, 23, 42, 0.24);
+}
+
+.light .form__input__Z3n7q0:focus,
+.light .form__textarea__Q6p3f0:focus,
+.light .form__select__P9j2k0:focus {
+    border-color: rgba(var(--color-blue), 1);
+    background-color: rgba(var(--color-bg-secondary), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}
+
+.dark .form__input__Z3n7q0 {
+    background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+.dark .form__textarea__Q6p3f0 {
+    background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+.dark .form__select__P9j2k0 {
+    background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+.dark .form__inputPhoneNR__H5k8q0 {
+    background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+.dark .form__inputPhoneNR__H5k8q0:focus-within {
+    background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+.dark .form__inputPhoneNRFlag__H5k8q0,
+.dark .form__inputPhoneNRNumber__H5k8q0 {
+    background-color: rgba(var(--color-bg-tertiary), 1) !important;
+}
+
+.light .form__inputPhoneNR__H5k8q0 {
+    color: rgba(34, 39, 47, 1);
+    background-color: rgba(var(--color-bg-secondary), 1);
+    border-color: rgba(var(--color-border-primary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.99);
+}
+
+.light .form__inputPhoneNRFlag__H5k8q0 {
+    background-color: rgba(var(--color-bg-secondary), 1);
+    border-right-color: rgba(var(--color-border-primary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.99);
+}
+
+.light .form__inputPhoneNRNumber__H5k8q0 {
+    color: rgba(34, 39, 47, 1);
+}
+
+.light .form__inputPhoneNRNumber__H5k8q0::placeholder {
+    color: rgba(122, 128, 138, 1);
+}
+
+.light .form__inputPhoneNR__H5k8q0:hover {
+    border-color: rgba(var(--color-border-secondary), 1);
+    background-color: rgba(var(--color-bg-secondary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 3px 8px -10px rgba(15, 23, 42, 0.24);
+}
+
+.light .form__inputPhoneNR__H5k8q0:focus-within {
+    border-color: rgba(var(--color-blue), 1);
+    background-color: rgba(var(--color-bg-secondary), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}
+
+.light input[type="checkbox"] {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.99);
+}
+
+.light input[type="checkbox"]:checked {
+    box-shadow: 0 7px 14px -14px rgba(15, 23, 42, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.light input[type="checkbox"]:checked:hover {
+    box-shadow: 0 8px 16px -14px rgba(15, 23, 42, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.light input[type="checkbox"]:checked:focus-visible {
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}

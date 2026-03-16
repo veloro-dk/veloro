@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+    .signup-form__input-row {
+        flex-direction: row;
+        gap: 16px;
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .form__group--row__M93j8A {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

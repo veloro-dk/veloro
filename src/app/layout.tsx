@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
+import { FormFieldPlaceholderBridge } from "@/components/FormFieldPlaceholderBridge";
+import { PortalActionNotificationsViewport } from "@/components/PortalActionNotificationsViewport";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,7 +27,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <FormFieldPlaceholderBridge />
         {children}
+        <PortalActionNotificationsViewport />
       </body>
     </html>
   );

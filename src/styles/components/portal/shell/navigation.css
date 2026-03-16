@@ -1,0 +1,208 @@
+.portalNav__M4n5O6 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-4) var(--space-3) 0;
+}
+
+.portalSidebarBottom__Y2k6Q4 {
+    margin-top: auto;
+    padding: var(--space-3);
+    border-top: 1px solid rgba(var(--color-border-primary), 1);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portalSection__P7q8R9 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.portalLinkRow__F3k8D1 {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    min-height: 28px;
+    border-radius: 6px;
+    transition: background-color 0.16s var(--ease-out-quad);
+}
+
+.portalLink__V4w5X6,
+.portalSubLink__C4v8L2 {
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-normal);
+    line-height: 1;
+    text-decoration: none;
+}
+
+.portalLink__V4w5X6 {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 var(--space-3);
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalLinkContent__A3t5N9 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-width: 0;
+}
+
+.portalLinkIcon__V8p2F1 {
+    width: 16px;
+    height: 16px;
+    color: currentColor;
+    flex: 0 0 auto;
+}
+
+.portalLinkActive__Y7z8A9,
+.portalLinkActive__Y7z8A9:hover {
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSubToggle__H7m2Q4 {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    padding: 0;
+    color: rgba(var(--color-text-tertiary), 1);
+    cursor: pointer;
+    transition: color 0.16s var(--ease-out-quad);
+}
+
+.portalSubToggle__H7m2Q4 svg {
+    width: 12px;
+    height: 12px;
+    transform: rotate(-90deg);
+    transition: transform 0.16s var(--ease-out-quad);
+}
+
+.portalSubToggle__H7m2Q4:hover {
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSubToggleOpen__K1p9S3 {
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSubToggleOpen__K1p9S3 svg {
+    transform: rotate(0deg);
+}
+
+.portalSublinks__B8n2Q7 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height 0.2s var(--ease-out-quad), opacity 0.16s var(--ease-out-quad);
+}
+
+.portalSublinks__B8n2Q7 a {
+    margin-top: 0;
+}
+
+.portalSublinksOpen__R8v2N6 {
+    max-height: 320px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.portalSubLink__C4v8L2 {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 var(--space-3);
+    border-radius: 6px;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSubLinkActive__M9t1H6,
+.portalSubLinkActive__M9t1H6:hover {
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSubLinkContent__M6p2Q9 {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.portalSubIndicator__J5k8D2 {
+    width: 14px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 auto;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSubIndicator__J5k8D2[data-state="none"] {
+    opacity: 0;
+}
+
+.portalSubIndicatorSvg__J2m8Q4 {
+    width: 14px;
+    height: 20px;
+    display: block;
+    overflow: visible;
+}
+
+.portalSubIndicatorStroke__B7m2Q6 {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.portalLink__V4w5X6:hover,
+.portalSubLink__C4v8L2:hover {
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalLinkRow__F3k8D1:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalLinkRow__F3k8D1:hover .portalLink__V4w5X6 {
+    color: rgba(var(--color-text-primary), 1);
+    background: transparent;
+}
+
+.portalSidebarBottom__Y2k6Q4 .portalSection__P7q8R9 {
+    gap: 2px;
+}
+
+.portalLinkRowOpen__V6m2Q8 {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalLinkRowOpen__V6m2Q8 .portalLink__V4w5X6 {
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalLink__V4w5X6:focus-visible,
+.portalSubLink__C4v8L2:focus-visible,
+.portalSubToggle__H7m2Q4:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}

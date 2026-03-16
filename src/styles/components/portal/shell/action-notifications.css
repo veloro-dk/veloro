@@ -1,0 +1,109 @@
+.portalInlineMessageHidden__M2n8Q5 {
+    display: none !important;
+}
+
+.portalActionNotificationsLayer__M6m2Q7 {
+    position: fixed;
+    right: max(var(--space-4), env(safe-area-inset-right));
+    bottom: max(var(--space-4), env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    row-gap: var(--space-2);
+    width: min(420px, calc(100vw - (var(--space-4) * 2)));
+    pointer-events: none;
+    z-index: calc(var(--layer-max) - 20);
+}
+
+.portalActionNotificationCard__Q4m2P8 {
+    --portal-action-tone: rgba(var(--color-blue), 1);
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: calc(var(--space-2) + 2px);
+    width: 100%;
+    margin-top: 0;
+    max-height: 180px;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    background: rgba(var(--color-bg-primary), 0.96);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    padding: var(--space-3) var(--space-3);
+    color: rgba(var(--color-text-primary), 1);
+    opacity: 0;
+    transform: translateY(16px) scale(0.975);
+    transition:
+        max-height 280ms var(--ease-out-quad),
+        padding-top 280ms var(--ease-out-quad),
+        padding-bottom 280ms var(--ease-out-quad),
+        border-width 280ms var(--ease-out-quad),
+        opacity 160ms var(--ease-out-quad),
+        transform 220ms var(--ease-out-quad);
+}
+
+.portalActionNotificationShown__R3m2Q6 {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.portalActionNotificationLeaving__F8m2Q5 {
+    opacity: 0;
+    transform: translate3d(72px, 0, 0);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    transition:
+        opacity 160ms var(--ease-out-quad),
+        transform 220ms var(--ease-out-quad),
+        max-height 120ms var(--ease-out-quad) 160ms,
+        padding-top 120ms var(--ease-out-quad) 160ms,
+        padding-bottom 120ms var(--ease-out-quad) 160ms,
+        border-width 120ms var(--ease-out-quad) 160ms;
+}
+
+.portalActionNotificationSuccess__W2m8Q1 {
+    --portal-action-tone: rgba(var(--color-text-status-success), 1);
+}
+
+.portalActionNotificationWarning__A4m2Q9 {
+    --portal-action-tone: rgba(var(--color-text-status-warning), 1);
+}
+
+.portalActionNotificationError__S2m8Q4 {
+    --portal-action-tone: rgba(214, 86, 86, 1);
+}
+
+.portalActionNotificationIcon__N5m2Q7 {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--portal-action-tone);
+    background: color-mix(in srgb, var(--portal-action-tone) 16%, transparent);
+}
+
+.portalActionNotificationIcon__N5m2Q7 svg {
+    width: 14px;
+    height: 14px;
+}
+
+.portalActionNotificationMessage__K7m2Q3 {
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-regular);
+    color: rgba(var(--color-text-primary), 1);
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+    .portalActionNotificationsLayer__M6m2Q7 {
+        right: var(--space-2);
+        left: var(--space-2);
+        width: auto;
+    }
+}

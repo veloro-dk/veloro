@@ -1,0 +1,7 @@
+.veloroLogo__root__N4j8Q1,
+.veloroLogo__root__N4j8Q1 * {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: none;
+}

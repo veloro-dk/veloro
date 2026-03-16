@@ -1,0 +1,39 @@
+name: Privacy Retention
+
+on:
+  schedule:
+    - cron: "5 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  privacy-retention:
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      APP_URL: http://localhost:3000
+      PRIVACY_LOGIN_ATTEMPT_RETENTION_DAYS: ${{ vars.PRIVACY_LOGIN_ATTEMPT_RETENTION_DAYS }}
+      PRIVACY_FEEDBACK_RETENTION_DAYS: ${{ vars.PRIVACY_FEEDBACK_RETENTION_DAYS }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Skip when DATABASE_URL is missing
+        if: env.DATABASE_URL == ''
+        run: echo "DATABASE_URL secret is not configured. Skipping privacy retention run."
+
+      - name: Install dependencies
+        if: env.DATABASE_URL != ''
+        run: npm ci
+
+      - name: Run privacy retention
+        if: env.DATABASE_URL != ''
+        run: npm run job:privacy-retention

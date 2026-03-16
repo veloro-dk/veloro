@@ -1,0 +1,93 @@
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 {
+    display: none;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0:after,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0:before,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 *,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 *:after,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 *:before,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 + .root__toggle-btn__T7g2m0 {
+    box-sizing: border-box;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0::selection,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 + .root__toggle-btn__T7g2m0::selection {
+    background: none;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 + .root__toggle-btn__T7g2m0 {
+    outline: 0;
+    display: block;
+    width: 44px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 + .root__toggle-btn__T7g2m0:after,
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 + .root__toggle-btn__T7g2m0:before {
+    position: relative;
+    display: block;
+    content: "";
+    width: 50%;
+    height: 100%;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 + .root__toggle-btn__T7g2m0:after {
+    left: 0;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0 + .root__toggle-btn__T7g2m0:before {
+    display: none;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle__T7g2m0:checked + .root__toggle-btn__T7g2m0:after {
+    left: 50%;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0 + .root__toggle-btn__T7g2m0 {
+    background: rgba(var(--color-toggle), 1);
+    border-radius: 999px;
+    padding: 2px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0 + .root__toggle-btn__T7g2m0:after {
+    border-radius: 999px;
+    background: rgba(251, 251, 251, 1);
+    transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0 + .root__toggle-btn__T7g2m0:hover:after {
+    will-change: padding;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0 + .root__toggle-btn__T7g2m0:active {
+    box-shadow: inset 0 0 0 2em rgba(var(--color-border-secondary), 1);
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0 + .root__toggle-btn__T7g2m0:active:after {
+    padding-right: 10px;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0:checked + .root__toggle-btn__T7g2m0 {
+    background: rgba(var(--color-blue), 1);
+    border-color: rgba(var(--color-blue), 1);
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0:checked + .root__toggle-btn__T7g2m0:active {
+    box-shadow: none;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0:checked + .root__toggle-btn__T7g2m0:active:after {
+    margin-left: -10px;
+}
+
+.root__toggle-wrapper__T7g2m0 .root__toggle--ios__T7g2m0:focus-visible + .root__toggle-btn__T7g2m0 {
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}

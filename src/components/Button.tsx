@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ComponentProps, ReactNode } from "react";
 
-type ButtonSize = "small" | "medium" | "large";
-type ButtonKind = "primary" | "secondary" | "tertiary" | "ghost";
+type ButtonSize = "xsmall" | "small" | "medium" | "large";
+type ButtonKind = "primary" | "secondary" | "tertiary" | "ghost" | "toggle" | "highlight" | "basic" | "danger";
 
 type Props = {
     children: ReactNode;
@@ -12,6 +12,7 @@ type Props = {
 } & Omit<ComponentProps<"button">, "children">;
 
 const sizeClass: Record<ButtonSize, string> = {
+    xsmall: "button__size-xsmall__L9d7h0",
     small: "button__size-small__L9d7h0",
     medium: "button__size-medium__L9d7h0",
     large: "button__size-large__L9d7h0",
@@ -22,6 +23,10 @@ const kindClass: Record<ButtonKind, string> = {
     secondary: "button__kind-secondary__R5j2s0",
     tertiary: "button__kind-tertiary__R5j2s0",
     ghost: "button__kind-ghost__R5j2s0",
+    toggle: "button__kind-toggle__R5j2s0",
+    highlight: "button__kind-highlight__R5j2s0",
+    basic: "button__kind-basic__R5j2s0",
+    danger: "button__kind-danger__R5j2s0",
 };
 
 export function Button({ children, size = "medium", kind = "primary", href, className, ...rest }: Props) {

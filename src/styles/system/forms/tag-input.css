@@ -1,0 +1,93 @@
+.portalProductCreateTagInputWrap__K5m2Q4 {
+    width: 100%;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 10px;
+    background: rgba(var(--color-bg-tertiary), 1);
+    box-shadow: inset 0 1px 0 #ffffff0f;
+    transition: border-color 0.16s var(--ease-out-quad), box-shadow 0.16s var(--ease-out-quad), background-color 0.16s var(--ease-out-quad);
+}
+
+.portalProductCreateTagInputWrap__K5m2Q4:hover {
+    border-color: rgba(var(--color-border-secondary), 1);
+}
+
+.portalProductCreateTagInputWrap__K5m2Q4:focus-within {
+    border-color: rgba(var(--color-blue), 1);
+    background-color: rgba(var(--color-bg-tertiary), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}
+
+.portalProductCreateTagList__L8m1Q2 {
+    min-height: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+}
+
+.portalProductCreateTagChip__R9m2Q6 {
+    min-height: 22px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    border-radius: 7px;
+    background: rgba(var(--color-bg-tertiary), 1);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-xs);
+}
+
+.portalProductCreateTagChipRemove__W2m9Q1 {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    color: rgba(var(--color-text-tertiary), 1);
+    font-size: 11px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.portalProductCreateTagChipRemove__W2m9Q1:hover {
+    background: rgba(var(--color-bg-quaternary), 1);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalProductCreateTagInput__Q3m8Q4 {
+    flex: 1 1 160px;
+    min-width: 120px;
+    height: 24px;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.portalProductCreateTagInput__Q3m8Q4::placeholder {
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.light .portalProductCreateTagInputWrap__K5m2Q4 {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.99);
+}
+
+.light .portalProductCreateTagInputWrap__K5m2Q4:hover {
+    background-color: rgba(var(--color-bg-secondary), 1);
+    border-color: rgba(var(--color-border-secondary), 1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), 0 3px 8px -10px rgba(15, 23, 42, 0.24);
+}
+
+.light .portalProductCreateTagInputWrap__K5m2Q4:focus-within {
+    background-color: rgba(var(--color-bg-secondary), 1);
+}
+
+.light .portalProductCreateTagChip__R9m2Q6 {
+    background: rgba(var(--color-bg-quaternary), 1);
+}

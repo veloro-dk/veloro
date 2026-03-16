@@ -1,0 +1,97 @@
+.form__inputPhoneNR__H5k8q0 {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    height: 32px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 10px;
+    background-color: rgba(var(--color-bg-secondary), 1);
+    box-shadow: inset 0 1px 0 #ffffff0f;
+    transition: border-color 0.16s var(--ease-out-quad), box-shadow 0.16s var(--ease-out-quad), background-color 0.16s var(--ease-out-quad);
+    overflow: hidden;
+}
+
+.form__inputPhoneNRFlag__H5k8q0 {
+    background-color: rgba(var(--color-bg-tertiary), 1);
+    display: flex;
+    position: relative;
+    width: 52px;
+    min-width: 52px;
+    font-size: 13px;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgba(var(--color-border-primary), 1);
+    box-shadow: inset 0 1px 0 #ffffff0f;
+}
+
+.form__inputPhoneNR__select__H5k8q0 {
+    opacity: 0;
+    cursor: pointer;
+    border: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.form__inputPhoneNR__select__H5k8q0 option {
+    color: rgba(var(--color-text-primary), 1);
+    background-color: rgba(var(--color-bg-primary), 1);
+}
+
+.form__inputPhoneNR__img--wrapper__H5k8q0 {
+    width: 20px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.form__inputPhoneNR__img__H5k8q0 {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.form__inputPhoneNRNumber__H5k8q0 {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    font-size: 13px;
+    line-height: 1.2;
+    height: 100%;
+    padding: 0 11px;
+    caret-color: rgba(var(--color-blue), 1);
+}
+
+.form__inputPhoneNRNumber__H5k8q0::placeholder {
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.form__inputPhoneNR__H5k8q0:hover {
+    border-color: rgba(var(--color-border-secondary), 1);
+    box-shadow: inset 0 1px 0 #ffffff0f;
+}
+
+.form__inputPhoneNR__H5k8q0:focus-within {
+    border-color: rgba(var(--color-blue), 1);
+    background-color: rgba(var(--color-bg-primary), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}
+
+.form__inputPhoneNR__H5k8q0:focus-within .form__inputPhoneNRFlag__H5k8q0 {
+    border-right-color: rgba(var(--color-blue), 1);
+}
+
+.form__inputPhoneNRNumber__H5k8q0:focus,
+.form__inputPhoneNR__select__H5k8q0:focus {
+    outline: none;
+    box-shadow: none;
+}

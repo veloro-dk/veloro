@@ -1,0 +1,10 @@
+@media (max-width: 640px) {
+    .portalSettingsStoreAccessGrid__S7n1P5 {
+        grid-template-columns: 1fr;
+        min-height: 0;
+    }
+
+    .portalSettingsStoreDetailGrid__B3n8R2 {
+        grid-template-columns: 1fr;
+    }
+}

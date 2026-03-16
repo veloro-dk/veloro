@@ -1,0 +1,208 @@
+.portalHeaderSearch__U7e3D2 {
+    width: min(100%, 560px);
+    justify-self: center;
+    position: relative;
+}
+
+.portalHeaderSearchFlipSurface__K8m2D1 {
+    position: relative;
+    width: 100%;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.portalHeaderSearchFlipSurface__K8m2D1::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: linear-gradient(
+        180deg,
+        rgba(0, 122, 255, 0.022) 0%,
+        rgba(0, 122, 255, 0.01) 56%,
+        rgba(0, 122, 255, 0.0035) 100%
+    );
+    box-shadow:
+        inset 0 1px 0 rgba(var(--color-blue), 0.038),
+        inset 0 -1px 0 rgba(var(--color-blue), 0.01),
+        inset 1px 0 0 rgba(var(--color-blue), 0.016),
+        inset -1px 0 0 rgba(var(--color-blue), 0.016);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 520ms var(--ease-out-quad);
+    z-index: 3;
+}
+
+.portalHeaderSearchFace__G3m8R1 {
+    position: absolute;
+    inset: 0;
+    transform-origin: center center;
+    z-index: 1;
+    transition: transform 0.24s var(--ease-out-quad), opacity 0.18s var(--ease-out-quad);
+}
+
+.portalHeaderSearchFaceNormal__P5m2Q9 {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.portalHeaderSearchFacePending__L4m2V8 {
+    transform: translateY(112%) scale(0.96);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.portalHeaderSearchPending__N4m8Q2 .portalHeaderSearchFaceNormal__P5m2Q9 {
+    transform: translateY(-112%) scale(0.96);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.portalHeaderSearchPending__N4m8Q2 .portalHeaderSearchFacePending__L4m2V8 {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@keyframes portalHeaderSearchShake__S2m9R4 {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    18% {
+        transform: translateX(-5px);
+    }
+
+    36% {
+        transform: translateX(5px);
+    }
+
+    54% {
+        transform: translateX(-3px);
+    }
+
+    72% {
+        transform: translateX(3px);
+    }
+}
+
+.portalHeaderSearchAttentionShake__W2n8P4 {
+    animation: portalHeaderSearchShake__S2m9R4 360ms var(--ease-out-quad);
+}
+
+.portalHeaderSearchAttentionTint__S1m7D3 .portalHeaderSearchFlipSurface__K8m2D1::after {
+    opacity: 1;
+}
+
+.portalHeaderSearchPendingBar__Q5m8P2 {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-secondary), 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: 0 var(--space-2);
+    transition: background 220ms var(--ease-out-quad), border-color 220ms var(--ease-out-quad);
+}
+
+.portalHeaderSearchPendingInfo__D8m1Q7 {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalHeaderSearchPendingIcon__Y7m2N4 {
+    width: 14px;
+    height: 14px;
+    color: currentColor;
+    flex: 0 0 auto;
+}
+
+.portalHeaderSearchPendingLabel__A1m8P6 {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.portalHeaderSearchPendingActions__C3m7Q2 {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex: 0 0 auto;
+}
+
+.portalHeaderSearchTrigger__D4k8P2 {
+    position: relative;
+    width: 100%;
+    height: 36px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+    border-radius: 8px;
+    padding: 0 var(--space-2) 0 calc(var(--space-8) + var(--space-1));
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-regular);
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    cursor: pointer;
+    transition: border-color 220ms var(--ease-out-quad), background 220ms var(--ease-out-quad), color 220ms var(--ease-out-quad);
+}
+
+.portalHeaderSearchIcon__Q6h2N8 {
+    position: absolute;
+    top: 50%;
+    left: var(--space-3);
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: rgba(var(--color-text-tertiary), 1);
+    pointer-events: none;
+}
+
+.portalHeaderSearchText__M2v8R4 {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(var(--color-text-tertiary), 0.74);
+    text-align: left;
+}
+
+.portalHeaderSearchShortcut__Y9n3Q5,
+.portalSearchShortcut__V5t9P2 {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--font-size-regular);
+    font-weight: var(--font-weight-normal);
+    white-space: nowrap;
+}
+
+.portalHeaderSearchShortcut__Y9n3Q5 {
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSearchShortcut__V5t9P2 {
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalHeaderSearchTrigger__D4k8P2:hover {
+    border-color: rgba(var(--color-border-primary), 1);
+    border-bottom-color: rgba(var(--color-border-secondary), 1);
+}
+
+.portalHeaderSearchTrigger__D4k8P2:focus-visible {
+    outline: none;
+    border-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+}

@@ -1,0 +1,11 @@
+.portalContent__D2s5F7 {
+    min-width: 0;
+    padding-top: var(--portal-gap);
+    padding-right: var(--portal-gap);
+    padding-left: var(--portal-gap);
+    padding-bottom: 0;
+}
+
+.portalContent__D2s5F7 > :last-child {
+    padding-bottom: var(--portal-gap);
+}

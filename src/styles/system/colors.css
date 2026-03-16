@@ -11,6 +11,16 @@
     --system-padding: 24px;
     --system-padding-default: 96px var(--system-padding) 0;
     --system-max-width: 1024px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-7: 28px;
+    --space-8: 32px;
+    --space-9: 40px;
+    --space-10: 48px;
 
     --layer-max: 10000;
     --layer-tooltip: 20000;
@@ -32,13 +42,10 @@
     --font-weight-semibold: 500;
     --font-weight-bold: 540;
 
-    --color-blue: #007aff;
-    --color-red: #ec6a5e;
-    --color-green: #62c755;
-    --color-orange: #f4bf50;
     --mask-on: #000;
     --mask-off: transparent;
 
+    --font-size-xs: clamp(0.6875rem, calc(0.66667rem + 0.10417vw), 0.75rem);
     --font-size-small: clamp(0.78125rem, calc(0.72917rem + 0.13021vw), 0.8125rem);
     --font-size-smallPlus: clamp(0.78125rem, calc(0.72917rem + 0.13021vw), 0.8125rem);
     --font-size-regular: clamp(0.84375rem, calc(0.79167rem + 0.13021vw), 0.875rem);
@@ -58,6 +65,13 @@
     --shadow-stack-high: 0 10px 30px rgba(0, 0, 0, 0.15);
 
     --icon-size-default: 16px;
+
+    --color-blue: 0, 122, 255;
+    --color-red: 255, 59, 48;
+    --color-green: 52, 199, 89;
+    --color-yellow: 255, 204, 0;
+    --color-orange: 255, 149, 0;
+
 }
 
 .light {
@@ -70,6 +84,7 @@
     --color-bg-tertiary: 244, 243, 244;
     --color-bg-quaternary: 238, 237, 239;
     --color-bg-quinary: 233, 232, 234;
+    --color-bg-saturation: 238, 237, 239;
     --color-primary-inverted: 25, 25, 27;
     --color-secondary-inverted: 12, 12, 12;
     --color-border-primary: 233, 232, 234;
@@ -80,6 +95,9 @@
     --color-text-secondary: 84, 90, 99;
     --color-text-tertiary: 134, 132, 141;
     --color-text-quaternary: 89, 90, 92;
+    --color-text-status-success: 45, 78, 54;
+    --color-text-status-warning: 101, 82, 37;
+    --color-text-status-accent: 48, 71, 114;
     --color-overlay-primary: 255, 255, 255, 0.6;
     --color-link-primary: 0, 122, 255;
     --color-link-hover: 66, 81, 222;
@@ -97,6 +115,7 @@
     --color-bg-tertiary: 28, 28, 31;
     --color-bg-quaternary: 35, 35, 38;
     --color-bg-quinary: 40, 40, 44;
+    --color-bg-saturation: 35, 35, 38;
     --color-primary-inverted: 228, 230, 230;
     --color-secondary-inverted: 243, 243, 243;
     --color-border-primary: 35, 37, 42;
@@ -107,6 +126,9 @@
     --color-text-secondary: 208, 214, 216;
     --color-text-tertiary: 138, 143, 152;
     --color-text-quaternary: 89, 90, 92;
+    --color-text-status-success: 203, 225, 210;
+    --color-text-status-warning: 228, 220, 201;
+    --color-text-status-accent: 206, 221, 243;
     --color-overlay-primary: 0, 0, 0, 0.6;
     --color-link-primary: 0, 122, 255;
     --color-link-hover: 66, 81, 222;

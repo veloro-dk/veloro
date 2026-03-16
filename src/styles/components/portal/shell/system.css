@@ -1,0 +1,186 @@
+.portalSystemStatusButton__H4k8P1 {
+    width: 100%;
+    border-radius: 6px;
+}
+
+.portalSystemStatusButton__H4k8P1:hover {
+    background: transparent;
+}
+
+.portalSystemStatusButtonError__T3d6L8 {
+    color: rgba(var(--color-red), 1);
+}
+
+.portalSystemStatusContent__Q4m8P2 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+}
+
+.portalSystemStatusIconWrap__S3d9L1 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portalSystemStatusText__D6p4V3 {
+    min-width: 0;
+    text-align: left;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: 1.2;
+}
+
+.portalSystemStatusLabel__R1n5Q8 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    min-width: 0;
+}
+
+.portalSystemStatusArrow__F2q8K6 {
+    width: 12px;
+    height: 12px;
+    flex: 0 0 auto;
+    color: currentColor;
+    transition: transform 0.16s var(--ease-out-quad);
+}
+
+.portalSystemStatusButton__H4k8P1:hover .portalSystemStatusArrow__F2q8K6 {
+    transform: translate(2px, -2px);
+}
+
+.portalSystemPage__L6m2Q8 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.portalSystemCard__P9t4H1 {
+    padding: var(--space-4);
+}
+
+.portalSystemSummary__F4k8V6 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalSystemSummaryText__S2n7D4 {
+    margin: 0;
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+    flex: 1 1 auto;
+}
+
+.portalSystemRefresh__Q3m9W5 {
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(var(--color-text-secondary), 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color 0.16s var(--ease-out-quad), background-color 0.16s var(--ease-out-quad), border-color 0.16s var(--ease-out-quad);
+}
+
+.portalSystemRefresh__Q3m9W5:hover {
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalSystemRefresh__Q3m9W5:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.portalSystemMeta__K1v6R3 {
+    margin-top: var(--space-3);
+    display: grid;
+    gap: var(--space-2);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.portalSystemMetaItem__A8p2T7 {
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-primary), 1);
+    padding: var(--space-2) var(--space-3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalSystemMetaItem__A8p2T7 strong {
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-semibold);
+}
+
+.portalSystemFailures__R7k3N1 {
+    margin-top: var(--space-3);
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    padding: var(--space-2) var(--space-3);
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalSystemFailuresTitle__X2h9M6 {
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+    margin-bottom: var(--space-2);
+}
+
+.portalSystemFailuresList__J6p4C2 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalSystemFailuresList__J6p4C2 li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalSystemFailuresList__J6p4C2 code {
+    font-family: var(--font-monospace);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSystemOkNote__N3d8P1 {
+    margin-top: var(--space-3);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalPageTitle__H8t2M4 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalPageTitleIcon__R5k1D7 {
+    width: 18px;
+    height: 18px;
+    color: currentColor;
+    flex: 0 0 auto;
+}
+
+.portalBlogPostsPage__G8n3P4 li {
+    margin-bottom: 8px;
+    margin-left: 24px;
+}
+

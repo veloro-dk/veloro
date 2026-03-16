@@ -1,0 +1,37 @@
+@media (max-width: 640px) {
+    .portalInventoryDetailGrid__N2m8Q6,
+    .portalInventoryFormGrid__C2m8Q7,
+    .portalInventoryActionBottomGrid__H4m8Q5 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalInventoryTable__K9m2Q4 {
+        min-width: 0;
+    }
+
+    .portalInventoryTable__K9m2Q4 .portalInventoryColumnsRow__M4m2Q6 {
+        display: none;
+    }
+
+    .portalInventoryTable__K9m2Q4 .portalProductsCellCheckbox__C5m1R9 {
+        display: none;
+    }
+
+    .portalInventoryTable__K9m2Q4 th[data-column-id]:not([data-column-id="product"]),
+    .portalInventoryTable__K9m2Q4 td[data-column-id]:not([data-column-id="product"]) {
+        display: none;
+    }
+
+    .portalInventoryTable__K9m2Q4 .portalProductsSku__N3m9K5 {
+        display: none;
+    }
+
+    .portalInventoryTable__K9m2Q4 td[data-column-id="product"] {
+        width: 100%;
+    }
+
+    .portalInventoryDataTableScroll__C2m8Q4 .portalInventoryTable__K9m2Q4 th[data-column-id="product"],
+    .portalInventoryDataTableScroll__C2m8Q4 .portalInventoryTable__K9m2Q4 td[data-column-id="product"] {
+        left: 0;
+    }
+}

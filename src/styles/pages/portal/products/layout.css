@@ -1,0 +1,90 @@
+.portalProductsPage__C4p8M2 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.portalProductsHeader__N7v2R4 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.portalProductsHeadingWrap__B6k1Q9 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+}
+
+.portalProductsHeadingIcon__Q8m2D5 {
+    width: 18px;
+    height: 18px;
+    color: rgba(var(--color-text-primary), 1);
+    flex: 0 0 auto;
+}
+
+.portalProductsHeading__L2m8T6 {
+    margin: 0;
+    font-size: clamp(1rem, 0.94rem + 0.26vw, 1.125rem);
+    font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+    line-height: 1.15;
+    white-space: nowrap;
+}
+
+.portalProductsHeaderActions__J9r2V3 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.portalProductsEditMenuWrap__R5m2Q4 {
+    order: -1;
+}
+
+.portalProductsControlsHeader__B6m2R1 {
+    height: 44px;
+    padding: 8px 12px !important;
+    white-space: normal !important;
+    vertical-align: middle !important;
+}
+
+.portalProductsTableShell__G4m7N1 {
+    overflow: visible;
+    padding: 0;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.portalProductsTableTopRow__Y3m9Q5 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+}
+
+.portalProductsViewsRow__R6m1V2 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    min-width: 0;
+}
+
+.portalProductsViewItem__X5m8Q2 {
+    position: relative;
+    display: inline-flex;
+}
+
+.portalProductsTableActions__P5d8K3 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex: 0 0 auto;
+}

@@ -1,0 +1,20 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: inherit !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.light input:-webkit-autofill,
+.light input:-webkit-autofill:hover,
+.light input:-webkit-autofill:focus {
+    -webkit-text-fill-color: rgba(34, 39, 47, 1) !important;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus {
+    -webkit-text-fill-color: inherit !important;
+    transition: background-color 9999s ease-in-out 0s;
+}

@@ -1,0 +1,41 @@
+.portalSettingsHero__Y2d5L8 {
+    padding: var(--space-4);
+}
+
+.portalSettingsHeroTitle__R7t1N4 {
+    margin: 0;
+}
+
+.portalSettingsHeroSubtitle__K5m9Q2 {
+    margin: var(--space-1) 0 0;
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalSettingsHeroBlurb__W8p3F6 {
+    margin: var(--space-2) 0 0;
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalSettingsTiles__E4h8P1 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.portalSettingsTile__A1d6V7 {
+    padding: var(--space-3);
+}
+
+.portalSettingsTileTitle__S9m2Q4 {
+    margin: 0 0 var(--space-1);
+    font-size: var(--font-size-regular);
+    font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalSettingsTile__A1d6V7 p {
+    margin: 0;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}

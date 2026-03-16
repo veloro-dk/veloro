@@ -1,0 +1,43 @@
+.portalSettingsMobileTopBar__E4n7Q2 {
+    display: none;
+}
+
+.portalSettingsMobileTopBarLeft__R7q2D5 {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+}
+
+.portalSettingsMobileHeading__C9n4D1 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalSettingsMobileHeading__C9n4D1 svg,
+.portalSettingsMobileBackButton__W3m8P1 svg {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+}
+
+.portalSettingsMobileBackButton__W3m8P1 {
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    height: 30px;
+    padding: 0 var(--space-2);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--font-size-small);
+    cursor: pointer;
+}
+
+.portalSettingsMobileBackButton__W3m8P1:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}

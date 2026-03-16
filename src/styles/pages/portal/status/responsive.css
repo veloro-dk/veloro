@@ -1,0 +1,77 @@
+@media (max-width: 640px) {
+    .portalStatusStandalone__P3k7M2 {
+        padding: var(--space-3);
+    }
+
+    .portalStatusHero__V5h2K8 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalStatusHeroActions__M6t9Q2 {
+        justify-content: flex-start;
+    }
+
+    .portalStatusInfoGrid__L5d8N2 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalStatusSloGrid__D8m2Q4 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalStatusAdminGrid__N8q2V4 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalStatusSummaryGrid__V1k3N8 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalStatusMaintenanceActions__N4k8V1 {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .portalStatusMaintenanceActions__N4k8V1 .button__root__ZxcvB0 {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .portalStatusBar__H3p9V2 {
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas:
+            "dot label chevron"
+            "dot stats chevron";
+        row-gap: var(--space-1);
+        padding-top: var(--space-2);
+        padding-bottom: var(--space-2);
+    }
+
+    .portalStatusBar__H3p9V2 .portalSystemStatusDot__N7r1M5 {
+        grid-area: dot;
+    }
+
+    .portalStatusBarLabelBlock__S9v3N2 {
+        grid-area: label;
+    }
+
+    .portalStatusBarStats__B7v3P6 {
+        grid-area: stats;
+    }
+
+    .portalStatusBarChevron__Q9n1L4 {
+        grid-area: chevron;
+        align-self: start;
+        margin-top: 2px;
+    }
+
+    .portalStatusDetailTop__Y5m1Q4 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .portalStatusDetailMeta__H8v3L6,
+    .portalStatusDetailFoot__E6q1K9 {
+        flex-wrap: wrap;
+    }
+}

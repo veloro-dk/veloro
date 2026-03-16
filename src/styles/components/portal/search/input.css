@@ -1,0 +1,25 @@
+.portalSearchInputRow__P4f8T1 {
+    position: relative;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 0 var(--space-3) 0 calc(var(--space-8) + var(--space-1));
+    border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+}
+
+.portalSearchInputRow__P4f8T1:focus-within {
+    border-bottom-color: rgba(var(--color-blue), 1);
+    box-shadow: inset 0 -1px 0 rgba(var(--color-blue), 1);
+}
+
+.portalSearchInputIcon__K7q1N6 {
+    position: absolute;
+    top: 50%;
+    left: var(--space-3);
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: rgba(var(--color-text-tertiary), 1);
+    pointer-events: none;
+}

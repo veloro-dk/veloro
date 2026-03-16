@@ -1,0 +1,36 @@
+.portalInventoryList__Q4m8Q2 {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalInventoryList__Q4m8Q2 li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px var(--space-2);
+    padding: 8px 10px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalInventoryList__Q4m8Q2 span {
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalInventoryList__Q4m8Q2 strong {
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+    text-align: right;
+}
+
+.portalInventoryList__Q4m8Q2 small {
+    grid-column: 1 / -1;
+    color: rgba(var(--color-text-tertiary), 1);
+    font-size: var(--font-size-xs);
+    line-height: 1.35;
+}

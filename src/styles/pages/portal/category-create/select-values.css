@@ -1,0 +1,11 @@
+.portalCategoriesSelectValuesInputWrap__V7m2Q5 {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.dark .portalCategoriesSelectValuesInputWrap__V7m2Q5 {
+    background: rgba(var(--color-bg-tertiary), 1);
+}
+
+.dark .portalCategoriesSelectValuesInputWrap__V7m2Q5:focus-within {
+    background-color: rgba(var(--color-bg-primary), 1);
+}

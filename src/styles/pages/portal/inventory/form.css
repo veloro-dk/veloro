@@ -1,0 +1,82 @@
+.portalInventoryFormGrid__C2m8Q7 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+
+.portalInventoryActionBottomGrid__H4m8Q5 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+    align-items: stretch;
+}
+
+.portalInventoryActionBottomGrid__H4m8Q5 > .portalProductCreateMainCard__N4m8Q3 {
+    height: 100%;
+}
+
+.portalInventoryFullWidth__K2m8Q4 {
+    grid-column: 1 / -1;
+}
+
+.portalInventorySummaryCard__B3m8Q7 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalInventorySummaryTitle__G9m2Q4 {
+    margin: 0;
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalInventorySummaryMeta__R2m8Q1 {
+    margin: 0;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalInventorySummaryEmpty__D8m2Q6 {
+    margin: 0;
+    color: rgba(var(--color-text-tertiary), 1);
+    font-size: var(--font-size-xs);
+}
+
+.portalInventorySummaryList__M4m2Q9 {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.portalInventorySummaryListRow__P6m8Q4 {
+    min-height: 22px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalInventorySummaryListLabel__Q3m2Q7 {
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.portalInventorySummaryListValue__Z2m8Q1 {
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+    text-align: right;
+}

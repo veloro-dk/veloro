@@ -7,6 +7,17 @@ type Props = ComponentProps<"input"> & {
 };
 
 export function Input({ label, error, helper, className, ...rest }: Props) {
+    const normalizedLabel = label.trim().toLowerCase();
+    const autoPlaceholder = rest.type === "email"
+        ? "name@example.com"
+        : rest.type === "date"
+            ? "YYYY-MM-DD"
+            : rest.type === "number"
+                ? "0"
+                : rest.type === "password"
+                    ? "Enter password"
+                    : `Enter ${normalizedLabel}`;
+
     return (
         <div className="form__group__K7p2s0">
             <label className="form__label__B9f4k0">{label}</label>
@@ -15,6 +26,7 @@ export function Input({ label, error, helper, className, ...rest }: Props) {
                     className={["form__input__Z3n7q0", className].filter(Boolean).join(" ")}
                     aria-invalid={Boolean(error) || undefined}
                     {...rest}
+                    placeholder={rest.placeholder ?? autoPlaceholder}
                 />
             </div>
             {error ? <div className="form__error__L5j8p0">{error}</div> : null}

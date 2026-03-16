@@ -1,0 +1,58 @@
+.portalPageHeader__Q8m3V1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+}
+
+.portalPageHeadingWrap__B6k1Q9 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-width: 0;
+}
+
+.portalPageHeadingText__A6m2P4 {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portalPageHeadingTextInline__M9k2V4 {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalPageHeadingIcon__Q8m2D5 {
+    width: 18px;
+    height: 18px;
+    color: rgba(var(--color-text-primary), 1);
+    flex: 0 0 auto;
+}
+
+.portalPageHeading__L2m8T6 {
+    margin: 0;
+    font-size: clamp(1rem, 0.94rem + 0.26vw, 1.125rem);
+    font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+    line-height: 1.15;
+    white-space: nowrap;
+}
+
+.portalPageMeta__N9r2D7 {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-tertiary), 1);
+    white-space: nowrap;
+}
+
+.portalPageHeaderActions__J9r2V3 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}

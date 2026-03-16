@@ -1,0 +1,144 @@
+.portalSettingsHeader__C7t4L2 {
+    min-height: 78px;
+    border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+    padding: var(--space-3) var(--space-4);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+}
+
+.portalSettingsHeading__F9m2Q1 {
+    min-width: 0;
+}
+
+.portalSettingsTitle__H6r3K8 {
+    margin: 0;
+}
+
+.portalSettingsSubtitle__T3d7N5 {
+    margin: var(--space-1) 0 0;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalSettingsActions__M2x8V4 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalSettingsButtonContent__N4q9W1 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalSettingsButtonContent__N4q9W1 svg {
+    width: 14px;
+    height: 14px;
+}
+
+@keyframes portalSettingsHeaderActionsEnter__H2m8R4 {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes portalSettingsHeaderActionsExit__D6n3P9 {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+@keyframes portalSettingsHeaderActionsShake__H9t2Q5 {
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-4px);
+    }
+
+    40% {
+        transform: translateX(4px);
+    }
+
+    60% {
+        transform: translateX(-3px);
+    }
+
+    80% {
+        transform: translateX(3px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.portalSettingsHeaderActionsGroup__P4n8V1 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    will-change: opacity, transform;
+    animation-duration: 220ms;
+    animation-timing-function: var(--ease-out-quad);
+    animation-fill-mode: both;
+}
+
+.portalSettingsHeaderActionsGroupVisible__Y2d7M9 {
+    animation-name: portalSettingsHeaderActionsEnter__H2m8R4;
+}
+
+.portalSettingsHeaderActionsGroupHidden__T6q3R4 {
+    pointer-events: none;
+    animation-name: portalSettingsHeaderActionsExit__D6n3P9;
+}
+
+.portalSettingsHeaderActionsGroupShake__H9t2Q5 {
+    animation-name: portalSettingsHeaderActionsEnter__H2m8R4, portalSettingsHeaderActionsShake__H9t2Q5;
+    animation-duration: 220ms, 360ms;
+    animation-delay: 0ms, 0ms;
+    animation-fill-mode: both, both;
+}
+
+.portalSettingsHeaderActionsGroup__P4n8V1 + .portalSettingsCloseButton__D4m7P1 {
+    margin-left: var(--space-2);
+}
+
+.portalSettingsCloseButton__D4m7P1 {
+    min-width: 32px;
+    width: 32px;
+    padding: 0;
+    justify-content: center;
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+    border: 0;
+    box-shadow: none;
+}
+
+.portalSettingsCloseButton__D4m7P1:hover {
+    background: rgba(var(--color-bg-tertiary), 1);
+    color: rgba(var(--color-text-primary), 1);
+    border: 0;
+    box-shadow: none;
+}
+
+.portalSettingsCloseButton__D4m7P1:active {
+    background: rgba(var(--color-bg-quaternary), 1);
+    border: 0;
+    box-shadow: none;
+}

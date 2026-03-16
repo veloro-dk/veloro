@@ -1,0 +1,47 @@
+name: Staging Parity
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 6 * * 1-5"
+
+permissions:
+  contents: read
+
+jobs:
+  parity:
+    runs-on: ubuntu-latest
+    env:
+      STAGING_BASE_URL: ${{ secrets.STAGING_BASE_URL }}
+      PRODUCTION_BASE_URL: ${{ secrets.PRODUCTION_BASE_URL }}
+      PARITY_TIMEOUT_MS: "20000"
+      PARITY_OUTPUT_FILE: "tmp/staging-parity-report.json"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Skip when required URLs are missing
+        if: env.STAGING_BASE_URL == '' || env.PRODUCTION_BASE_URL == ''
+        run: echo "STAGING_BASE_URL or PRODUCTION_BASE_URL secret is missing. Skipping staging parity checks."
+
+      - name: Install dependencies
+        if: env.STAGING_BASE_URL != '' && env.PRODUCTION_BASE_URL != ''
+        run: npm ci
+
+      - name: Run staging parity checks
+        if: env.STAGING_BASE_URL != '' && env.PRODUCTION_BASE_URL != ''
+        run: npm run staging:parity
+
+      - name: Upload staging parity report
+        if: env.STAGING_BASE_URL != '' && env.PRODUCTION_BASE_URL != '' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: staging-parity-report
+          path: tmp/staging-parity-report.json
+          if-no-files-found: ignore

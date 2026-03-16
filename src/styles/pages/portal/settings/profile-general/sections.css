@@ -1,0 +1,87 @@
+.portalSettingsProfile__L7v2D9 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.portalSettingsGeneral__V8m2P4 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.portalSettingsGeneralHint__L2m8Q1 {
+    margin: 0;
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalSettingsProfileCard__A2m8Q4 {
+    width: 100%;
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.portalSettingsSectionHeader__F6m2Q1 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalSettingsSectionSubtitle__W2m9Q6 {
+    margin: 0;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalSettingsFieldRow__R8m4P2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.portalSettingsFieldRowSingle__S5m8N1 {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.portalSettingsField__D2n7V1 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+}
+
+.portalSettingsFieldSpanFull__C9m4R2 {
+    grid-column: 1 / -1;
+}
+
+.portalSettingsProfileStores__Y4n8P1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+}
+
+.portalSettingsProfileStoreChip__Q8m3R2 {
+    min-height: 24px;
+    padding: 0 var(--space-2);
+    border-radius: 999px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-xs);
+    display: inline-flex;
+    align-items: center;
+}
+
+.portalSettingsProfileActions__N3q8V6 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalSettingsProfileSaved__D2m7T4 {
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+}

@@ -1,0 +1,67 @@
+.ui-card-heading-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-2);
+}
+
+.ui-card-heading {
+    margin: 0;
+    min-width: 0;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: var(--font-weight-bold);
+    color: rgba(var(--color-text-primary), 1);
+    text-align: left;
+}
+
+.ui-card-heading-text {
+    display: inline;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.ui-card-heading-hint {
+    border: 0;
+    border-bottom: 1px dotted rgba(var(--color-text-tertiary), 1);
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    text-align: left;
+    cursor: help;
+    transition: border-color 120ms ease, color 120ms ease;
+}
+
+.ui-card-heading-hint:hover {
+    color: rgba(var(--color-link-primary), 1);
+    border-color: rgba(var(--color-link-primary), 0.75);
+}
+
+.ui-card-heading-hint:focus-visible {
+    outline: none;
+    border-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 1px 0 rgba(var(--color-blue), 1);
+}
+
+.ui-card-heading-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    white-space: nowrap;
+    gap: var(--space-1);
+}
+
+.ui-card-subheading {
+    margin: 0;
+    font-size: var(--font-size-small);
+    line-height: 1.35;
+    color: rgba(var(--color-text-secondary), 1);
+}

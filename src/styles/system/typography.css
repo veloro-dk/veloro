@@ -85,7 +85,7 @@
 }
 
 .typography__link__B7s3m0 {
-    color: var(--color-blue);
+    color: rgba(var(--color-blue), 1);
     text-decoration: none;
     transition: color 0.2s var(--ease-out-quad);
 }

@@ -1,0 +1,1298 @@
+.portalHomeDashboardRoot__A2m8Q4 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.portalHomeDashboardFullscreen__X4m8Q7 {
+    min-height: 100%;
+    padding: var(--space-4);
+    background: rgba(var(--color-bg-primary), 1);
+    overflow: auto;
+}
+
+.portalHomeDashboardHeaderIconButton__K7m2Q4 {
+    width: 28px;
+    min-width: 28px;
+    justify-content: center;
+    padding: 0;
+}
+
+.portalHomeDashboardHeaderMenuWrap__E8m2Q4 {
+    position: relative;
+    display: inline-flex;
+}
+
+.portalHomeDashboardHeaderFilterButton__J8m2Q4 {
+    min-width: 0;
+    gap: 6px;
+    padding-left: 6px;
+}
+
+.portalHomeDashboardHeaderFilterButton__J8m2Q4 svg {
+    width: 14px;
+    height: 14px;
+}
+
+.portalHomeDashboardCurrencyIconGroup__V5m2Q4 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    flex: 0 0 auto;
+}
+
+.portalHomeDashboardSection__U4m2Q6 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardSectionHeader__R5m2Q8 {
+    min-height: 36px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: 0 var(--space-2);
+    cursor: text;
+    transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.portalHomeDashboardSectionHeader__R5m2Q8:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalHomeDashboardSectionHeaderEditing__F8m2Q5 {
+    border-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalHomeDashboardSectionHeaderNameWrap__H6m2Q9 {
+    min-width: 0;
+    flex: 1;
+}
+
+.portalHomeDashboardSectionHeaderName__D3m2Q7 {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: var(--font-weight-bold);
+    color: rgba(var(--color-text-primary), 1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.portalHomeDashboardSectionHeaderInput__C7m2Q3 {
+    width: 100%;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: var(--font-weight-bold);
+    padding: 0;
+}
+
+.portalHomeDashboardSectionHeaderInput__C7m2Q3:focus-visible {
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 0.8);
+}
+
+.portalHomeDashboardSectionHeaderActions__T7m2Q4 {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.portalHomeDashboardSectionIconButton__Q8m2Q5 {
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(var(--color-text-secondary), 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 120ms ease, color 120ms ease, opacity 120ms ease;
+}
+
+.portalHomeDashboardSectionIconButton__Q8m2Q5 svg {
+    width: 14px;
+    height: 14px;
+}
+
+.portalHomeDashboardSectionIconButton__Q8m2Q5:hover:not(:disabled) {
+    background: rgba(var(--color-bg-tertiary), 1);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalHomeDashboardSectionIconButton__Q8m2Q5:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.portalHomeDashboardSectionSequence__M8m2Q5 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.portalHomeDashboardSectionSequenceItem__S2m2Q7 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.portalHomeDashboardSectionSequenceRow__B4m2Q6 {
+    min-height: 34px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-primary), 1);
+    color: rgba(var(--color-text-primary), 1);
+    padding: 0 var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardSectionSequenceRow__B4m2Q6 span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: var(--font-size-small);
+}
+
+.portalHomeDashboardSectionSequenceHandle__Q5m2Q7 {
+    width: 22px;
+    height: 22px;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(var(--color-text-secondary), 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.portalHomeDashboardSectionSequenceHandle__Q5m2Q7 svg {
+    width: 14px;
+    height: 14px;
+}
+
+.portalHomeDashboardSectionSequenceHandle__Q5m2Q7:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.portalHomeDashboardSectionDropPlaceholder__X4m2Q8 {
+    width: 100%;
+    height: 34px;
+    border: 1px dashed rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-tertiary), 0.35);
+}
+
+.portalHomeDashboardSectionDragPreview__W7m2Q9 {
+    position: fixed;
+    z-index: calc(var(--layer-popover) + 1);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    min-width: 180px;
+    max-width: min(260px, 80vw);
+    height: 34px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-primary), 0.98);
+    display: inline-flex;
+    align-items: center;
+    padding: 0 var(--space-2);
+    box-shadow: 0 10px 20px -18px rgba(0, 122, 255, 0.5), 0 8px 16px -14px rgba(0, 0, 0, 0.62);
+}
+
+.portalHomeDashboardSectionDragPreview__W7m2Q9 span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalHomeDashboardHeaderMenuPanel__T6m2Q8 {
+    min-width: 268px;
+}
+
+.portalHomeDashboardHeaderMenuPanel__T6m2Q8 .portalProductsMenuItem__E3n8R6 {
+    height: 32px;
+}
+
+.portalHomeDashboardHeaderMenuPanel__T6m2Q8 .portalProductsMenuItem__E3n8R6.portalHomeDashboardCurrencyOption__S4m2Q7[role="menuitemradio"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    text-align: left;
+}
+
+.portalHomeDashboardHeaderMenuPanel__T6m2Q8 .portalProductsMenuItem__E3n8R6.portalHomeDashboardCurrencyOption__S4m2Q7[role="menuitemradio"]::before {
+    content: none;
+}
+
+.portalHomeDashboardCurrencyOptionLabel__X3m2Q8 {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.portalHomeDashboardCurrencyOptionCheck__L7m2Q6 {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 auto;
+    color: rgba(var(--color-text-primary), 1);
+    opacity: 0;
+    transition: opacity 0.12s var(--ease-out-quad);
+}
+
+.portalHomeDashboardHeaderMenuPanel__T6m2Q8 .portalProductsMenuItem__E3n8R6.portalHomeDashboardCurrencyOption__S4m2Q7:hover,
+.portalHomeDashboardHeaderMenuPanel__T6m2Q8 .portalProductsMenuItem__E3n8R6.portalHomeDashboardCurrencyOption__S4m2Q7[aria-checked="true"] {
+    background: rgba(var(--color-bg-secondary), 1);
+    border-color: transparent;
+}
+
+.portalHomeDashboardHeaderMenuPanel__T6m2Q8 .portalProductsMenuItem__E3n8R6.portalHomeDashboardCurrencyOption__S4m2Q7[aria-checked="true"] .portalHomeDashboardCurrencyOptionCheck__L7m2Q6 {
+    opacity: 1;
+}
+
+.portalHomeDashboardCurrencySearchWrap__D2m2Q4 {
+    padding: var(--space-1);
+    border-bottom: 1px solid rgba(var(--color-border-secondary), 1);
+    margin: calc(var(--space-1) * -1) calc(var(--space-1) * -1) var(--space-1);
+}
+
+.portalHomeDashboardCurrencySearchInput__Q2m2Q4 {
+    width: 100%;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    background: rgba(var(--color-bg-primary), 1);
+    color: rgba(var(--color-text-primary), 1);
+    font-size: 12px;
+    padding: 0 10px;
+}
+
+.portalHomeDashboardCurrencySearchInput__Q2m2Q4:focus-visible {
+    outline: none;
+    border-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 0.2);
+}
+
+.portalHomeDashboardCurrencyList__C2m2Q6 {
+    max-height: min(360px, 52vh);
+    overflow-y: auto;
+}
+
+.portalHomeDashboardCurrencyEmpty__N2m2Q5 {
+    margin: 0;
+    padding: var(--space-2);
+    font-size: 12px;
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalHomeDashboardDatePanel__V4m2Q7 {
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    width: min(760px, calc(100vw - 36px));
+    min-height: 360px;
+    padding: var(--space-3);
+    border-radius: 12px;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    background: rgba(var(--color-bg-primary), 0.98);
+    box-shadow: 0 10px 24px -18px rgba(15, 23, 42, 0.5), 0 8px 18px -14px rgba(15, 23, 42, 0.35);
+    z-index: var(--layer-popover);
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: var(--space-3);
+    backdrop-filter: blur(8px);
+}
+
+.portalHomeDashboardDatePresetColumn__R5m2Q6 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-right: var(--space-3);
+    border-right: 1px solid rgba(var(--color-border-secondary), 1);
+}
+
+.portalHomeDashboardDatePresetButton__Q3m2Q6 {
+    height: 32px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    text-align: left;
+    font-size: var(--font-size-small);
+    padding: 0 var(--space-2);
+    cursor: pointer;
+}
+
+.portalHomeDashboardDatePresetButton__Q3m2Q6:hover,
+.portalHomeDashboardDatePresetButtonActive__F2m2Q9 {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalHomeDashboardDateCalendarColumn__D2m2Q4 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+    padding-left: var(--space-3);
+}
+
+.portalHomeDashboardDateInputs__A2m2Q7 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardDateInputs__A2m2Q7 label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11px;
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalHomeDashboardDateSummary__A8m2Q4 {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalHomeDashboardCalendarGrid__H6m2Q3 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.portalHomeDashboardCalendarMonth__Y6m2Q5 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.portalHomeDashboardCalendarMonth__Y6m2Q5 h4 {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalHomeDashboardCalendarWeekdays__J6m2Q4,
+.portalHomeDashboardCalendarDays__B2m2Q5 {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.portalHomeDashboardCalendarWeekdays__J6m2Q4 {
+    gap: 4px;
+}
+
+.portalHomeDashboardCalendarDays__B2m2Q5 {
+    gap: 0;
+}
+
+.portalHomeDashboardCalendarWeekdays__J6m2Q4 span {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalHomeDashboardCalendarDay__H7m2Q4,
+.portalHomeDashboardCalendarDayEmpty__G2m2Q2 {
+    height: 28px;
+    border-radius: 0;
+}
+
+.portalHomeDashboardCalendarDayEmpty__G2m2Q2 {
+    display: block;
+}
+
+.portalHomeDashboardCalendarDay__H7m2Q4 {
+    border: 0;
+    background: transparent;
+    color: rgba(var(--color-text-primary), 1);
+    font-size: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.portalHomeDashboardCalendarDay__H7m2Q4:hover:not(.portalHomeDashboardCalendarDayInRange__K2m2Q4):not(.portalHomeDashboardCalendarDayStart__E3m2Q4):not(.portalHomeDashboardCalendarDayEnd__M4m2Q6) {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalHomeDashboardCalendarDayInRange__K2m2Q4 {
+    background: rgba(var(--color-bg-secondary), 1);
+    border-radius: 0;
+}
+
+.portalHomeDashboardCalendarDayStart__E3m2Q4,
+.portalHomeDashboardCalendarDayEnd__M4m2Q6 {
+    color: rgba(var(--color-bg-primary), 1);
+    background: rgba(var(--color-primary-inverted), 1);
+    border-radius: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.portalHomeDashboardCalendarDayStart__E3m2Q4 {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.portalHomeDashboardCalendarDayEnd__M4m2Q6 {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.portalHomeDashboardCalendarDaySingle__A3m2Q9 {
+    border-radius: 8px;
+}
+
+.portalHomeDashboardDateFooter__S7m2Q8 {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardGate__D4m2Q8 {
+    min-height: 260px;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.portalHomeDashboardGrid__E2m8Q4 {
+    --portal-home-grid-columns: 12;
+    --portal-home-grid-row-size: 45px;
+    --portal-home-grid-gap: 0px;
+    --portal-home-grid-inset: 8px;
+
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--portal-home-grid-columns), minmax(0, 1fr));
+    grid-auto-flow: row;
+    grid-auto-rows: var(--portal-home-grid-row-size);
+    gap: var(--portal-home-grid-gap);
+}
+
+.portalHomeDashboardGridOverlay__L7m2Q4 {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(var(--portal-home-grid-columns), minmax(0, 1fr));
+    grid-auto-rows: var(--portal-home-grid-row-size);
+    gap: var(--portal-home-grid-gap);
+    pointer-events: none;
+    z-index: 0;
+    transition: opacity 120ms ease;
+}
+
+.portalHomeDashboardGridCell__J4m2Q6 {
+    position: relative;
+    background: transparent;
+}
+
+.portalHomeDashboardGridCell__J4m2Q6::before {
+    content: "";
+    position: absolute;
+    inset:
+        var(--portal-home-grid-cell-inset-top, var(--portal-home-grid-inset))
+        var(--portal-home-grid-cell-inset-right, var(--portal-home-grid-inset))
+        var(--portal-home-grid-cell-inset-bottom, var(--portal-home-grid-inset))
+        var(--portal-home-grid-cell-inset-left, var(--portal-home-grid-inset));
+    border: 1px dashed rgba(var(--color-border-secondary), 0.62);
+    border-radius: var(--ui-surface-radius, 12px);
+    transition: border-color 130ms ease, background-color 130ms ease;
+}
+
+.portalHomeDashboardGridCellTarget__N4m2Q3::before {
+    border-color: rgba(var(--color-blue), 0.75);
+    background: rgba(var(--color-blue), 0.04);
+}
+
+.portalHomeDashboardCard__U3m8Q2 {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin:
+        var(--portal-home-card-inset-top, var(--portal-home-grid-inset))
+        var(--portal-home-card-inset-right, var(--portal-home-grid-inset))
+        var(--portal-home-card-inset-bottom, var(--portal-home-grid-inset))
+        var(--portal-home-card-inset-left, var(--portal-home-grid-inset));
+    padding: var(--space-4);
+    overflow: hidden;
+}
+
+.portalHomeDashboardCardEdit__T3m2Q4 {
+    cursor: grab;
+    border-color: rgba(var(--color-border-secondary), 1);
+    outline: 1px solid transparent;
+    overflow: visible;
+    touch-action: none;
+    transition:
+        border-color 130ms ease,
+        outline-color 130ms ease,
+        box-shadow 130ms ease,
+        opacity 120ms ease,
+        width 70ms linear,
+        height 70ms linear;
+}
+
+.portalHomeDashboardCardEdit__T3m2Q4:active {
+    cursor: grabbing;
+}
+
+.portalHomeDashboardCardEditHover__T3m2Q8 {
+    border-color: rgba(var(--color-blue), 1);
+    outline: 2px solid rgba(var(--color-blue), 1);
+    outline-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 0.22);
+}
+
+.portalHomeDashboardCardDragSource__Q4m2Q8 {
+    opacity: 0;
+}
+
+.portalHomeDashboardCardResizeSource__M8m2Q5 {
+    border-color: rgba(var(--color-blue), 1);
+    outline: 2px solid rgba(var(--color-blue), 1);
+    outline-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 0.2);
+}
+
+.portalHomeDashboardCardHead__H2m8Q4 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardCardHead__H2m8Q4 h3 {
+    font-weight: var(--font-weight-bold);
+}
+
+.portalHomeDashboardCardDelete__D6m2Q4 {
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 8px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(var(--color-text-tertiary), 1);
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 120ms ease, color 120ms ease, box-shadow 120ms ease;
+}
+
+.portalHomeDashboardCardDelete__D6m2Q4:hover {
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-tertiary), 1);
+}
+
+.portalHomeDashboardCardDelete__D6m2Q4:focus-visible {
+    outline: none;
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-tertiary), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 0.8);
+}
+
+.portalHomeDashboardCardDelete__D6m2Q4 svg {
+    width: 14px;
+    height: 14px;
+}
+
+.portalHomeDashboardCardHeading__Q4m7V6 {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.portalHomeDashboardCardTitleRow__A2m2Q5 {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.portalHomeDashboardCardTitleRow__A2m2Q5 h3 {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.2;
+    font-weight: var(--font-weight-bold);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalHomeDashboardCardTimeBadge__F8m2Q4 {
+    font-size: 10px;
+    line-height: 1;
+    border-radius: 999px;
+    padding: 2px 6px;
+    color: rgba(var(--color-blue), 1);
+    background: rgba(var(--color-blue), 0.1);
+}
+
+.portalHomeDashboardCardTitleHint__G2m2Q6 {
+    border: 0;
+    border-bottom: 1px dotted rgba(var(--color-text-tertiary), 1);
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    text-align: left;
+    cursor: help;
+    transition: border-color 120ms ease, color 120ms ease;
+}
+
+.portalHomeDashboardCardTitleHint__G2m2Q6:hover {
+    color: rgba(var(--color-link-primary), 1);
+    border-color: rgba(var(--color-link-primary), 0.75);
+}
+
+.portalHomeDashboardCardTitleHint__G2m2Q6:focus-visible {
+    outline: none;
+    border-color: rgba(var(--color-blue), 1);
+    box-shadow: 0 1px 0 rgba(var(--color-blue), 1);
+}
+
+.portalHomeDashboardCardBody__Z4m2Q7 {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    overflow: hidden;
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4 {
+    gap: 8px;
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4.portalHomeDashboardCardEdit__T3m2Q4 {
+    padding-right: calc(var(--space-4) + 28px);
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4 .portalHomeDashboardCardHead__H2m8Q4 {
+    flex: 0 0 auto;
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4.portalHomeDashboardCardEdit__T3m2Q4 .portalHomeDashboardCardDelete__D6m2Q4 {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4 .portalHomeDashboardCardBody__Z4m2Q7 {
+    flex: 1;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4 .portalHomeDashboardCardTitleRow__A2m2Q5 h3 {
+    font-size: 13px;
+    line-height: 1.15;
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4 .portalHomeDashboardCardTimeBadge__F8m2Q4 {
+    font-size: 9px;
+    padding: 2px 5px;
+}
+
+.portalHomeDashboardCardTwoRowCompact__Q9m2R4 .portalHomeDashboardWidgetStat__Q7m2R4 {
+    font-size: 13px;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.portalHomeDashboardCardBodyEdit__J3m2Q7 {
+    pointer-events: none;
+    user-select: none;
+}
+
+.portalHomeDashboardResizeHandle__K4m2Q7 {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    background: transparent;
+    color: rgba(var(--color-blue), 1);
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: nwse-resize;
+    transition: background-color 120ms ease, box-shadow 120ms ease;
+}
+
+.portalHomeDashboardResizeHandle__K4m2Q7:hover {
+    background: transparent;
+}
+
+.portalHomeDashboardResizeHandle__K4m2Q7:focus-visible {
+    outline: none;
+    background: rgba(var(--color-bg-tertiary), 1);
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 0.8);
+}
+
+.portalHomeDashboardResizeHandleSvg__T6m2Q4 {
+    width: 15px;
+    height: 15px;
+    display: block;
+}
+
+.portalHomeDashboardResizeHandleIcon__T6m2Q4 {
+    fill: currentColor;
+    stroke: none;
+}
+
+.portalHomeDashboardDragPreview__E4m2Q6 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    pointer-events: none;
+    margin: 0;
+    padding: var(--space-3);
+    overflow: hidden;
+    will-change: transform;
+    box-shadow: none;
+}
+
+.portalHomeDashboardGridInteracting__J7m2Q5 .portalHomeDashboardCard__U3m8Q2 {
+    pointer-events: none;
+}
+
+.portalHomeDashboardInteractingBody__A4m2Q7 {
+    user-select: none;
+}
+
+.portalHomeDashboardWidgetStat__Q7m2R4 {
+    margin: 0;
+    font-size: clamp(20px, 3vw, 30px);
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+@keyframes portalHomeDashboardWidgetLoadingSweep__N2m2R5 {
+    0% {
+        transform: translateX(-110%);
+    }
+
+    100% {
+        transform: translateX(110%);
+    }
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7 {
+    min-width: 0;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.portalHomeDashboardWidgetLoadingBlock__C2m2R6 {
+    position: relative;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    background: rgba(var(--color-bg-secondary), 1);
+    overflow: hidden;
+}
+
+.portalHomeDashboardWidgetLoadingBlock__C2m2R6::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(var(--color-bg-secondary), 0) 0%,
+        rgba(var(--color-bg-tertiary), 0.75) 46%,
+        rgba(var(--color-bg-secondary), 0) 100%
+    );
+    animation: portalHomeDashboardWidgetLoadingSweep__N2m2R5 1.2s ease-in-out infinite;
+}
+
+.portalHomeDashboardWidgetLoadingBlockChart__V2m2R8 {
+    margin-top: auto;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="compact"] {
+    gap: 6px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="compact"] .portalHomeDashboardWidgetLoadingBlockPrimary__L2m2R5 {
+    width: 56%;
+    height: 13px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="compact"] .portalHomeDashboardWidgetLoadingBlockSecondary__M2m2R4 {
+    width: 42%;
+    height: 13px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="compact"] .portalHomeDashboardWidgetLoadingBlockTertiary__P2m2R3,
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="compact"] .portalHomeDashboardWidgetLoadingBlockChart__V2m2R8 {
+    display: none;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="sm"] .portalHomeDashboardWidgetLoadingBlockPrimary__L2m2R5 {
+    width: 58%;
+    height: 18px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="sm"] .portalHomeDashboardWidgetLoadingBlockSecondary__M2m2R4 {
+    width: 78%;
+    height: 10px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="sm"] .portalHomeDashboardWidgetLoadingBlockTertiary__P2m2R3 {
+    width: 64%;
+    height: 10px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="sm"] .portalHomeDashboardWidgetLoadingBlockChart__V2m2R8 {
+    height: 26px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="md"] .portalHomeDashboardWidgetLoadingBlockPrimary__L2m2R5 {
+    width: 52%;
+    height: 20px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="md"] .portalHomeDashboardWidgetLoadingBlockSecondary__M2m2R4 {
+    width: 84%;
+    height: 11px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="md"] .portalHomeDashboardWidgetLoadingBlockTertiary__P2m2R3 {
+    width: 68%;
+    height: 11px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="md"] .portalHomeDashboardWidgetLoadingBlockChart__V2m2R8 {
+    height: 32px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="lg"] .portalHomeDashboardWidgetLoadingBlockPrimary__L2m2R5 {
+    width: 46%;
+    height: 24px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="lg"] .portalHomeDashboardWidgetLoadingBlockSecondary__M2m2R4 {
+    width: 78%;
+    height: 11px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="lg"] .portalHomeDashboardWidgetLoadingBlockTertiary__P2m2R3 {
+    width: 66%;
+    height: 11px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="lg"] .portalHomeDashboardWidgetLoadingBlockChart__V2m2R8 {
+    height: 40px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="xl"] .portalHomeDashboardWidgetLoadingBlockPrimary__L2m2R5 {
+    width: 42%;
+    height: 26px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="xl"] .portalHomeDashboardWidgetLoadingBlockSecondary__M2m2R4 {
+    width: 82%;
+    height: 12px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="xl"] .portalHomeDashboardWidgetLoadingBlockTertiary__P2m2R3 {
+    width: 70%;
+    height: 12px;
+}
+
+.portalHomeDashboardWidgetLoading__S2m2R7[data-size="xl"] .portalHomeDashboardWidgetLoadingBlockChart__V2m2R8 {
+    height: 56px;
+}
+
+.portalHomeDashboardMetric__X4m2Q5 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardMetric__X4m2Q5 p {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.35;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalHomeDashboardList__N7m2R1 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.portalHomeDashboardList__N7m2R1 li {
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardList__N7m2R1 span {
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalHomeDashboardList__N7m2R1 strong {
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-primary), 1);
+    white-space: nowrap;
+}
+
+.portalHomeDashboardProgress__W6m2Q4 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.portalHomeDashboardProgressLabel__R4m2Q2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: 5px;
+}
+
+.portalHomeDashboardProgressLabel__R4m2Q2 span {
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-secondary), 1);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.portalHomeDashboardProgressLabel__R4m2Q2 strong {
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-primary), 1);
+    white-space: nowrap;
+}
+
+.portalHomeDashboardProgressTrack__J4m2Q4 {
+    height: 7px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(var(--color-bg-tertiary), 1);
+}
+
+.portalHomeDashboardProgressTrack__J4m2Q4 span {
+    display: block;
+    height: 100%;
+    min-width: 6px;
+    border-radius: inherit;
+    background: rgba(var(--color-blue), 1);
+}
+
+.portalHomeDashboardSparkline__M6m2Q7 {
+    margin-top: auto;
+    min-height: 48px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    align-items: end;
+    gap: 5px;
+}
+
+.portalHomeDashboardSparkline__M6m2Q7 span {
+    border-radius: 4px 4px 1px 1px;
+    background: rgba(var(--color-blue), 1);
+}
+
+.portalHomeDashboardLineChart__P3m2R4 {
+    margin-top: auto;
+    min-height: 58px;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    background: rgba(var(--color-bg-tertiary), 0.6);
+    overflow: hidden;
+}
+
+.portalHomeDashboardLineChart__P3m2R4 svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.portalHomeDashboardLineChart__P3m2R4 polyline {
+    fill: none;
+    stroke: rgba(var(--color-blue), 1);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.portalHomeDashboardScatter__Q4m2R6 {
+    margin-top: auto;
+    min-height: 82px;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    background: rgba(var(--color-bg-tertiary), 0.35);
+    position: relative;
+    overflow: hidden;
+}
+
+.portalHomeDashboardScatter__Q4m2R6 span {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    margin-bottom: -3px;
+    border-radius: 999px;
+    background: rgba(var(--color-blue), 0.95);
+}
+
+.portalHomeDashboardVariantRows__R8m2R4 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.portalHomeDashboardVariantRows__R8m2R4 li {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.portalHomeDashboardVariantRowsLabel__A3m2R8 {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    align-items: center;
+    min-width: 0;
+}
+
+.portalHomeDashboardVariantRowsLabel__A3m2R8 span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalHomeDashboardVariantRowsLabel__A3m2R8 small {
+    font-size: 11px;
+    color: rgba(var(--color-text-secondary), 1);
+    white-space: nowrap;
+}
+
+.portalHomeDashboardVariantRowsBars__U2m2R7 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+}
+
+.portalHomeDashboardVariantRowsBars__U2m2R7 span {
+    display: block;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(var(--color-blue), 0.75);
+}
+
+.portalHomeDashboardVariantRowsBars__U2m2R7 span:nth-child(2) {
+    background: rgba(var(--color-blue), 0.45);
+}
+
+.portalHomeDashboardTags__H6m2Q4 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.portalHomeDashboardTags__H6m2Q4 li {
+    min-width: 0;
+    border-radius: 8px;
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    background: transparent;
+}
+
+.portalHomeDashboardTags__H6m2Q4 li:nth-child(even) {
+    background: rgba(var(--color-bg-tertiary), 1);
+}
+
+.portalHomeDashboardTags__H6m2Q4 span {
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-primary), 1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.portalHomeDashboardTags__H6m2Q4 small {
+    min-width: 0;
+    font-size: 11px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-secondary), 1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.portalHomeDashboardSplitStats__A6m2Q8 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: var(--space-2);
+}
+
+.portalHomeDashboardSplitStats__A6m2Q8 div {
+    border-radius: 8px;
+    padding: var(--space-2);
+    background: rgba(var(--color-bg-tertiary), 1);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.portalHomeDashboardSplitStats__A6m2Q8 span {
+    font-size: 11px;
+    line-height: 1.25;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalHomeDashboardSplitStats__A6m2Q8 strong {
+    font-size: 14px;
+    line-height: 1.15;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalHomeDashboardEmpty__D8m2Q4 {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    text-align: center;
+}
+
+.portalHomeDashboardEmpty__D8m2Q4 p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.3;
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalHomeDashboardEmptyEdit__M7m2Q9 {
+    grid-column: 1 / -1;
+    min-height: calc(var(--portal-home-grid-row-size) * 5);
+    margin: var(--portal-home-grid-inset);
+    border: 1px dashed rgba(var(--color-border-secondary), 0.82);
+    border-radius: var(--ui-surface-radius, 12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(var(--color-bg-secondary), 0.32);
+    pointer-events: none;
+}
+
+.portalHomeDashboardEmptyEdit__M7m2Q9 p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.3;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+@media (max-width: 768px) {
+    .portalHomeDashboardGrid__E2m8Q4 {
+        grid-auto-rows: 45px;
+        gap: 0;
+    }
+
+    .portalHomeDashboardGridOverlay__L7m2Q4 {
+        grid-auto-rows: 45px;
+        gap: 0;
+    }
+
+    .portalHomeDashboardCard__U3m8Q2 { padding: var(--space-4); }
+
+    .portalHomeDashboardCardTwoRowCompact__Q9m2R4.portalHomeDashboardCardEdit__T3m2Q4 {
+        padding-right: calc(var(--space-4) + 28px);
+    }
+
+    .portalHomeDashboardCardTwoRowCompact__Q9m2R4.portalHomeDashboardCardEdit__T3m2Q4 .portalHomeDashboardCardDelete__D6m2Q4 {
+        top: var(--space-4);
+        right: var(--space-4);
+    }
+
+    .portalHomeDashboardDragPreview__E4m2Q6 {
+        display: none;
+    }
+
+}

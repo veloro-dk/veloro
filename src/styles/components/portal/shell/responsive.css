@@ -1,0 +1,194 @@
+@media (max-width: 1080px) {
+    .portalHeader__R1u5J2 {
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 1fr) minmax(0, 1fr);
+    }
+
+    .portalBody__P4k8H2 {
+        --portal-assistant-width: clamp(300px, 36vw, 420px);
+    }
+
+}
+
+@media (max-width: 640px) {
+    .portalHeader__R1u5J2 {
+        height: var(--portal-header-height);
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        grid-template-areas: "brand search profile";
+        column-gap: var(--space-2);
+        row-gap: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: var(--space-3);
+        padding-right: var(--space-3);
+    }
+
+    .portalHeaderBrand__A9c4V1 {
+        grid-area: brand;
+    }
+
+    .portalProfile__N7p3Q5 {
+        grid-area: profile;
+    }
+
+    .portalHeaderLogoWrap__K9m2D6 {
+        display: none;
+    }
+
+    .portalMobileMenuButton__G4k2P8 {
+        display: inline-flex;
+    }
+
+    .portalBody__P4k8H2 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalMobileNavOverlay__X7m2D5 {
+        position: fixed;
+        top: var(--portal-header-height);
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: var(--layer-overlay);
+        border: 0;
+        margin: 0;
+        padding: 0;
+        background: rgba(var(--color-overlay-primary), 0.72);
+        opacity: 0;
+        pointer-events: none;
+        cursor: pointer;
+        display: block;
+        transition: opacity 0.2s var(--ease-out-quad);
+    }
+
+    .portalMobileNavOverlayVisible__M3q8P1 {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .portalSidebar__D4e5F6 {
+        position: fixed;
+        top: var(--portal-header-height);
+        bottom: auto;
+        left: 0;
+        width: min(240px, 100vw);
+        max-width: 240px;
+        height: calc(100vh - var(--portal-header-height));
+        height: calc(100dvh - var(--portal-header-height));
+        transform: translate3d(-100%, 0, 0);
+        opacity: 0;
+        pointer-events: none;
+        border-right: 1px solid rgba(var(--color-border-primary), 1);
+        border-bottom: 0;
+        border-radius: 0 14px 14px 0;
+        overflow: hidden;
+        background: rgba(var(--color-bg-primary), 1);
+        z-index: calc(var(--layer-header) - 1);
+        box-shadow: none;
+        will-change: transform, opacity;
+        transition: transform 0.22s var(--ease-out-quad), opacity 0.18s var(--ease-out-quad);
+    }
+
+    .portalSidebarScene__D1m2Q7 {
+        border-right: 0;
+    }
+
+    .portalSidebarMobileOpen__L2q9T4 {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .portalHeaderActionSlotNotifications__B2m8Q1 {
+        display: none;
+    }
+
+    .portalHeaderActionSlotTheme__C8m2P4 {
+        order: 1;
+    }
+
+    .portalHeaderActionSlotAssistant__A5m9Q3 {
+        order: 2;
+    }
+
+    .portalHeaderActionSlotFeedback__N4q1R7 {
+        order: 3;
+    }
+
+    .portalHeaderActionSlotProfile__H5t9D1 {
+        order: 4;
+    }
+
+    .portalHeaderFeedbackButton__D9m1Q4 {
+        width: 34px;
+        min-width: 34px;
+        padding: 0;
+        gap: 0;
+    }
+
+    .portalHeaderFeedbackIcon__M8d2Q4 {
+        display: inline-flex;
+    }
+
+    .portalHeaderFeedbackLabel__R6m1V9 {
+        display: none;
+    }
+
+    .portalProfileButton__R2k8V4 {
+        width: 36px;
+        min-width: 36px;
+        padding: 0;
+    }
+
+    .portalHeaderPopover__W6m2R9 {
+        width: min(320px, calc(100vw - (var(--space-3) * 2)));
+    }
+
+    .portalHeaderPopoverWide__J7v2L5 {
+        width: min(340px, calc(100vw - (var(--space-3) * 2)));
+    }
+
+    .portalNav__M4n5O6 {
+        padding: var(--space-3) var(--space-3) 0;
+    }
+
+    .portalSidebarBottom__Y2k6Q4 {
+        padding: var(--space-3);
+    }
+
+    .portalContent__D2s5F7 {
+        padding-top: var(--space-3);
+        padding-right: var(--space-3);
+        padding-left: var(--space-3);
+        padding-bottom: 0;
+    }
+
+    .portalContent__D2s5F7 > :last-child {
+        padding-bottom: var(--space-3);
+    }
+
+    .portalWorkspaceAssistantOpen__B8m2Q3 .portalContent__D2s5F7 {
+        margin-right: 0;
+    }
+
+    .portalAssistantPanel__H2m8Q3 {
+        width: min(100%, 420px);
+    }
+
+    .portalAssistantPanelFullWidth__C3m8Q2 {
+        width: 100%;
+        left: 0;
+    }
+
+    .portalAssistantPanelInner__M8m2Q4 {
+        border-radius: 12px 0 0 12px;
+    }
+
+    .portalAssistantConversationButton__R7m2Q1 {
+        max-width: min(52vw, 220px);
+    }
+
+    .portalSystemMeta__K1v6R3 {
+        grid-template-columns: 1fr;
+    }
+
+}

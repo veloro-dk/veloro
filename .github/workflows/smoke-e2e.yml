@@ -1,0 +1,49 @@
+name: Smoke E2E
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke-e2e:
+    runs-on: ubuntu-latest
+    env:
+      SMOKE_BASE_URL: ${{ secrets.SMOKE_BASE_URL }}
+      SMOKE_EMPLOYEE_ID: ${{ secrets.SMOKE_EMPLOYEE_ID }}
+      SMOKE_PASSWORD: ${{ secrets.SMOKE_PASSWORD }}
+      SMOKE_TIMEOUT_MS: "20000"
+      SMOKE_OUTPUT_FILE: "tmp/smoke-e2e-report.json"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Skip when required smoke secrets are missing
+        if: env.SMOKE_BASE_URL == '' || env.SMOKE_EMPLOYEE_ID == '' || env.SMOKE_PASSWORD == ''
+        run: echo "SMOKE_BASE_URL, SMOKE_EMPLOYEE_ID, or SMOKE_PASSWORD is missing. Skipping smoke e2e checks."
+
+      - name: Install dependencies
+        if: env.SMOKE_BASE_URL != '' && env.SMOKE_EMPLOYEE_ID != '' && env.SMOKE_PASSWORD != ''
+        run: npm ci
+
+      - name: Run smoke e2e checks
+        if: env.SMOKE_BASE_URL != '' && env.SMOKE_EMPLOYEE_ID != '' && env.SMOKE_PASSWORD != ''
+        run: npm run smoke:e2e
+
+      - name: Upload smoke report
+        if: env.SMOKE_BASE_URL != '' && env.SMOKE_EMPLOYEE_ID != '' && env.SMOKE_PASSWORD != '' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-e2e-report
+          path: tmp/smoke-e2e-report.json
+          if-no-files-found: ignore

@@ -1,0 +1,126 @@
+.portalCategoriesVariantRules__K4m2Q9 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalCategoriesVariantRulesHeader__V3m7Q2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portalCategoriesVariantRulesHeader__V3m7Q2 h3 {
+    margin: 0;
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalCategoriesVariantRulesHeader__V3m7Q2 p,
+.portalCategoriesVariantRulesEmpty__Q2m8K5 {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalCategoriesVariantRulesList__N6m3Q4 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalCategoriesVariantRuleRow__H7m2Q8 {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    padding: 6px 8px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 8px;
+    background: rgba(var(--color-bg-secondary), 1);
+    cursor: default;
+}
+
+.portalCategoriesVariantRuleRowDragging__L4m2Q7 {
+    opacity: 0.5;
+}
+
+.portalCategoriesVariantDropPlaceholder__D8m2Q6 {
+    min-height: 44px;
+    border: 1px dashed rgba(var(--color-blue), 0.78);
+    border-radius: 8px;
+    background: transparent;
+}
+
+.portalCategoriesVariantRuleGrip__S5m2Q7 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalCategoriesVariantRuleGripButton__N7m2Q4 {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    cursor: grab;
+    touch-action: none;
+}
+
+.portalCategoriesVariantRuleGripButton__N7m2Q4:hover {
+    background: rgba(var(--color-bg-tertiary), 1);
+}
+
+.portalCategoriesVariantRuleGripButton__N7m2Q4:active {
+    cursor: grabbing;
+}
+
+.portalCategoriesVariantRuleGrip__S5m2Q7 svg {
+    width: 16px;
+    height: 16px;
+}
+
+.portalCategoriesVariantRuleName__W9m2Q1 {
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalCategoriesVariantRuleType__M2m7Q4 {
+    min-height: 18px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 6px;
+    border-radius: 6px;
+    background: rgba(var(--color-bg-tertiary), 1);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: 10px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.portalCategoriesVariantRuleRequired__P4m8Q2 {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-xs);
+}
+
+.portalCategoriesVariantRuleRequired__P4m8Q2 input {
+    --checkbox-size: 14px;
+}
+
+.portalCategoriesVariantRuleActions__X3m7Q9 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+}

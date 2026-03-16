@@ -1,0 +1,192 @@
+.portalStatusStandalone__P3k7M2 {
+    max-width: 980px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: clamp(var(--space-4), 2.8vw, var(--space-8));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.portalStatusTop__J9d1R5 {
+    display: flex;
+    align-items: center;
+}
+
+.portalStatusLogo__S4n8V6 {
+    display: inline-flex;
+    align-items: center;
+}
+
+.portalStatusHero__V5h2K8 {
+    padding: 0 0 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: var(--space-4);
+}
+
+.portalStatusHeroMain__J1d7T6 {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalStatusHeroTitle__P3q8R4 {
+    margin: 0;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalStatusHeroMeta__L4s9D2 {
+    margin: 0;
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalStatusHeroActions__M6t9Q2 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.portalStatusSummaryGrid__V1k3N8 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+
+.portalStatusSummaryCard__A2r7D5 {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalStatusSummaryLabel__M4p8Q1 {
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalStatusSummaryValue__R6n2T3 {
+    font-size: var(--font-size-heading4);
+    font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+    letter-spacing: -0.02em;
+}
+
+.portalStatusInfoGrid__L5d8N2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+
+.portalStatusSloGrid__D8m2Q4 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+}
+
+.portalStatusInfoCard__Q7m3V9 {
+    padding: var(--space-3);
+}
+
+.portalStatusInfoTitle__C1r4P6 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-size-regular);
+    font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalStatusInfoList__A8t2K5 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalStatusInfoList__A8t2K5 li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalStatusInfoList__A8t2K5 strong {
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalStatusStorageHint__V9m2K4 {
+    margin-top: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalStatusStorageHotspots__R7f3Q2 {
+    list-style: none;
+    margin: var(--space-2) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalStatusStorageHotspots__R7f3Q2 li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalStatusStorageHotspots__R7f3Q2 strong {
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalStatusSloDrivers__S5m2Q9 {
+    list-style: none;
+    margin: var(--space-2) 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalStatusSloDrivers__S5m2Q9 li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalStatusSloDrivers__S5m2Q9 strong {
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalStatusMaintenanceText__M5p2T8 {
+    margin: 0;
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+}
+
+.portalStatusMaintenanceActions__N4k8V1 {
+    margin-top: var(--space-2);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+}
+
+.portalStatusMaintenanceNote__C8q4L1 {
+    margin-top: var(--space-2);
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+}

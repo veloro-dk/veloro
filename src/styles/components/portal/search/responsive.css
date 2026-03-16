@@ -1,0 +1,52 @@
+@media (max-width: 640px) {
+    .portalHeaderSearch__U7e3D2 {
+        grid-area: search;
+        width: 100%;
+        min-width: 0;
+        max-width: none;
+        justify-self: stretch;
+    }
+
+    .portalHeaderSearchFlipSurface__K8m2D1 {
+        height: 34px;
+    }
+
+    .portalHeaderSearchTrigger__D4k8P2 {
+        height: 34px;
+        padding: 0 var(--space-2) 0 calc(var(--space-7) + var(--space-1));
+    }
+
+    .portalHeaderSearchPendingBar__Q5m8P2 {
+        height: 34px;
+        padding: 0 var(--space-1) 0 var(--space-2);
+    }
+
+    .portalHeaderSearchPendingLabel__A1m8P6 {
+        font-size: var(--font-size-xs);
+    }
+
+    .portalHeaderSearchPendingActions__C3m7Q2 {
+        gap: 4px;
+    }
+
+    .portalHeaderSearchIcon__Q6h2N8 {
+        left: var(--space-2);
+    }
+
+    .portalHeaderSearchShortcut__Y9n3Q5 {
+        display: none;
+    }
+
+    .portalHeaderSearchText__M2v8R4 {
+        font-size: var(--font-size-small);
+    }
+
+    .portalSearchOverlay__N8k3V5 {
+        padding: var(--space-2);
+    }
+
+    .portalSearchPanel__H6m2Q9 {
+        border-radius: 8px;
+        max-height: min(500px, calc(100dvh - var(--portal-header-height) - (var(--space-2) * 2)));
+    }
+}

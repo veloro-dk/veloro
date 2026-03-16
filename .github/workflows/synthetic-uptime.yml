@@ -1,0 +1,46 @@
+name: Synthetic Uptime
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  synthetic-uptime:
+    runs-on: ubuntu-latest
+    env:
+      SYNTHETIC_BASE_URL: ${{ secrets.SYNTHETIC_BASE_URL }}
+      SYNTHETIC_TIMEOUT_MS: "20000"
+      SYNTHETIC_OUTPUT_FILE: "tmp/synthetic-uptime-report.json"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Skip when SYNTHETIC_BASE_URL is missing
+        if: env.SYNTHETIC_BASE_URL == ''
+        run: echo "SYNTHETIC_BASE_URL secret is not configured. Skipping synthetic uptime checks."
+
+      - name: Install dependencies
+        if: env.SYNTHETIC_BASE_URL != ''
+        run: npm ci
+
+      - name: Run synthetic uptime checks
+        if: env.SYNTHETIC_BASE_URL != ''
+        run: npm run uptime:check
+
+      - name: Upload synthetic uptime report
+        if: env.SYNTHETIC_BASE_URL != '' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-uptime-report
+          path: tmp/synthetic-uptime-report.json
+          if-no-files-found: ignore

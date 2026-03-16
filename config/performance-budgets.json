@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "route": "/portal",
+      "manifestFile": ".next/server/app/(portal)/portal/(app)/page_client-reference-manifest.js",
+      "manifestRouteKey": "/(portal)/portal/(app)/page",
+      "entryKey": "[project]/src/app/(portal)/portal/(app)/page",
+      "budgets": {
+        "jsRawBytes": 280000,
+        "cssRawBytes": 180000,
+        "jsGzipBytes": 90000,
+        "cssGzipBytes": 34000
+      }
+    },
+    {
+      "route": "/portal/settings",
+      "manifestFile": ".next/server/app/(portal)/portal/(app)/settings/page_client-reference-manifest.js",
+      "manifestRouteKey": "/(portal)/portal/(app)/settings/page",
+      "entryKey": "[project]/src/app/(portal)/portal/(app)/settings/page",
+      "budgets": {
+        "jsRawBytes": 280000,
+        "cssRawBytes": 160000,
+        "jsGzipBytes": 90000,
+        "cssGzipBytes": 30000
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+.portalStatusFailures__E4r8M3 {
+    margin-top: var(--space-1);
+    padding: var(--space-3);
+}
+
+.portalStatusFailuresTitle__K7n1Q5 {
+    margin: 0 0 var(--space-2);
+    font-size: var(--font-size-regular);
+    font-weight: var(--font-weight-medium);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalStatusFailuresList__V2p9T8 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalStatusFailuresList__V2p9T8 li {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    color: rgba(var(--color-text-secondary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalStatusFailuresList__V2p9T8 code {
+    font-family: var(--font-monospace);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.portalStatusFooter__L3d8Q6 {
+    margin-top: auto;
+    padding-top: var(--space-4);
+    text-align: center;
+    font-size: var(--font-size-xs);
+    color: rgba(var(--color-text-tertiary), 1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.portalStatusFooterHelp__K8m2P4 {
+    font-weight: var(--font-weight-medium);
+}
+
+.portalStatusFooterMeta__V6t1R3 {
+    font-size: var(--font-size-xs);
+}

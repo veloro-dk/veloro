@@ -3,19 +3,47 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "predev": "prisma generate",
+    "dev": "next dev --webpack",
+    "dev:turbo": "next dev",
+    "prebuild": "prisma generate",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "node --conditions=react-server --test --import tsx \"src/**/*.test.ts\"",
+    "perf:budgets": "tsx scripts/perf-budget.ts",
+    "launch:check": "tsx scripts/launch-check.ts",
+    "uptime:check": "tsx scripts/synthetic-uptime.ts",
+    "smoke:e2e": "tsx scripts/smoke-e2e.ts",
+    "staging:parity": "tsx scripts/staging-parity.ts",
+    "dr:cadence:check": "tsx scripts/dr-cadence-check.ts",
+    "db:migration:guard": "tsx scripts/migration-guardrails.ts",
+    "prisma:generate": "prisma generate",
+    "seed": "tsx prisma/seed.ts",
+    "db:backup": "tsx scripts/db-backup.ts",
+    "db:restore": "tsx scripts/db-restore.ts",
+    "job:audit-log-retention": "tsx scripts/audit-log-retention.ts",
+    "job:privacy-retention": "tsx scripts/privacy-retention.ts",
+    "privacy:user:export": "tsx scripts/privacy-user-export.ts",
+    "privacy:user:anonymize": "tsx scripts/privacy-user-anonymize.ts"
+  },
+  "overrides": {
+    "hono": "4.12.8",
+    "@hono/node-server": "1.19.10",
+    "lodash": "4.17.23"
   },
   "dependencies": {
+    "@geist-ui/icons": "^1.0.2",
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
+    "argon2": "^0.44.0",
     "dotenv": "^17.3.1",
+    "lucide-react": "^0.577.0",
     "next": "16.1.6",
     "pg": "^8.19.0",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -24,6 +52,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "prisma": "^7.4.2",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

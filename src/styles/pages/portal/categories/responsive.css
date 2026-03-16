@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+    .portalCategoriesVariantCreateGrid__P5m2Q8 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalCategoriesVariantRuleRow__H7m2Q8 {
+        flex-wrap: wrap;
+    }
+}

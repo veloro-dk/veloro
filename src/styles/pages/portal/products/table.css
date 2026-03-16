@@ -1,0 +1,419 @@
+.portalProductsTableScroll__H7q2M4 {
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 10px;
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+.portalProductsControlsTableWrap__Q4m2R7 {
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0;
+    overflow: visible;
+}
+
+.portalProductsTable__E8n4Q7.portalProductsControlsTable__N2m8Q5 {
+    min-width: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.portalProductsControlsTable__N2m8Q5 thead tr:first-child th {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.portalProductsDataTableScroll__W5m2Q9 {
+    border-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsDataTable__B2m8Q4 {
+    width: max-content;
+    min-width: 100%;
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsDataTable__B2m8Q4 thead tr:first-child th {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 thead tr:first-child th:first-child,
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 thead tr:first-child th:last-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 .portalProductsCellCheckbox__C5m1R9 {
+    position: sticky;
+    left: 0;
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 th.portalProductsCellCheckbox__C5m1R9 {
+    z-index: 5;
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 td.portalProductsCellCheckbox__C5m1R9 {
+    z-index: 4;
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 th[data-sticky-primary="true"],
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 td[data-sticky-primary="true"] {
+    position: sticky;
+    left: 42px;
+    width: 1%;
+    white-space: nowrap;
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 th[data-sticky-primary="true"] {
+    z-index: 4;
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 td[data-sticky-primary="true"] {
+    z-index: 3;
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr:hover td[data-sticky-primary="true"],
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr:hover td.portalProductsCellCheckbox__C5m1R9 {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr.portalProductsRowSelected__Q9m2N4 td[data-sticky-primary="true"],
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr.portalProductsRowSelected__Q9m2N4 td.portalProductsCellCheckbox__C5m1R9,
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr.portalProductsRowSelected__Q9m2N4:hover td[data-sticky-primary="true"],
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr.portalProductsRowSelected__Q9m2N4:hover td.portalProductsCellCheckbox__C5m1R9 {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr.portalProductsEmptyRow__S2m8Q4:hover td[data-sticky-primary="true"],
+.portalProductsDataTableScroll__W5m2Q9 .portalProductsTable__E8n4Q7 tbody tr.portalProductsEmptyRow__S2m8Q4:hover td.portalProductsCellCheckbox__C5m1R9 {
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalProductsDataTableScrolled__F2m8Q6 .portalProductsTable__E8n4Q7 th[data-sticky-primary="true"],
+.portalProductsDataTableScrolled__F2m8Q6 .portalProductsTable__E8n4Q7 td[data-sticky-primary="true"] {
+    box-shadow: inset -1px 0 0 rgba(var(--color-border-primary), 1);
+}
+
+.portalProductsTable__E8n4Q7 {
+    width: 100%;
+    min-width: 1020px;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.portalProductsTable__E8n4Q7 th,
+.portalProductsTable__E8n4Q7 td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+    font-size: var(--font-size-small);
+    color: rgba(var(--color-text-secondary), 1);
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.portalProductsTable__E8n4Q7 thead th {
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsTable__E8n4Q7 thead tr:first-child th {
+    height: 44px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalProductsTable__E8n4Q7 thead tr:nth-child(2) th {
+    height: 38px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsTable__E8n4Q7 thead tr.portalProductsColumnSizerRow__P8m2Q4 th {
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+    font-size: 0;
+    line-height: 0;
+    color: transparent;
+    background: transparent;
+    visibility: hidden;
+}
+
+.portalProductsTable__E8n4Q7 tbody tr {
+    height: 60px;
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalProductsRowInteractive__T4m8Q1 {
+    cursor: pointer;
+}
+
+.portalProductsRowInteractive__T4m8Q1:focus-visible {
+    outline: none;
+    box-shadow: inset 0 0 0 1px rgba(var(--color-blue), 1);
+}
+
+.portalProductsTable__E8n4Q7 tbody tr:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsTable__E8n4Q7 tbody tr.portalProductsEmptyRow__S2m8Q4,
+.portalProductsTable__E8n4Q7 tbody tr.portalProductsEmptyRow__S2m8Q4:hover {
+    background: rgba(var(--color-bg-primary), 1);
+}
+
+.portalProductsTable__E8n4Q7 thead tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.portalProductsTable__E8n4Q7 thead tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.portalProductsTable__E8n4Q7 tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.portalProductsTable__E8n4Q7 tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+.portalProductsTable__E8n4Q7 tbody tr:last-child td:last-child,
+.portalProductsTable__E8n4Q7 tbody tr:last-child td[colspan] {
+    border-bottom-right-radius: 10px;
+}
+
+.portalProductsTable__E8n4Q7 tbody tr.portalProductsRowSelected__Q9m2N4,
+.portalProductsTable__E8n4Q7 tbody tr.portalProductsRowSelected__Q9m2N4:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsCellCheckbox__C5m1R9 {
+    width: 42px;
+    max-width: 42px;
+    min-width: 42px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.portalProductsCellCheckbox__C5m1R9 input {
+    --checkbox-size: 16px;
+}
+
+.portalProductsNameCell__R8m2Q1 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portalProductsNameButton__N6m2Q5 {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.portalProductsNameButton__N6m2Q5:focus-visible {
+    outline: 1px solid rgba(var(--color-blue), 1);
+    border-radius: 6px;
+}
+
+.portalProductsName__V6p3M1 {
+    color: rgba(var(--color-text-primary), 1);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalProductsSku__N3m9K5 {
+    color: rgba(var(--color-text-tertiary), 1);
+    font-family: var(--font-monospace);
+    font-size: 11px;
+}
+
+.portalProductsCellTruncate__N5m2Q8 {
+    display: inline-block;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.portalProductsStatusBadge__M4n2P6 {
+    display: inline-flex;
+    align-items: center;
+    min-height: 20px;
+    border-radius: 7px;
+    padding: 0 7px;
+    font-size: 11px;
+    font-weight: var(--font-weight-medium);
+}
+
+.portalProductsStatusBadge__M4n2P6[data-status="ACTIVE"] {
+    color: rgba(var(--color-text-status-success), 1);
+    background: rgba(52, 199, 89, 0.14);
+}
+
+.portalProductsStatusBadge__M4n2P6[data-status="DRAFT"] {
+    color: rgba(var(--color-text-status-warning), 1);
+    background: rgba(214, 180, 112, 0.19);
+}
+
+.portalProductsStatusBadge__M4n2P6[data-status="ARCHIVED"] {
+    color: rgba(var(--color-text-tertiary), 1);
+    background: rgba(var(--color-bg-tertiary), 1);
+}
+
+.portalProductsBulkHeader__L1p7V4 {
+    background: rgba(var(--color-bg-secondary), 1);
+    padding: 8px 10px;
+}
+
+.portalProductsBulkActions__S6m2N8 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.portalProductsBulkSummary__K4m9P2 {
+    color: rgba(var(--color-text-primary), 1);
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-medium);
+}
+
+.portalProductsBulkButtons__W5m2R8 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.portalProductsEmpty__D3m7K2 {
+    padding: var(--space-7) var(--space-3);
+    text-align: center;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.portalProductsTableTopRowDisabled__B4m2Q6 {
+    opacity: 0.62;
+}
+
+.portalProductsOnboardingCell__M2m8Q9 {
+    padding: 0;
+    text-align: left;
+}
+
+.portalProductsOnboardingRow__D2m8Q7 {
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(18px, 3vw, 42px);
+    padding: clamp(20px, 2.4vw, 34px);
+}
+
+.portalProductsOnboardingContent__G7m2Q3 {
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.portalProductsEmptyHeading__D2m8Q4 {
+    margin: 0;
+}
+
+.portalProductsEmptyBody__J3m2Q7 {
+    margin: 0;
+}
+
+.portalProductsOnboardingActions__V8m2Q4 {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+}
+
+.portalProductsOnboardingHint__N4m2Q8 {
+    margin: 0;
+    color: rgba(var(--color-text-tertiary), 1);
+    font-size: var(--font-size-small);
+}
+
+.portalProductsOnboardingArt__A5m2Q6 {
+    position: relative;
+    width: min(42vw, 340px);
+    min-width: 190px;
+    height: 170px;
+}
+
+.portalProductsOnboardingArtCard__W3m2Q8 {
+    position: absolute;
+    border-radius: 12px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    box-shadow: 0 10px 24px rgba(16, 24, 40, 0.12);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsOnboardingArtCardPrimary__Y2m8Q5 {
+    width: 168px;
+    height: 116px;
+    left: 54%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-2.8deg);
+}
+
+.portalProductsOnboardingArtCardSecondary__F5m2Q4 {
+    width: 140px;
+    height: 98px;
+    left: 44%;
+    top: 36%;
+    transform: translate(-50%, -50%) rotate(8deg);
+    background: rgba(var(--color-bg-tertiary), 1);
+}
+
+.portalProductsOnboardingArtCardTertiary__B2m8Q1 {
+    width: 118px;
+    height: 84px;
+    left: 66%;
+    top: 64%;
+    transform: translate(-50%, -50%) rotate(13deg);
+    background: rgba(var(--color-bg-secondary), 1);
+}
+
+.portalProductsEmptyCard__X5m2Q8 {
+    min-height: 380px;
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-radius: 10px;
+    background: rgba(var(--color-bg-primary), 1);
+    padding: clamp(30px, 3.4vw, 44px);
+}
+
+.portalProductsEmptyCardCentered__K2m8Q4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--space-2);
+}
+
+.portalProductsEmptyCardCentered__K2m8Q4 .portalProductsEmptyBody__J3m2Q7 {
+    max-width: 460px;
+}

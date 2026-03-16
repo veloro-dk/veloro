@@ -1,0 +1,88 @@
+@media (max-width: 640px) {
+    .portalSettingsHeader__C7t4L2 {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .portalSettingsActions__M2x8V4 {
+        align-self: flex-start;
+    }
+
+    .portalSettingsBody__R8p1H6 {
+        grid-template-columns: 1fr;
+    }
+
+    .portalSettingsNav__S2m5V9 {
+        border-right: 0;
+        border-bottom: 0;
+    }
+
+    .portalSettingsNavList__V4f8R2,
+    .portalSettingsSearchResults__A5n2Q7 {
+        flex-direction: column;
+        overflow: visible;
+        max-height: none;
+        padding-right: 0;
+        padding-bottom: 0;
+    }
+
+    .portalSettingsMobileTopBarVisible__K1m3V8 {
+        position: sticky;
+        top: 0;
+        z-index: 22;
+        min-height: 46px;
+        padding: calc(var(--space-2) + env(safe-area-inset-top, 0px)) var(--space-3) var(--space-2);
+        border-bottom: 1px solid rgba(var(--color-border-primary), 1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-2);
+        background: rgba(var(--color-bg-primary), 0.96);
+        backdrop-filter: blur(10px);
+    }
+
+    .portalSettingsMobileCloseButton__H6q1T9 {
+        display: inline-flex;
+    }
+
+    .portalSettingsPageCloseButton__F2n8P6 {
+        display: none;
+    }
+
+    .portalSettingsNavMobileHidden__J8n2R4,
+    .portalSettingsContentMobileHidden__B4m9Q7 {
+        display: none;
+    }
+
+    .portalSettingsBodyMobileCategories__V2m6Q9 {
+        min-height: calc(100vh - var(--portal-header-height) - 62px);
+    }
+
+    .portalSettingsContent__G1k7M3 {
+        padding-top: var(--space-2);
+    }
+
+    .portalContentSettings__X3k7D5 {
+        padding-left: var(--space-2);
+        padding-right: var(--space-2);
+    }
+
+    .portalSettingsScene__D5n2M7 {
+        width: 100%;
+    }
+
+    .portalSettingsFrame__A8k3P6 {
+        border-radius: 14px 14px 0 0;
+    }
+
+    .portalSettingsHeader__C7t4L2,
+    .portalSettingsContent__G1k7M3 {
+        padding: var(--space-3);
+    }
+
+    .portalSettingsPageActions__J4m8P2 {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+}

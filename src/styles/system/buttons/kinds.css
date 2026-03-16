@@ -1,0 +1,174 @@
+.button__kind-primary__R5j2s0 {
+    color: rgba(var(--color-bg-primary), 1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0) 58%), rgba(var(--color-primary-inverted), 1);
+    border: 1px solid rgba(var(--color-primary-inverted), 1);
+    box-shadow: 0 8px 16px -12px rgba(0, 122, 255, 0.62), 0 1px 0 rgba(255, 255, 255, 0.16) inset;
+    font-weight: var(--font-weight-medium);
+}
+
+.button__kind-primary__R5j2s0:hover {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(255, 255, 255, 0.01) 60%), rgba(var(--color-secondary-inverted), 1);
+    border-color: rgba(var(--color-secondary-inverted), 1);
+    box-shadow: 0 10px 18px -12px rgba(0, 122, 255, 0.72), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+.light .button__kind-primary__R5j2s0 {
+    box-shadow: 0 8px 16px -12px rgba(15, 23, 42, 0.32), 0 1px 0 rgba(255, 255, 255, 0.16) inset;
+}
+
+.light .button__kind-primary__R5j2s0:hover {
+    box-shadow: 0 10px 18px -12px rgba(15, 23, 42, 0.36), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+.button__kind-secondary__R5j2s0 {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%), rgba(var(--color-bg-tertiary), 1);
+    border: 1px solid rgba(var(--color-border-secondary), 1);
+    color: rgba(var(--color-text-primary), 1);
+    box-shadow: 0 6px 14px -14px rgba(0, 122, 255, 0.45), 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+.button__kind-secondary__R5j2s0:hover {
+    background: rgba(var(--color-bg-quaternary), 1);
+    border-color: rgba(0, 122, 255, 0.32);
+    box-shadow: 0 8px 16px -14px rgba(0, 122, 255, 0.55), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.dark .button__kind-secondary__R5j2s0 {
+    background: rgba(var(--color-bg-tertiary), 1);
+    border-color: rgba(var(--color-border-secondary), 1);
+    box-shadow: 0 6px 14px -14px rgba(15, 23, 42, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.dark .button__kind-secondary__R5j2s0:hover {
+    background: rgba(var(--color-bg-quaternary), 1);
+    border-color: rgba(var(--color-border-secondary), 1);
+    box-shadow: 0 8px 16px -14px rgba(15, 23, 42, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.light .button__kind-secondary__R5j2s0 {
+    box-shadow: 0 6px 14px -14px rgba(15, 23, 42, 0.22), 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+.light .button__kind-secondary__R5j2s0:hover {
+    border-color: rgba(var(--color-border-secondary), 1);
+    box-shadow: 0 8px 16px -14px rgba(15, 23, 42, 0.24), 0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.light .button__kind-secondary__R5j2s0.button__root__ZxcvB0:focus-visible {
+    box-shadow: 0 0 0 1px rgba(var(--color-blue), 1);
+    border-color: rgba(var(--color-blue), 1);
+}
+
+.button__kind-tertiary__R5j2s0 {
+    padding: 0;
+    font-weight: var(--font-weight-normal);
+    background: none;
+    border: none;
+    color: rgba(var(--color-text-tertiary), 1);
+}
+
+.button__kind-tertiary__R5j2s0:hover {
+    color: rgba(var(--color-link-primary), 1);
+}
+
+.button__kind-ghost__R5j2s0 {
+    color: rgba(var(--color-text-tertiary), 1);
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.button__kind-ghost__R5j2s0:hover {
+    background: rgba(var(--color-bg-tertiary), 1);
+    border-color: rgba(var(--color-border-secondary), 1);
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.button__kind-toggle__R5j2s0 {
+    color: rgba(var(--color-text-secondary), 1);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.button__kind-toggle__R5j2s0.button__size-small__L9d7h0 {
+    --button-icon-size: 16px;
+}
+
+.button__kind-toggle__R5j2s0.button__size-xsmall__L9d7h0 {
+    --button-icon-size: 14px;
+}
+
+.button__kind-toggle__R5j2s0.button__size-medium__L9d7h0 {
+    --button-icon-size: 18px;
+}
+
+.button__kind-toggle__R5j2s0.button__size-large__L9d7h0 {
+    --button-icon-size: 20px;
+}
+
+.button__kind-toggle__R5j2s0:hover {
+    background: rgba(var(--color-bg-tertiary), 1);
+    border-color: transparent;
+    box-shadow: none;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.button__kind-toggle__R5j2s0[aria-pressed="true"],
+.button__kind-toggle__R5j2s0[data-state="on"] {
+    background: rgba(var(--color-bg-tertiary), 1);
+    border-color: transparent;
+    box-shadow: none;
+    color: rgba(var(--color-text-primary), 1);
+}
+
+.button__kind-highlight__R5j2s0 {
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-tertiary), 1);
+    border: 1px solid transparent;
+    box-shadow: none;
+}
+
+.button__kind-highlight__R5j2s0:hover {
+    background: rgba(var(--color-bg-quaternary), 1);
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.button__kind-basic__R5j2s0 {
+    color: rgba(var(--color-text-primary), 1);
+    background: rgba(var(--color-bg-primary), 1);
+    border: 1px solid rgba(var(--color-border-primary), 1);
+    border-bottom-color: rgba(var(--color-border-tertiary), 1);
+    box-shadow: none;
+}
+
+.button__kind-basic__R5j2s0:hover {
+    background: rgba(var(--color-bg-secondary), 1);
+    border-color: rgba(var(--color-border-primary), 1);
+    border-bottom-color: rgba(var(--color-border-tertiary), 1);
+    box-shadow: none;
+}
+
+.button__kind-danger__R5j2s0 {
+    color: rgba(255, 255, 255, 1);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 58%), rgba(var(--color-red), 1);
+    border: 1px solid rgba(var(--color-red), 1);
+    box-shadow: 0 8px 16px -12px rgba(255, 59, 48, 0.58), 0 1px 0 rgba(255, 255, 255, 0.18) inset;
+    font-weight: var(--font-weight-medium);
+}
+
+.button__kind-danger__R5j2s0:hover {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 60%), rgba(216, 42, 35, 1);
+    border-color: rgba(216, 42, 35, 1);
+    box-shadow: 0 10px 18px -12px rgba(255, 59, 48, 0.68), 0 1px 0 rgba(255, 255, 255, 0.2) inset;
+}
+
+.light .button__kind-toggle__R5j2s0:hover {
+    box-shadow: none;
+}
+
+.light .button__kind-toggle__R5j2s0[aria-pressed="true"],
+.light .button__kind-toggle__R5j2s0[data-state="on"] {
+    border-color: transparent;
+    box-shadow: none;
+}
