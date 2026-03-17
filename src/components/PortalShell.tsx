@@ -2399,6 +2399,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                                                         <Link
                                                             className={cn("portalLink__V4w5X6", active && "portalLinkActive__Y7z8A9")}
                                                             href={item.href}
+                                                            prefetch={false}
                                                             aria-current={active ? "page" : undefined}
                                                             onClick={onSidebarLinkClick}
                                                         >
@@ -2420,6 +2421,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                                                         <Link
                                                             className={cn("portalLink__V4w5X6", active && "portalLinkActive__Y7z8A9")}
                                                             href={item.href}
+                                                            prefetch={false}
                                                             aria-current={active ? "page" : undefined}
                                                             onClick={onSidebarLinkClick}
                                                         >
@@ -2469,6 +2471,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                                                                     key={sub.href}
                                                                     className={cn("portalSubLink__C4v8L2", subActive ? "portalSubLinkActive__M9t1H6" : null)}
                                                                     href={sub.href}
+                                                                    prefetch={false}
                                                                     aria-current={subActive ? "page" : undefined}
                                                                     onClick={onSidebarLinkClick}
                                                                 >
@@ -2521,6 +2524,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                                             <Link
                                                 className={cn("portalLink__V4w5X6", isActive("/settings") && "portalLinkActive__Y7z8A9")}
                                                 href="/settings"
+                                                prefetch={false}
                                                 aria-current={isActive("/settings") ? "page" : undefined}
                                                 onClick={onSidebarLinkClick}
                                             >
@@ -2537,6 +2541,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                                         <div className="portalSection__P7q8R9">
                                             <Link
                                                 href="/system-status"
+                                                prefetch={false}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className={cn(

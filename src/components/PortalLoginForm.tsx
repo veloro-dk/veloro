@@ -137,18 +137,18 @@ export function PortalLoginForm() {
 
             <div className="login__footer__F6k3M9">
                 <div className="login__help__H2p7Q1">
-                    <Link className="typography__link__B7s3m0" href="/help">
+                    <Link className="typography__link__B7s3m0" href="/help" prefetch={false}>
                         Need Help?
                     </Link>
                 </div>
 
                 <div className="login__legal__P4x8D2">
                     By continuing, you agree to the{" "}
-                    <Link className="typography__link__B7s3m0" href="/terms">
+                    <Link className="typography__link__B7s3m0" href="/terms" prefetch={false}>
                         Terms
                     </Link>{" "}
                     and{" "}
-                    <Link className="typography__link__B7s3m0" href="/privacy">
+                    <Link className="typography__link__B7s3m0" href="/privacy" prefetch={false}>
                         Privacy Policy
                     </Link>
                     .
