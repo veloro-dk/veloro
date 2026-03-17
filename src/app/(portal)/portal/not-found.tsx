@@ -5,6 +5,7 @@ import { PortalShell } from "@/components/PortalShell";
 import { normalizeCurrency, normalizeLanguage } from "@/i18n/portal";
 import { getSessionUser } from "@/server/auth";
 import { prisma } from "@/server/db";
+import { withDatabaseRetry } from "@/server/dbRetry";
 import { getRuntimeEnv } from "@/server/env";
 import { getUserStoreContext } from "@/server/stores";
 import { findUserSettingsSafe, PREFERRED_CURRENCY_COOKIE_NAME } from "@/server/userSettings";
@@ -17,10 +18,10 @@ export default async function PortalNotFoundPage() {
 
     const settings = await findUserSettingsSafe(prisma, user.id);
     const storeContext = await getUserStoreContext(user.id);
-    const activeStore = await prisma.store.findUnique({
+    const activeStore = await withDatabaseRetry(() => prisma.store.findUnique({
         where: { id: storeContext.activeStoreId },
         select: { defaultCurrency: true },
-    });
+    }));
     const cookieStore = await cookies();
     const currencyCookie = cookieStore.get(PREFERRED_CURRENCY_COOKIE_NAME)?.value ?? null;
 

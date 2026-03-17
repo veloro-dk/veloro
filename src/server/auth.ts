@@ -3,6 +3,7 @@ import crypto from "crypto";
 import argon2 from "argon2";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/server/db";
+import { isTransientDatabaseError, runBestEffortDbWrite, withDatabaseRetry } from "@/server/dbRetry";
 import { cookies, headers } from "next/headers";
 
 const SESSION_COOKIE_NAME = "veloro_session";
@@ -79,14 +80,16 @@ export async function createSession(userId: string) {
     const now = Date.now();
     const expiresAt = new Date(now + SESSION_LIFETIME_MS);
 
-    await prisma.session.deleteMany({ where: { expiresAt: { lt: new Date() } } });
+    await runBestEffortDbWrite("session_cleanup", () => prisma.session.deleteMany({
+        where: { expiresAt: { lt: new Date() } },
+    }));
 
     for (let i = 0; i < 3; i++) {
         const token = randomToken();
         const tokenHash = sha256(token);
 
         try {
-            await prisma.session.create({
+            await withDatabaseRetry(() => prisma.session.create({
                 data: {
                     userId,
                     tokenHash,
@@ -94,7 +97,7 @@ export async function createSession(userId: string) {
                     lastSeenAt: new Date(),
                     rotatedAt: new Date(),
                 },
-            });
+            }));
 
             await setSessionCookie(token, expiresAt);
             return;
@@ -112,7 +115,7 @@ export async function destroySession() {
 
     if (token) {
         const tokenHash = sha256(token);
-        await prisma.session.deleteMany({ where: { tokenHash } });
+        await runBestEffortDbWrite("session_destroy", () => prisma.session.deleteMany({ where: { tokenHash } }));
     }
 
     await clearSessionCookie();
@@ -124,16 +127,18 @@ export async function getSessionUser(options: GetSessionUserOptions = {}) {
     const token = c.get(SESSION_COOKIE_NAME)?.value;
     if (!token) return null;
 
-    await prisma.session.deleteMany({ where: { expiresAt: { lt: new Date() } } });
+    await runBestEffortDbWrite("session_cleanup", () => prisma.session.deleteMany({
+        where: { expiresAt: { lt: new Date() } },
+    }));
 
     const tokenHash = sha256(token);
-    const session = await prisma.session.findFirst({
+    const session = await withDatabaseRetry(() => prisma.session.findFirst({
         where: {
             tokenHash,
             expiresAt: { gt: new Date() },
         },
         include: { user: true },
-    });
+    }));
 
     if (!session) {
         if (allowCookieMutation) await clearSessionCookie();
@@ -141,7 +146,9 @@ export async function getSessionUser(options: GetSessionUserOptions = {}) {
     }
 
     if (session.user.status !== "ACTIVE") {
-        await prisma.session.deleteMany({ where: { id: session.id } });
+        await runBestEffortDbWrite("session_invalidate_inactive_user", () => prisma.session.deleteMany({
+            where: { id: session.id },
+        }));
         if (allowCookieMutation) await clearSessionCookie();
         return null;
     }
@@ -150,7 +157,9 @@ export async function getSessionUser(options: GetSessionUserOptions = {}) {
     const lastSeenMs = session.lastSeenAt.getTime();
 
     if (now - lastSeenMs > SESSION_IDLE_MS) {
-        await prisma.session.deleteMany({ where: { id: session.id } });
+        await runBestEffortDbWrite("session_invalidate_idle", () => prisma.session.deleteMany({
+            where: { id: session.id },
+        }));
         if (allowCookieMutation) await clearSessionCookie();
         return null;
     }
@@ -164,31 +173,35 @@ export async function getSessionUser(options: GetSessionUserOptions = {}) {
             const newHash = sha256(newToken);
 
             try {
-                const updated = await prisma.session.update({
+                const updated = await withDatabaseRetry(() => prisma.session.update({
                     where: { id: session.id },
                     data: {
                         tokenHash: newHash,
                         rotatedAt: new Date(),
                         lastSeenAt: new Date(),
                     },
-                });
+                }));
 
                 await setSessionCookie(newToken, updated.expiresAt);
                 return session.user;
             } catch (error: unknown) {
-                if (!isUniqueConstraintError(error)) throw error;
+                if (isUniqueConstraintError(error)) continue;
+                if (isTransientDatabaseError(error)) return session.user;
+                throw error;
             }
         }
 
-        await prisma.session.deleteMany({ where: { id: session.id } });
+        await runBestEffortDbWrite("session_invalidate_rotation_failure", () => prisma.session.deleteMany({
+            where: { id: session.id },
+        }));
         await clearSessionCookie();
         return null;
     }
 
-    await prisma.session.update({
+    await runBestEffortDbWrite("session_touch", () => prisma.session.update({
         where: { id: session.id },
         data: { lastSeenAt: new Date() },
-    });
+    }));
 
     return session.user;
 }

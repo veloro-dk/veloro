@@ -6,6 +6,7 @@ import { isJsonRequest, isSameOriginRequest } from "@/server/requestSecurity";
 import { parseLoginPayload } from "@/server/authPayload";
 import { handleApiRoute } from "@/server/apiRoute";
 import { sendAuthFailureAlert, shouldAlertAuthFailures } from "@/server/anomalyAlerts";
+import { runBestEffortDbWrite, withDatabaseRetry } from "@/server/dbRetry";
 
 const DUMMY_PASSWORD_HASH = "$argon2id$v=19$m=65536,t=3,p=4$J+QaCIodZwr+3XWkjMK1kw$XG0TlJXQz5I48rLhEJvLpG02ItnHiMJCMGEERC83avw";
 const LOGIN_ALERT_WINDOW_MS = 10 * 60 * 1000;
@@ -45,7 +46,7 @@ export const POST = handleApiRoute("api/auth/login.POST", async (req: Request) =
         return json({ ok: false, message: "Too many attempts. Please wait and try again." }, 429);
     }
 
-    const user = await prisma.user.findUnique({ where: { employeeId } });
+    const user = await withDatabaseRetry(() => prisma.user.findUnique({ where: { employeeId } }));
     const passwordOk = await verifyPassword(user?.passwordHash ?? DUMMY_PASSWORD_HASH, password);
     const ok = !!user && passwordOk && user.status === "ACTIVE";
 
@@ -53,7 +54,7 @@ export const POST = handleApiRoute("api/auth/login.POST", async (req: Request) =
 
     if (!ok) {
         const failedSince = new Date(Date.now() - LOGIN_ALERT_WINDOW_MS);
-        const [ipFailures, employeeFailures] = await Promise.all([
+        const [ipFailures, employeeFailures] = await withDatabaseRetry(() => Promise.all([
             prisma.loginAttempt.count({
                 where: {
                     ipHash: allowed.ipHash,
@@ -68,7 +69,7 @@ export const POST = handleApiRoute("api/auth/login.POST", async (req: Request) =
                     createdAt: { gt: failedSince },
                 },
             }),
-        ]);
+        ]));
 
         const recentFailureCount = Math.max(ipFailures, employeeFailures);
         if (shouldAlertAuthFailures(recentFailureCount)) {
@@ -87,7 +88,7 @@ export const POST = handleApiRoute("api/auth/login.POST", async (req: Request) =
 
     await createSession(user!.id);
 
-    await prisma.auditLog.create({
+    await runBestEffortDbWrite("auth_login_audit_log", () => prisma.auditLog.create({
         data: {
             actorId: user!.id,
             action: "AUTH_LOGIN",
@@ -95,7 +96,7 @@ export const POST = handleApiRoute("api/auth/login.POST", async (req: Request) =
             entityId: user!.id,
             meta: { employeeId },
         },
-    });
+    }));
 
     return json({ ok: true, requiresPasswordReset: Boolean(user!.requiresPasswordReset) });
 });

@@ -1,6 +1,7 @@
 import "server-only";
 import crypto from "crypto";
 import { prisma } from "@/server/db";
+import { runBestEffortDbWrite, withDatabaseRetry } from "@/server/dbRetry";
 
 function sha256Hex(input: string) {
     return crypto.createHash("sha256").update(input).digest("hex");
@@ -18,7 +19,7 @@ export async function ensureLoginAllowed(params: { ip: string; employeeId?: stri
     const ipHash = hashIp(params.ip);
     const employeeId = params.employeeId?.trim() || undefined;
 
-    const [ipFails, idFails] = await Promise.all([
+    const [ipFails, idFails] = await withDatabaseRetry(() => Promise.all([
         prisma.loginAttempt.count({
             where: { ipHash, ok: false, createdAt: { gt: since } },
         }),
@@ -27,7 +28,7 @@ export async function ensureLoginAllowed(params: { ip: string; employeeId?: stri
                 where: { employeeId, ok: false, createdAt: { gt: since } },
             })
             : Promise.resolve(0),
-    ]);
+    ]));
 
     if (ipFails >= 10 || idFails >= 10) {
         return { allowed: false as const, ipHash };
@@ -37,11 +38,11 @@ export async function ensureLoginAllowed(params: { ip: string; employeeId?: stri
 }
 
 export async function recordLoginAttempt(params: { ipHash: string; employeeId?: string; ok: boolean }) {
-    await prisma.loginAttempt.create({
+    await runBestEffortDbWrite("login_attempt", () => prisma.loginAttempt.create({
         data: {
             ipHash: params.ipHash,
             employeeId: params.employeeId?.trim() || null,
             ok: params.ok,
         },
-    });
+    }));
 }

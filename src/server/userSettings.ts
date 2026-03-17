@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { withDatabaseRetry } from "@/server/dbRetry";
 
 export const PREFERRED_CURRENCY_COOKIE_NAME = "veloro_preferred_currency";
 
@@ -53,7 +54,7 @@ export async function findUserSettingsSafe(
     userId: string
 ) {
     try {
-        return await db.userSettings.findUnique({
+        return await withDatabaseRetry(() => db.userSettings.findUnique({
             where: { userId },
             select: {
                 preferredLanguage: true,
@@ -65,18 +66,18 @@ export async function findUserSettingsSafe(
                 defaultCurrency: true,
                 activeStoreId: true,
             },
-        });
+        }));
     } catch (error) {
         if (!isMissingDbColumnError(error)) throw error;
     }
 
     try {
-        const rows = await db.$queryRaw<Record<string, unknown>[]>`
+        const rows = await withDatabaseRetry(() => db.$queryRaw<Record<string, unknown>[]>`
             SELECT *
             FROM "UserSettings"
             WHERE "userId" = ${userId}
             LIMIT 1
-        `;
+        `);
         const row = rows[0];
         if (!row) return null;
         return {

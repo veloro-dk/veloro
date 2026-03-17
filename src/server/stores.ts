@@ -1,5 +1,7 @@
 import "server-only";
+import { Prisma } from "@prisma/client";
 import { prisma } from "@/server/db";
+import { isTransientDatabaseError, withDatabaseRetry } from "@/server/dbRetry";
 import { isMissingDbColumnError } from "@/server/userSettings";
 
 export type UserStoreSummary = {
@@ -18,7 +20,7 @@ const DEFAULT_STORE_SLUG = "thompson-bicycles";
 const DEFAULT_PRODUCT_CODE_PREFIX = "VLR";
 
 export async function ensureDefaultStore() {
-    return prisma.store.upsert({
+    return withDatabaseRetry(() => prisma.store.upsert({
         where: { slug: DEFAULT_STORE_SLUG },
         update: {
             name: DEFAULT_STORE_NAME,
@@ -38,11 +40,11 @@ export async function ensureDefaultStore() {
             name: true,
             slug: true,
         },
-    });
+    }));
 }
 
 export async function getUserStoreContext(userId: string): Promise<UserStoreContext> {
-    let accessRows = await prisma.userStoreAccess.findMany({
+    let accessRows = await withDatabaseRetry(() => prisma.userStoreAccess.findMany({
         where: {
             userId,
             store: { isActive: true },
@@ -59,7 +61,7 @@ export async function getUserStoreContext(userId: string): Promise<UserStoreCont
                 },
             },
         },
-    });
+    }));
 
     if (accessRows.length === 0) {
         const defaultStore = await ensureDefaultStore();
@@ -71,7 +73,7 @@ export async function getUserStoreContext(userId: string): Promise<UserStoreCont
             },
         }).catch(() => undefined);
 
-        accessRows = await prisma.userStoreAccess.findMany({
+        accessRows = await withDatabaseRetry(() => prisma.userStoreAccess.findMany({
             where: {
                 userId,
                 store: { isActive: true },
@@ -88,7 +90,7 @@ export async function getUserStoreContext(userId: string): Promise<UserStoreCont
                     },
                 },
             },
-        });
+        }));
     }
 
     const stores = accessRows.map((row) => row.store);
@@ -96,10 +98,10 @@ export async function getUserStoreContext(userId: string): Promise<UserStoreCont
         throw new Error("User has no active store access.");
     }
 
-    const settings = await prisma.userSettings.findUnique({
+    const settings = await withDatabaseRetry(() => prisma.userSettings.findUnique({
         where: { userId },
         select: { activeStoreId: true },
-    }).catch((error: unknown) => {
+    })).catch((error: unknown) => {
         if (isMissingDbColumnError(error)) return null;
         throw error;
     });
@@ -110,17 +112,37 @@ export async function getUserStoreContext(userId: string): Promise<UserStoreCont
         : stores[0].id;
 
     if (settings?.activeStoreId !== activeStoreId) {
-        await prisma.userSettings.upsert({
-            where: { userId },
-            update: { activeStoreId },
-            create: {
-                userId,
+        try {
+            await withDatabaseRetry(() => prisma.userSettings.upsert({
+                where: { userId },
+                update: { activeStoreId },
+                create: {
+                    userId,
+                    activeStoreId,
+                },
+            }));
+        } catch (error) {
+            if (isMissingDbColumnError(error)) return {
+                stores,
                 activeStoreId,
-            },
-        }).catch((error: unknown) => {
-            if (isMissingDbColumnError(error)) return null;
-            throw error;
-        });
+            };
+
+            if (
+                error instanceof Prisma.PrismaClientKnownRequestError
+                && error.code === "P2002"
+            ) {
+                return {
+                    stores,
+                    activeStoreId,
+                };
+            }
+
+            if (isTransientDatabaseError(error)) {
+                console.warn("[db-best-effort:active_store_sync]", error instanceof Error ? error.message : error);
+            } else {
+                throw error;
+            }
+        }
     }
 
     return {
@@ -130,7 +152,7 @@ export async function getUserStoreContext(userId: string): Promise<UserStoreCont
 }
 
 export async function userCanAccessStore(userId: string, storeId: string) {
-    const record = await prisma.userStoreAccess.findUnique({
+    const record = await withDatabaseRetry(() => prisma.userStoreAccess.findUnique({
         where: {
             userId_storeId: {
                 userId,
@@ -144,7 +166,7 @@ export async function userCanAccessStore(userId: string, storeId: string) {
                 },
             },
         },
-    });
+    }));
 
     return !!record?.store.isActive;
 }
