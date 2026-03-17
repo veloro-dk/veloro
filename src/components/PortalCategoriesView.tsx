@@ -756,7 +756,7 @@ export function PortalCategoriesView() {
     };
 
     const navigateToCategoryEdit = (id: string) => {
-        router.push(`/portal/products/categories/${id}`);
+        router.push(`/products/categories/${id}`);
     };
 
     const handleCategoryRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, id: string) => {
@@ -1267,7 +1267,7 @@ export function PortalCategoriesView() {
                                 </div>
                             ) : null}
                         </div>
-                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/portal/products/categories/new")}>
+                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/products/categories/new")}>
                             {text.actions.addCategory}
                         </Button>
                     </>
@@ -1288,7 +1288,7 @@ export function PortalCategoriesView() {
                         </div>
                         <h3 className="typography__heading6__H5j9s0 portalProductsEmptyHeading__D2m8Q4">Create categories for your products</h3>
                         <p className="typography__small__Q9j2p0 portalProductsEmptyBody__J3m2Q7">Use categories to organize your products before you start adding inventory.</p>
-                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/portal/products/categories/new")}>
+                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/products/categories/new")}>
                             {text.actions.addCategory}
                         </Button>
                     </div>

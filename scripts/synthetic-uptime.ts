@@ -32,25 +32,25 @@ const CHECKS: SyntheticCheck[] = [
     {
         id: "login",
         label: "Login page",
-        path: "/portal/login",
+        path: "/login",
         acceptedStatuses: [200, 301, 302, 303, 307, 308],
     },
     {
         id: "dashboard",
         label: "Dashboard page",
-        path: "/portal",
+        path: "/",
         acceptedStatuses: [200, 301, 302, 303, 307, 308],
     },
     {
         id: "products",
         label: "Products page",
-        path: "/portal/products",
+        path: "/products",
         acceptedStatuses: [200, 301, 302, 303, 307, 308],
     },
     {
         id: "settings",
         label: "Settings page",
-        path: "/portal/settings",
+        path: "/settings",
         acceptedStatuses: [200, 301, 302, 303, 307, 308],
     },
     {

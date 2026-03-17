@@ -25,7 +25,7 @@ export default function SiteHomePage() {
                     Manage products, inventory, purchase orders, and store settings in one workspace.
                 </p>
                 <p style={{ margin: 0 }}>
-                    <Link href="/portal/login" style={{ textDecoration: "underline", fontWeight: 600 }}>
+                    <Link href="/login" style={{ textDecoration: "underline", fontWeight: 600 }}>
                         Open portal login
                     </Link>
                 </p>

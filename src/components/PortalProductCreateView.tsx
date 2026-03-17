@@ -669,7 +669,7 @@ export function PortalProductCreateView({
 
     const openCategoryEdit = useCallback((categoryId: string) => {
         if (!categoryId) return;
-        router.push(`/portal/products/categories/${categoryId}`);
+        router.push(`/products/categories/${categoryId}`);
     }, [router]);
 
     const updateVariantSelection = (variantId: string, value: string) => {
@@ -1197,7 +1197,7 @@ export function PortalProductCreateView({
 
         setProducts(nextProducts);
         setCategories(nextCategories);
-        router.push("/portal/products");
+        router.push("/products");
         return true;
     }, [
         canSaveProduct,
@@ -1271,7 +1271,7 @@ export function PortalProductCreateView({
     const openTimelineEdit = useCallback((event: ProductTimelineEvent) => {
         if (!event.editable) return;
         if (event.type === "purchase-order" && event.purchaseOrderId) {
-            router.push(`/portal/products/purchase-orders/${event.purchaseOrderId}`);
+            router.push(`/products/purchase-orders/${event.purchaseOrderId}`);
             return;
         }
         if (event.type === "maintenance" && productId && event.lineId && event.maintenanceEntryId) {
@@ -1280,14 +1280,14 @@ export function PortalProductCreateView({
                 batchId: event.lineId,
                 maintenanceId: event.maintenanceEntryId,
             });
-            router.push(`/portal/products/inventory/maintenance?${params.toString()}`);
+            router.push(`/products/inventory/maintenance?${params.toString()}`);
             return;
         }
         if (event.type === "sale" && productId) {
             const params = new URLSearchParams({ productId });
             if (event.lineId) params.set("batchId", event.lineId);
             if (event.saleId) params.set("saleId", event.saleId);
-            router.push(`/portal/products/inventory/sell?${params.toString()}`);
+            router.push(`/products/inventory/sell?${params.toString()}`);
         }
     }, [productId, router]);
 
@@ -1333,7 +1333,7 @@ export function PortalProductCreateView({
         discardLabelVariant: "cancel",
         saveDisabled: !canSaveProduct || (isEditMode && (!catalogLoaded || productMissing)),
         onSave: onSaveProduct,
-        onDiscard: () => router.push("/portal/products"),
+        onDiscard: () => router.push("/products"),
     });
 
     const newVariantErrorMessage = newVariantError === "name"

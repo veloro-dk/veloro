@@ -7,6 +7,7 @@ import {
     getCountryFlagUrl,
     sanitizePhoneNationalNumberInput,
 } from "@/i18n/countries";
+import { normalizePortalPublicPathname } from "@/lib/portalRoutes";
 
 export const LAST_NON_SETTINGS_PATH_STORAGE_KEY = "veloro_last_non_settings_path";
 export const SETTINGS_CLOSE_ANIMATION_MS = 170;
@@ -50,14 +51,17 @@ export function normalizeSearchText(value: string) {
 }
 
 export function resolveCloseTarget() {
-    if (typeof window === "undefined") return "/portal";
+    if (typeof window === "undefined") return "/";
 
     const stored = window.sessionStorage.getItem(LAST_NON_SETTINGS_PATH_STORAGE_KEY);
-    if (stored && stored.startsWith("/portal") && !stored.startsWith("/portal/settings")) {
-        return stored;
+    if (stored) {
+        const normalized = normalizePortalPublicPathname(stored);
+        if (normalized !== "/settings") {
+            return normalized;
+        }
     }
 
-    return "/portal";
+    return "/";
 }
 
 export function joinStreetAndHouseNumber(street: string, houseNumber: string) {

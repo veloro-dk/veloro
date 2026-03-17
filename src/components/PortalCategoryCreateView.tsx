@@ -726,7 +726,7 @@ export function PortalCategoryCreateView({ stores, activeStoreId }: PortalCatego
             return false;
         }
 
-        router.push("/portal/products/categories");
+        router.push("/products/categories");
         return true;
     }, [
         categories,
@@ -750,7 +750,7 @@ export function PortalCategoryCreateView({ stores, activeStoreId }: PortalCatego
         discardLabelVariant: "cancel",
         saveDisabled: !canCreateCategory,
         onSave: createCategory,
-        onDiscard: () => router.push("/portal/products/categories"),
+        onDiscard: () => router.push("/products/categories"),
     });
 
     return (

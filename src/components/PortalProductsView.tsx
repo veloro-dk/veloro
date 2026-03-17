@@ -952,7 +952,7 @@ export function PortalProductsView() {
     };
 
     const navigateToProductEdit = (id: string) => {
-        router.push(`/portal/products/${id}`);
+        router.push(`/products/${id}`);
     };
 
     const handleRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, id: string) => {
@@ -981,7 +981,7 @@ export function PortalProductsView() {
     };
 
     const handleOpenCreateProduct = () => {
-        router.push("/portal/products/new");
+        router.push("/products/new");
     };
 
     useEffect(() => {

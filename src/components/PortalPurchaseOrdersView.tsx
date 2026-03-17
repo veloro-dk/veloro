@@ -447,7 +447,7 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
             });
             return;
         }
-        router.push("/portal/products/purchase-orders/new");
+        router.push("/products/purchase-orders/new");
     };
 
     useEffect(() => {
@@ -536,7 +536,7 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
     };
 
     const openOrder = (orderId: string) => {
-        router.push(`/portal/products/purchase-orders/${encodeURIComponent(orderId)}`);
+        router.push(`/products/purchase-orders/${encodeURIComponent(orderId)}`);
     };
 
     const onRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, orderId: string) => {

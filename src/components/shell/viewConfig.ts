@@ -109,7 +109,7 @@ export const ROLE_LABELS: Record<"ADMIN" | "MANAGER" | "EMPLOYEE", string> = {
 export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     {
         id: "home",
-        href: "/portal",
+        href: "/",
         icon: "home",
         pageKey: "home",
         description: "Main portal overview and operational summary.",
@@ -117,7 +117,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "products",
-        href: "/portal/products",
+        href: "/products",
         icon: "products",
         pageKey: "products",
         description: "Product catalog overview and assortment management.",
@@ -125,7 +125,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "categories",
-        href: "/portal/products/categories",
+        href: "/products/categories",
         icon: "categories",
         pageKey: "categories",
         description: "Product taxonomy and category structure.",
@@ -133,7 +133,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "inventory",
-        href: "/portal/products/inventory",
+        href: "/products/inventory",
         icon: "inventory",
         pageKey: "inventory",
         description: "Stock levels, inventory flow, and availability.",
@@ -141,7 +141,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "purchaseOrders",
-        href: "/portal/products/purchase-orders",
+        href: "/products/purchase-orders",
         icon: "purchaseOrders",
         pageKey: "purchaseOrders",
         description: "Purchase orders, suppliers, and inbound stock planning.",
@@ -149,7 +149,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "variants",
-        href: "/portal/products/variants",
+        href: "/products/variants",
         icon: "variants",
         pageKey: "variants",
         description: "Variant definitions and option management.",
@@ -157,7 +157,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "finance",
-        href: "/portal/finance",
+        href: "/finance",
         icon: "finance",
         pageKey: "finance",
         description: "Financial performance and transaction overview.",
@@ -165,7 +165,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "analytics",
-        href: "/portal/analytics",
+        href: "/analytics",
         icon: "analytics",
         pageKey: "analytics",
         description: "Performance metrics and trend analysis.",
@@ -173,7 +173,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "reports",
-        href: "/portal/analytics/reports",
+        href: "/analytics/reports",
         icon: "reports",
         pageKey: "reports",
         description: "Scheduled and on-demand analytics reports.",
@@ -181,7 +181,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "liveView",
-        href: "/portal/analytics/live-view",
+        href: "/analytics/live-view",
         icon: "liveView",
         pageKey: "liveView",
         description: "Real-time activity and live analytics stream.",
@@ -189,7 +189,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "settings",
-        href: "/portal/settings",
+        href: "/settings",
         icon: "settings",
         pageKey: "settings",
         description: "Workspace configuration, users, and preferences.",
@@ -197,7 +197,7 @@ export const SEARCH_PAGE_DEFINITIONS: SearchPageDefinition[] = [
     },
     {
         id: "system-status",
-        href: "/portal/system-status",
+        href: "/system-status",
         icon: "settings",
         titleFallback: "System status",
         description: "Platform health checks, uptime, and operational details.",

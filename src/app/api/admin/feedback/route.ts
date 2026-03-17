@@ -71,7 +71,7 @@ export const GET = handleApiRoute("api/admin/feedback.GET", async (req: Request)
             : "IDEA";
         const pagePath = typeof (meta as { pagePath?: unknown }).pagePath === "string"
             ? (meta as { pagePath: string }).pagePath
-            : "/portal";
+            : "/";
         const message = typeof (meta as { message?: unknown }).message === "string"
             ? (meta as { message: string }).message
             : "";

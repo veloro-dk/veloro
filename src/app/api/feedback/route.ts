@@ -69,7 +69,7 @@ export const POST = handleApiRoute("api/feedback.POST", async (req: Request) => 
     const kind = normalizeKind(payload.data.kind);
     const message = payload.data.message;
     const pagePathRaw = payload.data.pagePath ?? "";
-    const pagePath = pagePathRaw.startsWith("/portal") ? pagePathRaw : "/portal";
+    const pagePath = pagePathRaw.startsWith("/") ? pagePathRaw : "/";
 
     if (!kind) {
         return json({ ok: false, message: "Invalid feedback type." }, 400);

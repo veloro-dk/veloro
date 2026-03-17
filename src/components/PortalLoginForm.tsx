@@ -66,7 +66,7 @@ export function PortalLoginForm() {
                 return;
             }
 
-            router.replace(data?.requiresPasswordReset ? "/portal/password-reset" : "/portal");
+            router.replace(data?.requiresPasswordReset ? "/password-reset" : "/");
             router.refresh();
         } catch {
             notifyPortalAction({ message: "Unable to sign in right now.", tone: "error" });

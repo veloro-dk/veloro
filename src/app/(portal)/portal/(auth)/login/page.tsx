@@ -5,8 +5,8 @@ import { getSessionUser } from "@/server/auth";
 export default async function PortalLoginPage() {
     const user = await getSessionUser();
     if (user) {
-        if (user.requiresPasswordReset) redirect("/portal/password-reset");
-        redirect("/portal");
+        if (user.requiresPasswordReset) redirect("/password-reset");
+        redirect("/");
     }
 
     return <PortalLoginForm />;

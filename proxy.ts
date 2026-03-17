@@ -6,6 +6,11 @@ import {
     createCspNonce,
     shouldSetStrictTransportSecurity,
 } from "@/server/securityHeaders";
+import {
+    isLegacyPortalPath,
+    toInternalPortalPath,
+    toPublicPortalPath,
+} from "@/lib/portalRoutes";
 
 function applySecurityHeaders(
     response: NextResponse,
@@ -31,7 +36,12 @@ function applySecurityHeaders(
 
 function isPortalHost(hostHeader: string) {
     const host = hostHeader.split(":")[0].toLowerCase();
-    return host === "portal.veloro.dk" || host === "portal.veloro-one.vercel.app" || host.startsWith("portal.");
+    return host === "portal.veloro.dk"
+        || host === "portal.veloro-one.vercel.app"
+        || host === "localhost"
+        || host === "127.0.0.1"
+        || host.startsWith("portal.")
+        || host.endsWith(".vercel.app");
 }
 
 function isHttpsRequest(request: NextRequest) {
@@ -86,9 +96,22 @@ export function proxy(request: NextRequest) {
         );
     }
 
+    if (isLegacyPortalPath(pathname)) {
+        const redirectUrl = request.nextUrl.clone();
+        redirectUrl.pathname = toPublicPortalPath(pathname);
+
+        return applySecurityHeaders(
+            NextResponse.redirect(redirectUrl, 308),
+            {
+                contentSecurityPolicy,
+                includeStrictTransportSecurity,
+            }
+        );
+    }
+
     if (pathname === "/") {
         return applySecurityHeaders(
-            NextResponse.rewrite(new URL("/portal", request.url), {
+            NextResponse.rewrite(new URL(toInternalPortalPath(pathname), request.url), {
                 request: { headers: requestHeaders },
             }),
             {
@@ -98,18 +121,8 @@ export function proxy(request: NextRequest) {
         );
     }
 
-    if (pathname.startsWith("/portal")) {
-        return applySecurityHeaders(
-            NextResponse.next({ request: { headers: requestHeaders } }),
-            {
-                contentSecurityPolicy,
-                includeStrictTransportSecurity,
-            }
-        );
-    }
-
     return applySecurityHeaders(
-        NextResponse.rewrite(new URL(`/portal${pathname}`, request.url), {
+        NextResponse.rewrite(new URL(toInternalPortalPath(pathname), request.url), {
             request: { headers: requestHeaders },
         }),
         {

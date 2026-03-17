@@ -4,18 +4,18 @@ import { prisma } from "@/server/db";
 import { getRuntimeEnv } from "@/server/env";
 
 const BASE_PAGE_CHECK_PATHS = [
-    "/portal/login",
-    "/portal",
-    "/portal/products",
-    "/portal/products/categories",
-    "/portal/products/inventory",
-    "/portal/products/purchase-orders",
-    "/portal/finance",
-    "/portal/analytics",
-    "/portal/analytics/reports",
-    "/portal/analytics/live-view",
-    "/portal/settings",
-    "/portal/system-status",
+    "/login",
+    "/",
+    "/products",
+    "/products/categories",
+    "/products/inventory",
+    "/products/purchase-orders",
+    "/finance",
+    "/analytics",
+    "/analytics/reports",
+    "/analytics/live-view",
+    "/settings",
+    "/system-status",
 ] as const;
 
 const DEFAULT_SUPABASE_FREE_DB_LIMIT_MB = 500;

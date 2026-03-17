@@ -347,7 +347,7 @@ export function PortalInventoryActionView({ mode }: PortalInventoryActionViewPro
         scope: "productCreate",
         discardLabelVariant: "cancel",
         saveDisabled,
-        onDiscard: () => router.push("/portal/products/inventory"),
+        onDiscard: () => router.push("/products/inventory"),
         onSave: async () => {
             const nextErrors = getFieldErrors();
             setFieldErrors(nextErrors);
@@ -498,7 +498,7 @@ export function PortalInventoryActionView({ mode }: PortalInventoryActionViewPro
                     });
                 }
 
-                router.push("/portal/products/inventory");
+                router.push("/products/inventory");
                 return true;
             } catch {
                 setSubmitError(isSellMode ? "Unable to save sale right now." : "Unable to save maintenance right now.");
@@ -774,7 +774,7 @@ export function PortalInventoryActionView({ mode }: PortalInventoryActionViewPro
                 }
                 await saveCatalogStateToApi({ purchaseOrders: nextPurchaseOrders });
             }
-            router.push("/portal/products/inventory");
+            router.push("/products/inventory");
         } catch {
             setSubmitError(isSellMode ? "Unable to delete sale right now." : "Unable to delete maintenance right now.");
         } finally {

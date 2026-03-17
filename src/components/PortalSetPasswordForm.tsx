@@ -50,7 +50,7 @@ export function PortalSetPasswordForm() {
                 return;
             }
 
-            router.replace("/portal");
+            router.replace("/");
             router.refresh();
         } catch {
             notifyPortalAction({ message: "Unable to save password.", tone: "error" });

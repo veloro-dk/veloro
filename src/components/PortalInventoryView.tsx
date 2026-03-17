@@ -633,7 +633,7 @@ export function PortalInventoryView() {
     const openAddStock = () => {
         setActionError(null);
         const query = actionProductId ? `?productId=${encodeURIComponent(actionProductId)}` : "";
-        router.push(`/portal/products/purchase-orders/new${query}`);
+        router.push(`/products/purchase-orders/new${query}`);
     };
 
     const createPurchaseOrderForSelected = () => {
@@ -644,7 +644,7 @@ export function PortalInventoryView() {
         selectedProductIds.forEach((productId) => {
             params.append("productId", productId);
         });
-        router.push(`/portal/products/purchase-orders/new?${params.toString()}`);
+        router.push(`/products/purchase-orders/new?${params.toString()}`);
     };
 
     const openSellStock = () => {
@@ -659,7 +659,7 @@ export function PortalInventoryView() {
             ? `?productId=${encodeURIComponent(prefillProductId)}`
             : "";
         setActionError(null);
-        router.push(`/portal/products/inventory/sell${query}`);
+        router.push(`/products/inventory/sell${query}`);
     };
 
     const openMaintenance = () => {
@@ -674,7 +674,7 @@ export function PortalInventoryView() {
             ? `?productId=${encodeURIComponent(prefillProductId)}`
             : "";
         setActionError(null);
-        router.push(`/portal/products/inventory/maintenance${query}`);
+        router.push(`/products/inventory/maintenance${query}`);
     };
 
     const onSellProductChange = (nextProductId: string) => {
@@ -990,7 +990,7 @@ export function PortalInventoryView() {
     };
 
     const openProductEditor = (productId: string) => {
-        router.push(`/portal/products/${encodeURIComponent(productId)}`);
+        router.push(`/products/${encodeURIComponent(productId)}`);
     };
 
     const onInventoryRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, productId: string) => {
@@ -1530,7 +1530,7 @@ export function PortalInventoryView() {
                         </div>
                         <h3 className="typography__heading6__H5j9s0 portalProductsEmptyHeading__D2m8Q4">Keep track of your inventory</h3>
                         <p className="typography__small__Q9j2p0 portalProductsEmptyBody__J3m2Q7">When you enable inventory tracking on your products, you can view and adjust counts here.</p>
-                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/portal/products")}>
+                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/products")}>
                             Go to products
                         </Button>
                     </div>

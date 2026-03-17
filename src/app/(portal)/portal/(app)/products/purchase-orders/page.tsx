@@ -5,7 +5,7 @@ import { getUserStoreContext } from "@/server/stores";
 
 export default async function PurchaseOrdersPage() {
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
+    if (!user) redirect("/login");
 
     const storeContext = await getUserStoreContext(user.id);
 

@@ -939,7 +939,7 @@ export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurren
             });
 
             setSubmitMessage(canFinalize ? "Purchase order saved." : "Required fields are missing. Saved as draft.");
-            router.push("/portal/products/purchase-orders");
+            router.push("/products/purchase-orders");
             return true;
         } catch {
             setSubmitError("Unable to save purchase order.");
@@ -948,7 +948,7 @@ export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurren
     }, [activeStoreId, draft, router, storeCurrency, validateDraftForFinalSave]);
 
     const onDiscard = useCallback(() => {
-        router.push("/portal/products/purchase-orders");
+        router.push("/products/purchase-orders");
     }, [router]);
 
     const pendingHeaderActive = !orderId || isDirty;
@@ -1316,7 +1316,7 @@ export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurren
                                                     <button
                                                         type="button"
                                                         className="portalProductsNameButton__N6m2Q5"
-                                                        onClick={() => router.push(`/portal/products/inventory/${encodeURIComponent(product.id)}`)}
+                                                        onClick={() => router.push(`/products/inventory/${encodeURIComponent(product.id)}`)}
                                                     >
                                                         {getProductDisplayLabel(product)}
                                                     </button>

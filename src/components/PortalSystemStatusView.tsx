@@ -125,18 +125,18 @@ type StatusGroupDefinition = {
 };
 
 const PATH_LABELS: Record<string, string> = {
-    "/portal/login": "Authentication",
-    "/portal": "Portal home",
-    "/portal/products": "Products",
-    "/portal/products/categories": "Product categories",
-    "/portal/products/inventory": "Inventory",
-    "/portal/products/purchase-orders": "Purchase orders",
-    "/portal/finance": "Finance",
-    "/portal/settings": "Settings",
-    "/portal/system-status": "System status page",
-    "/portal/analytics": "Analytics overview",
-    "/portal/analytics/reports": "Reports",
-    "/portal/analytics/live-view": "Live view",
+    "/login": "Authentication",
+    "/": "Portal home",
+    "/products": "Products",
+    "/products/categories": "Product categories",
+    "/products/inventory": "Inventory",
+    "/products/purchase-orders": "Purchase orders",
+    "/finance": "Finance",
+    "/settings": "Settings",
+    "/system-status": "System status page",
+    "/analytics": "Analytics overview",
+    "/analytics/reports": "Reports",
+    "/analytics/live-view": "Live view",
 };
 
 const STATUS_GROUPS: StatusGroupDefinition[] = [
@@ -144,17 +144,17 @@ const STATUS_GROUPS: StatusGroupDefinition[] = [
         id: "control-plane",
         label: "Control Plane",
         includeDatabase: true,
-        paths: ["/portal/login", "/portal", "/portal/settings", "/portal/system-status"],
+        paths: ["/login", "/", "/settings", "/system-status"],
     },
     {
         id: "management",
         label: "Management",
-        paths: ["/portal/products", "/portal/products/categories", "/portal/products/inventory", "/portal/products/purchase-orders", "/portal/finance"],
+        paths: ["/products", "/products/categories", "/products/inventory", "/products/purchase-orders", "/finance"],
     },
     {
         id: "analytics",
         label: "Analytics",
-        paths: ["/portal/analytics", "/portal/analytics/reports", "/portal/analytics/live-view"],
+        paths: ["/analytics", "/analytics/reports", "/analytics/live-view"],
     },
 ];
 

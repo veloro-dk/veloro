@@ -10,8 +10,8 @@ import { normalizeCurrency, normalizeLanguage } from "@/i18n/portal";
 
 export default async function PortalAppLayout({ children }: { children: React.ReactNode }) {
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
-    if (user.requiresPasswordReset) redirect("/portal/password-reset");
+    if (!user) redirect("/login");
+    if (user.requiresPasswordReset) redirect("/password-reset");
     const runtimeEnv = getRuntimeEnv();
 
     const settings = await findUserSettingsSafe(prisma, user.id);

@@ -24,7 +24,7 @@ export function PortalNotFoundView() {
                 </p>
 
                 <div className="portalNotFoundActions__S2m4Q6">
-                    <Button type="button" kind="primary" size="small" onClick={() => router.push("/portal")}>Go to home</Button>
+                    <Button type="button" kind="primary" size="small" onClick={() => router.push("/")}>Go to home</Button>
                     <Button type="button" kind="secondary" size="small" onClick={() => router.back()}>Go back</Button>
                 </div>
             </section>

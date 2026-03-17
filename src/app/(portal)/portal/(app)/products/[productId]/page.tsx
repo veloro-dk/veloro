@@ -14,7 +14,7 @@ type ProductEditPageProps = {
 export default async function ProductEditPage({ params }: ProductEditPageProps) {
     const { productId } = await params;
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
+    if (!user) redirect("/login");
     const storeContext = await getUserStoreContext(user.id);
     const activeStore = await prisma.store.findUnique({
         where: { id: storeContext.activeStoreId },

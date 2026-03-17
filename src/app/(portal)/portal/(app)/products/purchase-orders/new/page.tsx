@@ -8,11 +8,11 @@ import { getUserStoreContext } from "@/server/stores";
 
 export default async function PurchaseOrderCreatePage() {
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
+    if (!user) redirect("/login");
 
     const storeContext = await getUserStoreContext(user.id);
     const hasProducts = await hasCatalogProducts(storeContext.activeStoreId);
-    if (!hasProducts) redirect("/portal/products");
+    if (!hasProducts) redirect("/products");
 
     const activeStore = await prisma.store.findUnique({
         where: { id: storeContext.activeStoreId },

@@ -1,5 +1,6 @@
 import type { LanguageCode, PortalMessages } from "@/i18n/portal";
 import type { PortalActionNotificationTone } from "@/components/portalActionNotifications";
+import { normalizePortalPublicPathname } from "@/lib/portalRoutes";
 import {
     SEARCH_CONTENT_IGNORE_SELECTOR,
     SEARCH_CONTENT_ROOT_SELECTORS,
@@ -329,8 +330,10 @@ export function isTrackedRouteLoadRequest(input: RequestInfo | URL, init?: Reque
     }
 
     if (url.origin !== window.location.origin) return false;
-    if (!url.pathname.startsWith("/portal")) return false;
-    if (typeof currentPathname === "string" && normalizePathname(url.pathname) === normalizePathname(currentPathname)) {
+    if (url.pathname.startsWith("/api")) return false;
+
+    const normalizedTargetPath = normalizePathname(normalizePortalPublicPathname(url.pathname));
+    if (typeof currentPathname === "string" && normalizedTargetPath === normalizePathname(normalizePortalPublicPathname(currentPathname))) {
         return false;
     }
 

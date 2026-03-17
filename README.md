@@ -34,10 +34,10 @@ Create `.env.local` (or environment secrets in deployment) with:
 | `ALLOW_PRODUCTION_DB_RESTORE` | Optional safety override | Must be `YES` with `NODE_ENV=production` to allow restore |
 | `MIGRATION_GUARD_ALLOW_PENDING` | Optional | Allow local migrations to be pending vs target DB (default: `false`) |
 | `MIGRATION_GUARD_OUTPUT_FILE` | Optional | Write migration guardrail JSON report to file path |
-| `FF_PORTAL_FINANCE_ENABLED` | Optional | Toggle `/portal/finance` visibility (default: `true`) |
-| `FF_PORTAL_ANALYTICS_ENABLED` | Optional | Toggle `/portal/analytics` visibility (default: `true`) |
-| `FF_PORTAL_ANALYTICS_REPORTS_ENABLED` | Optional | Toggle `/portal/analytics/reports` visibility (default: `true`) |
-| `FF_PORTAL_ANALYTICS_LIVE_VIEW_ENABLED` | Optional | Toggle `/portal/analytics/live-view` visibility (default: `true`) |
+| `FF_PORTAL_FINANCE_ENABLED` | Optional | Toggle `/finance` visibility (default: `true`) |
+| `FF_PORTAL_ANALYTICS_ENABLED` | Optional | Toggle `/analytics` visibility (default: `true`) |
+| `FF_PORTAL_ANALYTICS_REPORTS_ENABLED` | Optional | Toggle `/analytics/reports` visibility (default: `true`) |
+| `FF_PORTAL_ANALYTICS_LIVE_VIEW_ENABLED` | Optional | Toggle `/analytics/live-view` visibility (default: `true`) |
 | `FF_PORTAL_ASSISTANT_ENABLED` | Optional | Toggle AI assistant UI visibility in portal shell (default: `true`) |
 | `FF_PORTAL_NOTIFICATIONS_ENABLED` | Optional | Toggle notifications UI visibility in portal shell (default: `true`) |
 | `SMOKE_BASE_URL` | Optional (CI smoke checks) | Base URL for release smoke e2e checks |
@@ -268,10 +268,10 @@ Scheduled privacy retention workflow:
 
 Built-in synthetic checks validate:
 
-1. `/portal/login`
-2. `/portal`
-3. `/portal/products`
-4. `/portal/settings`
+1. `/login`
+2. `/`
+3. `/products`
+4. `/settings`
 5. `/api/system/ping`
 
 Run manually:
@@ -300,10 +300,10 @@ STAGING_BASE_URL=https://staging.portal.veloro.dk PRODUCTION_BASE_URL=https://po
 
 The check compares staging vs production for:
 
-1. `/portal/login`
-2. `/portal`
-3. `/portal/products`
-4. `/portal/settings`
+1. `/login`
+2. `/`
+3. `/products`
+4. `/settings`
 5. `/api/system/ping`
 
 It validates:
@@ -337,7 +337,7 @@ Checks include:
 
 1. public login page and API ping
 2. login flow + session cookie issuance
-3. authenticated portal pages (`/portal`, `/portal/products`, `/portal/settings`)
+3. authenticated portal pages (`/`, `/products`, `/settings`)
 4. authenticated APIs (`/api/catalog/state`, `/api/search/index`, `/api/system/health`)
 5. logout flow + post-logout access guard
 

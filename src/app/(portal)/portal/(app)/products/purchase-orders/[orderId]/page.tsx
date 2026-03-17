@@ -15,11 +15,11 @@ type PurchaseOrderEditPageProps = {
 export default async function PurchaseOrderEditPage({ params }: PurchaseOrderEditPageProps) {
     const { orderId } = await params;
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
+    if (!user) redirect("/login");
 
     const storeContext = await getUserStoreContext(user.id);
     const hasProducts = await hasCatalogProducts(storeContext.activeStoreId);
-    if (!hasProducts) redirect("/portal/products");
+    if (!hasProducts) redirect("/products");
 
     const activeStore = await prisma.store.findUnique({
         where: { id: storeContext.activeStoreId },

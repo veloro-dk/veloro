@@ -12,7 +12,7 @@ type CategoryEditPageProps = {
 export default async function CategoryEditPage({ params }: CategoryEditPageProps) {
     const { categoryId } = await params;
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
+    if (!user) redirect("/login");
 
     const storeContext = await getUserStoreContext(user.id);
     return (

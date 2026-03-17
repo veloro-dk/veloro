@@ -747,7 +747,7 @@ export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: Po
             return false;
         }
 
-        router.push("/portal/products/categories");
+        router.push("/products/categories");
         return true;
     }, [
         categories,
@@ -770,7 +770,7 @@ export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: Po
         discardLabelVariant: "cancel",
         saveDisabled: !canSaveCategory,
         onSave: saveCategory,
-        onDiscard: () => router.push("/portal/products/categories"),
+        onDiscard: () => router.push("/products/categories"),
     });
 
     if (!isLoaded) {
@@ -798,7 +798,7 @@ export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: Po
                 />
                 <section className="portalProductCreateMainCard__N4m8Q3 ui-surface-card portalProductCreateMissing__H9m2Q4">
                     <p>{ERROR_MESSAGES.categoryMissing}</p>
-                    <Button type="button" kind="secondary" size="xsmall" onClick={() => router.push("/portal/products/categories")}>
+                    <Button type="button" kind="secondary" size="xsmall" onClick={() => router.push("/products/categories")}>
                         Back to categories
                     </Button>
                 </section>

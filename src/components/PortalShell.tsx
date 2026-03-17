@@ -148,27 +148,28 @@ import { PortalI18nProvider } from "@/i18n/PortalI18nContext";
 import { primeCatalogStateCache } from "@/lib/catalogStateClient";
 import { cn } from "@/lib/cn";
 import { isSearchPageEnabled } from "@/lib/portalFeatureFlags";
+import { normalizePortalPublicPathname } from "@/lib/portalRoutes";
 
 export function PortalShell({ children, user, language, currency, storeCurrency, stores, activeStoreId, featureFlags }: PortalShellProps) {
-    const pathname = usePathname();
+    const pathname = normalizePortalPublicPathname(usePathname());
     const router = useRouter();
-    const isSettingsRoute = pathname === "/portal/settings" || pathname.startsWith("/portal/settings/");
-    const isProductCreateRoute = pathname === "/portal/products/new" || pathname.startsWith("/portal/products/new/");
-    const isInventoryCreateRoute = pathname === "/portal/products/inventory/new" || pathname.startsWith("/portal/products/inventory/new/");
-    const isInventoryDetailRoute = /^\/portal\/products\/inventory\/[^/]+(?:\/.*)?$/.test(pathname)
-        && !pathname.startsWith("/portal/products/inventory/new");
-    const isPurchaseOrderCreateRoute = pathname === "/portal/products/purchase-orders/new" || pathname.startsWith("/portal/products/purchase-orders/new/");
-    const isPurchaseOrderEditRoute = /^\/portal\/products\/purchase-orders\/[^/]+(?:\/.*)?$/.test(pathname)
-        && !pathname.startsWith("/portal/products/purchase-orders/new");
-    const isCategoryCreateRoute = pathname === "/portal/products/categories/new" || pathname.startsWith("/portal/products/categories/new/");
-    const isCategoryEditRoute = /^\/portal\/products\/categories\/[^/]+(?:\/.*)?$/.test(pathname)
-        && !pathname.startsWith("/portal/products/categories/new");
-    const isProductEditRoute = /^\/portal\/products\/[^/]+(?:\/.*)?$/.test(pathname)
-        && !pathname.startsWith("/portal/products/new")
-        && !pathname.startsWith("/portal/products/categories")
-        && !pathname.startsWith("/portal/products/inventory")
-        && !pathname.startsWith("/portal/products/purchase-orders")
-        && !pathname.startsWith("/portal/products/variants");
+    const isSettingsRoute = pathname === "/settings" || pathname.startsWith("/settings/");
+    const isProductCreateRoute = pathname === "/products/new" || pathname.startsWith("/products/new/");
+    const isInventoryCreateRoute = pathname === "/products/inventory/new" || pathname.startsWith("/products/inventory/new/");
+    const isInventoryDetailRoute = /^\/products\/inventory\/[^/]+(?:\/.*)?$/.test(pathname)
+        && !pathname.startsWith("/products/inventory/new");
+    const isPurchaseOrderCreateRoute = pathname === "/products/purchase-orders/new" || pathname.startsWith("/products/purchase-orders/new/");
+    const isPurchaseOrderEditRoute = /^\/products\/purchase-orders\/[^/]+(?:\/.*)?$/.test(pathname)
+        && !pathname.startsWith("/products/purchase-orders/new");
+    const isCategoryCreateRoute = pathname === "/products/categories/new" || pathname.startsWith("/products/categories/new/");
+    const isCategoryEditRoute = /^\/products\/categories\/[^/]+(?:\/.*)?$/.test(pathname)
+        && !pathname.startsWith("/products/categories/new");
+    const isProductEditRoute = /^\/products\/[^/]+(?:\/.*)?$/.test(pathname)
+        && !pathname.startsWith("/products/new")
+        && !pathname.startsWith("/products/categories")
+        && !pathname.startsWith("/products/inventory")
+        && !pathname.startsWith("/products/purchase-orders")
+        && !pathname.startsWith("/products/variants");
 
     const [openPopover, setOpenPopover] = useState<HeaderPopoverId>(null);
     const [signingOut, setSigningOut] = useState(false);
@@ -238,35 +239,35 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
 
     const nav = useMemo<NavItem[]>(() => {
         const items: NavItem[] = [
-            { key: "home", href: "/portal" },
+            { key: "home", href: "/" },
             {
                 key: "products",
-                href: "/portal/products",
+                href: "/products",
                 children: [
-                    { key: "categories", href: "/portal/products/categories" },
-                    { key: "inventory", href: "/portal/products/inventory" },
-                    { key: "purchaseOrders", href: "/portal/products/purchase-orders" },
-                    { key: "variants", href: "/portal/products/variants" },
+                    { key: "categories", href: "/products/categories" },
+                    { key: "inventory", href: "/products/inventory" },
+                    { key: "purchaseOrders", href: "/products/purchase-orders" },
+                    { key: "variants", href: "/products/variants" },
                 ],
             },
         ];
 
         if (featureFlags.finance) {
-            items.push({ key: "finance", href: "/portal/finance" });
+            items.push({ key: "finance", href: "/finance" });
         }
 
         if (featureFlags.analytics) {
             const analyticsChildren: Array<{ key: "reports" | "liveView"; href: string }> = [];
             if (featureFlags.analyticsReports) {
-                analyticsChildren.push({ key: "reports", href: "/portal/analytics/reports" });
+                analyticsChildren.push({ key: "reports", href: "/analytics/reports" });
             }
             if (featureFlags.analyticsLiveView) {
-                analyticsChildren.push({ key: "liveView", href: "/portal/analytics/live-view" });
+                analyticsChildren.push({ key: "liveView", href: "/analytics/live-view" });
             }
 
             items.push({
                 key: "analytics",
-                href: "/portal/analytics",
+                href: "/analytics",
                 ...(analyticsChildren.length > 0 ? { children: analyticsChildren } : {}),
             });
         }
@@ -276,7 +277,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
 
     const isActive = useCallback(
         (href: string) => {
-            if (href === "/portal") return pathname === "/portal";
+            if (href === "/") return pathname === "/";
             return pathname === href || pathname.startsWith(href + "/");
         },
         [pathname]
@@ -291,7 +292,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
     }, [nav, pathname]);
 
     const [openSubmenuHrefs, setOpenSubmenuHrefs] = useState<string[]>([]);
-    const isDashboardWidgetMenuTargetActive = pathname === "/portal"
+    const isDashboardWidgetMenuTargetActive = pathname === "/"
         && dashboardWidgetMenuState.open
         && !isSettingsRoute
         && !isMobileViewport;
@@ -310,7 +311,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
 
         if (isSettingsRoute && settingsPending) return "settings";
         if ((isProductCreateRoute || isInventoryCreateRoute || isInventoryDetailRoute || isPurchaseOrderCreateRoute || isPurchaseOrderEditRoute || isCategoryCreateRoute || isCategoryEditRoute || isProductEditRoute) && productCreatePending) return "productCreate";
-        if (pathname === "/portal" && dashboardPending) return "dashboard";
+        if (pathname === "/" && dashboardPending) return "dashboard";
         return null;
     }, [isCategoryCreateRoute, isCategoryEditRoute, isInventoryCreateRoute, isInventoryDetailRoute, isProductCreateRoute, isProductEditRoute, isPurchaseOrderCreateRoute, isPurchaseOrderEditRoute, isSettingsRoute, pathname]);
 
@@ -566,7 +567,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
     }, []);
 
     useEffect(() => {
-        if (pathname === "/portal") return;
+        if (pathname === "/") return;
         if (!dashboardWidgetMenuState.open) return;
 
         setDashboardWidgetMenuState((current) => ({ ...current, open: false }));
@@ -706,9 +707,9 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
         }
 
         if (url.origin !== window.location.origin) return;
-        if (!url.pathname.startsWith("/portal")) return;
+        if (url.pathname.startsWith("/api")) return;
 
-        const nextPath = normalizePathname(url.pathname);
+        const nextPath = normalizePathname(normalizePortalPublicPathname(url.pathname));
         const currentPath = normalizePathname(pathname);
         if (nextPath === currentPath) return;
 
@@ -1081,7 +1082,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
 
     useEffect(() => {
         if (typeof window === "undefined") return;
-        if (!isSettingsRoute && pathname.startsWith("/portal")) {
+        if (!isSettingsRoute && pathname !== "/login" && pathname !== "/password-reset") {
             window.sessionStorage.setItem(LAST_NON_SETTINGS_PATH_STORAGE_KEY, pathname);
         }
     }, [isSettingsRoute, pathname]);
@@ -1465,8 +1466,8 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
         } finally {
             setSigningOut(false);
             setOpenPopover(null);
-            startRouteTransitionLoadForHref("/portal/login");
-            router.replace("/portal/login");
+            startRouteTransitionLoadForHref("/login");
+            router.replace("/login");
             router.refresh();
         }
     }
@@ -1686,8 +1687,8 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
 
             if (item.action === "open-settings") {
                 closeSearch();
-                startRouteTransitionLoadForHref("/portal/settings");
-                router.push("/portal/settings");
+                startRouteTransitionLoadForHref("/settings");
+                router.push("/settings");
                 return;
             }
 
@@ -2518,9 +2519,9 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                                     <div className="portalSidebarBottom__Y2k6Q4">
                                         <div className="portalSection__P7q8R9">
                                             <Link
-                                                className={cn("portalLink__V4w5X6", isActive("/portal/settings") && "portalLinkActive__Y7z8A9")}
-                                                href="/portal/settings"
-                                                aria-current={isActive("/portal/settings") ? "page" : undefined}
+                                                className={cn("portalLink__V4w5X6", isActive("/settings") && "portalLinkActive__Y7z8A9")}
+                                                href="/settings"
+                                                aria-current={isActive("/settings") ? "page" : undefined}
                                                 onClick={onSidebarLinkClick}
                                             >
                                                 <span className="portalLinkContent__A3t5N9">
@@ -2535,7 +2536,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
 
                                         <div className="portalSection__P7q8R9">
                                             <Link
-                                                href="/portal/system-status"
+                                                href="/system-status"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 className={cn(

@@ -18,13 +18,13 @@ export const DEFAULT_PORTAL_FEATURE_FLAGS: PortalFeatureFlags = {
 
 export function isPortalPathEnabled(path: string, flags: PortalFeatureFlags) {
     switch (path) {
-        case "/portal/finance":
+        case "/finance":
             return flags.finance;
-        case "/portal/analytics":
+        case "/analytics":
             return flags.analytics;
-        case "/portal/analytics/reports":
+        case "/analytics/reports":
             return flags.analytics && flags.analyticsReports;
-        case "/portal/analytics/live-view":
+        case "/analytics/live-view":
             return flags.analytics && flags.analyticsLiveView;
         default:
             return true;

@@ -233,10 +233,10 @@ async function main() {
     const cookieJar = new Map<string, string>();
     const checks: SmokeCheckResult[] = [];
 
-    const loginPage = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/portal/login" });
+    const loginPage = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/login" });
     pushResult(
         checks,
-        { id: "public-login-page", label: "Public login page", path: "/portal/login" },
+        { id: "public-login-page", label: "Public login page", path: "/login" },
         loginPage,
         loginPage.status === 200,
         null
@@ -262,7 +262,7 @@ async function main() {
         headers: {
             "content-type": "application/json",
             origin: baseUrl,
-            referer: `${baseUrl}/portal/login`,
+            referer: `${baseUrl}/login`,
             "sec-fetch-site": "same-origin",
         },
         body: JSON.stringify({ employeeId, password }),
@@ -284,28 +284,28 @@ async function main() {
     );
 
     if (loginOk) {
-        const dashboard = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/portal" });
+        const dashboard = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/" });
         pushResult(
             checks,
-            { id: "auth-dashboard", label: "Dashboard after login", path: "/portal" },
+            { id: "auth-dashboard", label: "Dashboard after login", path: "/" },
             dashboard,
             dashboard.status === 200,
             null
         );
 
-        const products = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/portal/products" });
+        const products = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/products" });
         pushResult(
             checks,
-            { id: "auth-products", label: "Products page after login", path: "/portal/products" },
+            { id: "auth-products", label: "Products page after login", path: "/products" },
             products,
             products.status === 200,
             null
         );
 
-        const settings = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/portal/settings" });
+        const settings = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/settings" });
         pushResult(
             checks,
-            { id: "auth-settings", label: "Settings page after login", path: "/portal/settings" },
+            { id: "auth-settings", label: "Settings page after login", path: "/settings" },
             settings,
             settings.status === 200,
             null
@@ -362,7 +362,7 @@ async function main() {
             method: "POST",
             headers: {
                 origin: baseUrl,
-                referer: `${baseUrl}/portal`,
+                referer: `${baseUrl}/`,
                 "sec-fetch-site": "same-origin",
             },
         });
@@ -378,17 +378,17 @@ async function main() {
             logoutOk ? null : "Expected status 200 with { ok: true }."
         );
 
-        const postLogout = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/portal" });
+        const postLogout = await performRequest(baseUrl, timeoutMs, cookieJar, { path: "/" });
         const location = postLogout.response?.headers.get("location") || "";
         const postLogoutOk = postLogout.status !== null
             && REDIRECT_STATUSES.has(postLogout.status)
-            && location.includes("/portal/login");
+            && location.includes("/login");
         pushResult(
             checks,
-            { id: "post-logout-guard", label: "Dashboard blocked after logout", path: "/portal" },
+            { id: "post-logout-guard", label: "Dashboard blocked after logout", path: "/" },
             postLogout,
             postLogoutOk,
-            postLogoutOk ? null : "Expected redirect to /portal/login after logout."
+            postLogoutOk ? null : "Expected redirect to /login after logout."
         );
     }
 

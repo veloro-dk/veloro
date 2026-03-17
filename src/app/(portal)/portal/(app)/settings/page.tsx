@@ -10,7 +10,7 @@ import { normalizeCurrency, normalizeDateFormat, normalizeLanguage, normalizeWee
 
 export default async function SettingsPage() {
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
+    if (!user) redirect("/login");
 
     let firstName = user.firstName?.trim() ?? "";
     let lastName = user.lastName?.trim() ?? "";

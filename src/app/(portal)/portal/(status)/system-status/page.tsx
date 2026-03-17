@@ -7,8 +7,8 @@ import { prisma } from "@/server/db";
 
 export default async function PortalSystemStatusStandalonePage() {
     const user = await getSessionUser();
-    if (!user) redirect("/portal/login");
-    if (user.requiresPasswordReset) redirect("/portal/password-reset");
+    if (!user) redirect("/login");
+    if (user.requiresPasswordReset) redirect("/password-reset");
 
     const settings = await prisma.userSettings.findUnique({
         where: { userId: user.id },
