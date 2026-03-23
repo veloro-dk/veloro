@@ -1,10 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Button } from "@/components/Button";
-import { Input } from "@/components/Input";
 import { VeloroLogo } from "@/components/VeloroLogo";
 import { Spinner } from "@/components/Spinner";
 import { notifyPortalAction } from "@/components/portalActionNotifications";
@@ -13,30 +12,76 @@ function sleep(ms: number) {
     return new Promise((r) => setTimeout(r, ms));
 }
 
+function syncCredentialValues(
+    employeeIdInput: HTMLInputElement | null,
+    passwordInput: HTMLInputElement | null,
+    setEmployeeId: React.Dispatch<React.SetStateAction<string>>,
+    setPassword: React.Dispatch<React.SetStateAction<string>>,
+) {
+    const nextEmployeeId = employeeIdInput?.value ?? "";
+    const nextPassword = passwordInput?.value ?? "";
+    setEmployeeId((current) => (current === nextEmployeeId ? current : nextEmployeeId));
+    setPassword((current) => (current === nextPassword ? current : nextPassword));
+}
+
 export function PortalLoginForm() {
     const router = useRouter();
 
+    const employeeIdInputRef = useRef<HTMLInputElement | null>(null);
+    const passwordInputRef = useRef<HTMLInputElement | null>(null);
     const [employeeId, setEmployeeId] = useState("");
     const [password, setPassword] = useState("");
     const [honeypot, setHoneypot] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [passwordVisible, setPasswordVisible] = useState(false);
 
-    const canSubmit = useMemo(() => {
-        if (isSubmitting) return false;
-        return employeeId.trim().length > 0 && password.length > 0;
-    }, [employeeId, password, isSubmitting]);
+    function syncCredentialsFromInputs() {
+        syncCredentialValues(employeeIdInputRef.current, passwordInputRef.current, setEmployeeId, setPassword);
+    }
 
-    function validate(): string | null {
-        if (!employeeId.trim() && !password) return "Enter your employee ID and password.";
-        if (!employeeId.trim()) return "Enter your employee ID.";
-        if (!password) return "Enter your password.";
+    useEffect(() => {
+        const sync = () => {
+            syncCredentialValues(employeeIdInputRef.current, passwordInputRef.current, setEmployeeId, setPassword);
+        };
+
+        const rafId = window.requestAnimationFrame(sync);
+        const timeoutIds = [
+            window.setTimeout(sync, 150),
+            window.setTimeout(sync, 600),
+        ];
+        const intervalId = window.setInterval(sync, 800);
+        const handleWindowFocus = () => {
+            sync();
+        };
+
+        window.addEventListener("focus", handleWindowFocus);
+
+        return () => {
+            window.cancelAnimationFrame(rafId);
+            timeoutIds.forEach((timeoutId) => window.clearTimeout(timeoutId));
+            window.clearInterval(intervalId);
+            window.removeEventListener("focus", handleWindowFocus);
+        };
+    }, []);
+
+    const canSubmit = !isSubmitting && employeeId.trim().length > 0 && password.length > 0;
+
+    function validate(nextEmployeeId: string, nextPassword: string): string | null {
+        if (!nextEmployeeId.trim() && !nextPassword) return "Enter your employee ID and password.";
+        if (!nextEmployeeId.trim()) return "Enter your employee ID.";
+        if (!nextPassword) return "Enter your password.";
         return null;
     }
 
     async function onSubmit(e: React.FormEvent) {
         e.preventDefault();
 
-        const validationMessage = validate();
+        const nextEmployeeId = employeeIdInputRef.current?.value ?? employeeId;
+        const nextPassword = passwordInputRef.current?.value ?? password;
+        setEmployeeId(nextEmployeeId);
+        setPassword(nextPassword);
+
+        const validationMessage = validate(nextEmployeeId, nextPassword);
         if (validationMessage) {
             notifyPortalAction({ message: validationMessage, tone: "error" });
             return;
@@ -55,7 +100,7 @@ export function PortalLoginForm() {
             const res = await fetch("/api/auth/login", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
-                body: JSON.stringify({ employeeId, password }),
+                body: JSON.stringify({ employeeId: nextEmployeeId, password: nextPassword }),
             });
 
             const data = (await res.json().catch(() => null)) as { ok?: boolean; message?: string; requiresPasswordReset?: boolean } | null;
@@ -100,26 +145,60 @@ export function PortalLoginForm() {
                             </label>
                         </div>
 
-                        <Input
-                            label="Employee ID"
-                            name="employeeId"
-                            placeholder="EMP0001"
-                            autoComplete="username"
-                            value={employeeId}
-                            onChange={(e) => setEmployeeId(e.target.value)}
-                            disabled={isSubmitting}
-                        />
+                        <div className="form__group__K7p2s0">
+                            <label className="form__label__B9f4k0" htmlFor="login-employee-id">Employee ID</label>
+                            <div className="input__wrapper__Z3n7q0">
+                                <input
+                                    id="login-employee-id"
+                                    ref={employeeIdInputRef}
+                                    className="form__input__Z3n7q0"
+                                    name="employeeId"
+                                    type="text"
+                                    placeholder="EMP0001"
+                                    autoComplete="username"
+                                    autoCapitalize="off"
+                                    spellCheck={false}
+                                    disabled={isSubmitting}
+                                    defaultValue=""
+                                    onChange={syncCredentialsFromInputs}
+                                    onInput={syncCredentialsFromInputs}
+                                    onFocus={syncCredentialsFromInputs}
+                                />
+                            </div>
+                        </div>
 
-                        <Input
-                            label="Password"
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            autoComplete="current-password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            disabled={isSubmitting}
-                        />
+                        <div className="form__group__K7p2s0">
+                            <label className="form__label__B9f4k0" htmlFor="login-password">Password</label>
+                            <div className="input__wrapper__Z3n7q0 login__passwordWrap__A7m3Q2">
+                                <input
+                                    id="login-password"
+                                    ref={passwordInputRef}
+                                    className="form__input__Z3n7q0 login__passwordInput__W6m2Q5"
+                                    name="password"
+                                    type={passwordVisible ? "text" : "password"}
+                                    placeholder="Password"
+                                    autoComplete="current-password"
+                                    autoCapitalize="off"
+                                    spellCheck={false}
+                                    disabled={isSubmitting}
+                                    defaultValue=""
+                                    onChange={syncCredentialsFromInputs}
+                                    onInput={syncCredentialsFromInputs}
+                                    onFocus={syncCredentialsFromInputs}
+                                />
+                                <button
+                                    type="button"
+                                    className="login__passwordToggle__Q5m8P2"
+                                    aria-label={passwordVisible ? "Hide password" : "Show password"}
+                                    aria-pressed={passwordVisible}
+                                    title={passwordVisible ? "Hide password" : "Show password"}
+                                    onClick={() => setPasswordVisible((current) => !current)}
+                                    disabled={isSubmitting}
+                                >
+                                    {passwordVisible ? <EyeOff aria-hidden="true" /> : <Eye aria-hidden="true" />}
+                                </button>
+                            </div>
+                        </div>
 
                         <div className="login__actions__P7q8R9">
                             <Button type="submit" kind="primary" size="medium" disabled={!canSubmit} aria-busy={isSubmitting}>
@@ -132,26 +211,6 @@ export function PortalLoginForm() {
                     </form>
 
                     <div className="login__hint__Y7z8A9">Contact an administrator if you forgot your password.</div>
-                </div>
-            </div>
-
-            <div className="login__footer__F6k3M9">
-                <div className="login__help__H2p7Q1">
-                    <Link className="typography__link__B7s3m0" href="/help" prefetch={false}>
-                        Need Help?
-                    </Link>
-                </div>
-
-                <div className="login__legal__P4x8D2">
-                    By continuing, you agree to the{" "}
-                    <Link className="typography__link__B7s3m0" href="/terms" prefetch={false}>
-                        Terms
-                    </Link>{" "}
-                    and{" "}
-                    <Link className="typography__link__B7s3m0" href="/privacy" prefetch={false}>
-                        Privacy Policy
-                    </Link>
-                    .
                 </div>
             </div>
         </main>

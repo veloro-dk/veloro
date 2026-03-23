@@ -9,7 +9,7 @@ import {
     type ReactNode,
     type PointerEvent as ReactPointerEvent,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { FolderPlus, GripVertical, PackageSearch, Plus, Search, Tags, Trash2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
@@ -160,7 +160,7 @@ function CategorySectionHeader({ title, description, action, showTooltip = true 
 }
 
 export function PortalCategoryCreateView({ stores, activeStoreId }: PortalCategoryCreateViewProps) {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const { storeCurrency } = usePortalI18n();
     const cachedCatalogState = getCachedCatalogStateSnapshot();
 
@@ -726,7 +726,7 @@ export function PortalCategoryCreateView({ stores, activeStoreId }: PortalCatego
             return false;
         }
 
-        router.push("/products/categories");
+        void navigateTo("/products/categories");
         return true;
     }, [
         categories,
@@ -739,7 +739,7 @@ export function PortalCategoryCreateView({ stores, activeStoreId }: PortalCatego
         manualSelectedProductIds,
         products,
         purchaseOrders,
-        router,
+        navigateTo,
         variantDefinitions,
         selectedStoreIds,
     ]);
@@ -750,7 +750,7 @@ export function PortalCategoryCreateView({ stores, activeStoreId }: PortalCatego
         discardLabelVariant: "cancel",
         saveDisabled: !canCreateCategory,
         onSave: createCategory,
-        onDiscard: () => router.push("/products/categories"),
+        onDiscard: () => void navigateTo("/products/categories"),
     });
 
     return (

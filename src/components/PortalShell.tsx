@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
     useCallback,
     useEffect,
@@ -37,6 +37,7 @@ import {
     X,
 } from "lucide-react";
 import { Button } from "@/components/Button";
+import { PortalNavigationProvider } from "@/components/PortalNavigationContext";
 import { PortalHeaderPopover } from "@/components/PortalHeaderPopover";
 import {
     PortalSearchDialog,
@@ -145,14 +146,21 @@ import {
     PORTAL_MESSAGES,
 } from "@/i18n/portal";
 import { PortalI18nProvider } from "@/i18n/PortalI18nContext";
-import { primeCatalogStateCache } from "@/lib/catalogStateClient";
+import { getCachedCatalogStateSnapshot, primeCatalogStateCache } from "@/lib/catalogStateClient";
 import { cn } from "@/lib/cn";
 import { isSearchPageEnabled } from "@/lib/portalFeatureFlags";
+import { preloadPortalRouteData, routeRequiresCatalogState } from "@/lib/portalRouteLoading";
 import { normalizePortalPublicPathname } from "@/lib/portalRoutes";
 
 export function PortalShell({ children, user, language, currency, storeCurrency, stores, activeStoreId, featureFlags }: PortalShellProps) {
     const pathname = normalizePortalPublicPathname(usePathname());
+    const searchParams = useSearchParams();
     const router = useRouter();
+    const searchParamsString = searchParams.toString();
+    const currentRouteKey = useMemo(() => {
+        const normalizedPath = normalizePathname(pathname);
+        return searchParamsString ? `${normalizedPath}?${searchParamsString}` : normalizedPath;
+    }, [pathname, searchParamsString]);
     const isSettingsRoute = pathname === "/settings" || pathname.startsWith("/settings/");
     const isProductCreateRoute = pathname === "/products/new" || pathname.startsWith("/products/new/");
     const isInventoryCreateRoute = pathname === "/products/inventory/new" || pathname.startsWith("/products/inventory/new/");
@@ -224,18 +232,15 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
     const routeLoadVisibleRef = useRef(false);
     const routeLoadProgressRef = useRef(0);
     const routeLoadActiveRef = useRef(false);
-    const routeLoadTargetPathRef = useRef<string | null>(null);
+    const routeLoadTargetRouteKeyRef = useRef<string | null>(null);
     const routeLoadTransitionIdRef = useRef(0);
-    const routeLoadPreviousPathRef = useRef(normalizePathname(pathname));
+    const routeLoadPreviousRouteKeyRef = useRef(currentRouteKey);
+    const initialRouteLoadHandledRef = useRef(false);
     const searchAttentionShakeTimeoutRef = useRef<number | null>(null);
     const searchAttentionLastShakeAtRef = useRef(0);
     const searchAttentionTintStartTimeoutRef = useRef<number | null>(null);
     const searchAttentionTintHideTimeoutRef = useRef<number | null>(null);
     const searchShortcutLabel = useMemo(() => getShortcutLabel(), []);
-
-    useEffect(() => {
-        void primeCatalogStateCache().catch(() => undefined);
-    }, []);
 
     const nav = useMemo<NavItem[]>(() => {
         const items: NavItem[] = [
@@ -634,7 +639,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
         if (!routeLoadActiveRef.current) return;
 
         routeLoadActiveRef.current = false;
-        routeLoadTargetPathRef.current = null;
+        routeLoadTargetRouteKeyRef.current = null;
         clearRouteLoadShowTimer();
         clearRouteLoadAdvanceTimer();
         clearRouteLoadFailSafeTimer();
@@ -657,12 +662,12 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
         }, 220);
     }, [clearRouteLoadAdvanceTimer, clearRouteLoadFailSafeTimer, clearRouteLoadHideTimer, clearRouteLoadShowTimer]);
 
-    const startRouteTransitionLoad = useCallback((targetPath: string | null) => {
+    const startRouteTransitionLoad = useCallback((targetRouteKey: string | null) => {
         routeLoadTransitionIdRef.current += 1;
         const transitionId = routeLoadTransitionIdRef.current;
 
         routeLoadActiveRef.current = true;
-        routeLoadTargetPathRef.current = targetPath;
+        routeLoadTargetRouteKeyRef.current = targetRouteKey;
         routeLoadProgressRef.current = 0.04;
         setRouteLoadProgress(0.04);
 
@@ -694,46 +699,91 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
         routeLoadFailSafeTimerRef.current = window.setTimeout(() => {
             finishRouteTransitionLoad();
         }, 10000);
+        return transitionId;
     }, [clearRouteLoadAdvanceTimer, clearRouteLoadFailSafeTimer, clearRouteLoadHideTimer, clearRouteLoadShowTimer, finishRouteTransitionLoad]);
 
-    const startRouteTransitionLoadForHref = useCallback((href: string) => {
+    const navigateTo = useCallback(async (href: string, options?: { replace?: boolean }) => {
         if (typeof window === "undefined") return;
 
         let url: URL;
         try {
             url = new URL(href, window.location.origin);
         } catch {
+            if (options?.replace) {
+                router.replace(href);
+            } else {
+                router.push(href);
+            }
             return;
         }
 
-        if (url.origin !== window.location.origin) return;
-        if (url.pathname.startsWith("/api")) return;
+        if (url.origin !== window.location.origin || url.pathname.startsWith("/api")) {
+            window.location.assign(url.toString());
+            return;
+        }
 
         const nextPath = normalizePathname(normalizePortalPublicPathname(url.pathname));
-        const currentPath = normalizePathname(pathname);
-        if (nextPath === currentPath) return;
+        const nextRouteKey = url.search ? `${nextPath}${url.search}` : nextPath;
+        if (nextRouteKey === currentRouteKey) return;
 
-        startRouteTransitionLoad(nextPath);
-    }, [pathname, startRouteTransitionLoad]);
+        const transitionId = startRouteTransitionLoad(nextRouteKey);
+
+        try {
+            await preloadPortalRouteData(nextPath);
+        } catch {
+            // Keep navigation moving even if preloading fails.
+        }
+
+        if (transitionId !== routeLoadTransitionIdRef.current) return;
+        if (options?.replace) {
+            router.replace(href);
+        } else {
+            router.push(href);
+        }
+    }, [currentRouteKey, router, startRouteTransitionLoad]);
 
     useEffect(() => {
-        const normalizedPath = normalizePathname(pathname);
-        const previousPath = routeLoadPreviousPathRef.current;
-        routeLoadPreviousPathRef.current = normalizedPath;
+        if (initialRouteLoadHandledRef.current) return;
+        initialRouteLoadHandledRef.current = true;
+
+        let cancelled = false;
+
+        if (!routeRequiresCatalogState(pathname) || getCachedCatalogStateSnapshot()) {
+            void primeCatalogStateCache().catch(() => undefined);
+            return;
+        }
+
+        const transitionId = startRouteTransitionLoad(currentRouteKey);
+        void preloadPortalRouteData(pathname)
+            .catch(() => undefined)
+            .finally(() => {
+                if (cancelled) return;
+                if (transitionId !== routeLoadTransitionIdRef.current) return;
+                finishRouteTransitionLoad();
+            });
+
+        return () => {
+            cancelled = true;
+        };
+    }, [currentRouteKey, finishRouteTransitionLoad, pathname, startRouteTransitionLoad]);
+
+    useEffect(() => {
+        const previousRouteKey = routeLoadPreviousRouteKeyRef.current;
+        routeLoadPreviousRouteKeyRef.current = currentRouteKey;
 
         if (!routeLoadActiveRef.current) return;
-        const targetPath = routeLoadTargetPathRef.current;
+        const targetRouteKey = routeLoadTargetRouteKeyRef.current;
 
-        if (targetPath) {
-            if (targetPath !== normalizedPath) return;
+        if (targetRouteKey) {
+            if (targetRouteKey !== currentRouteKey) return;
             finishRouteTransitionLoad();
             return;
         }
 
-        if (previousPath !== normalizedPath) {
+        if (previousRouteKey !== currentRouteKey) {
             finishRouteTransitionLoad();
         }
-    }, [finishRouteTransitionLoad, pathname]);
+    }, [currentRouteKey, finishRouteTransitionLoad]);
 
     useEffect(() => {
         return () => {
@@ -1466,7 +1516,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
         } finally {
             setSigningOut(false);
             setOpenPopover(null);
-            startRouteTransitionLoadForHref("/login");
+            startRouteTransitionLoad("/login");
             router.replace("/login");
             router.refresh();
         }
@@ -1680,15 +1730,13 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
 
             if (item.type === "page" && item.href) {
                 closeSearch();
-                startRouteTransitionLoadForHref(item.href);
-                router.push(item.href);
+                void navigateTo(item.href);
                 return;
             }
 
             if (item.action === "open-settings") {
                 closeSearch();
-                startRouteTransitionLoadForHref("/settings");
-                router.push("/settings");
+                void navigateTo("/settings");
                 return;
             }
 
@@ -1709,7 +1757,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                 closeSearch();
             }
         },
-        [closeSearch, onSetTheme, rememberSearchSelection, router, startRouteTransitionLoadForHref]
+        [closeSearch, navigateTo, onSetTheme, rememberSearchSelection]
     );
 
     const onSearchInputKeyDown = useCallback(
@@ -1874,12 +1922,20 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                 return;
             }
 
-            if (event.currentTarget.target !== "_blank") {
-                startRouteTransitionLoadForHref(event.currentTarget.href);
+            if (
+                event.currentTarget.target !== "_blank"
+                && event.button === 0
+                && !event.metaKey
+                && !event.ctrlKey
+                && !event.shiftKey
+                && !event.altKey
+            ) {
+                event.preventDefault();
+                void navigateTo(event.currentTarget.href);
             }
             setMobileNavOpen(false);
         },
-        [hasBlockingPendingChanges, startRouteTransitionLoadForHref, triggerBlockingPendingShake]
+        [hasBlockingPendingChanges, navigateTo, triggerBlockingPendingShake]
     );
 
     const toggleAssistantPanel = useCallback(() => {
@@ -2005,9 +2061,11 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
     const themeLabel = messages.themeValues[themePreference];
     const themeTooltipLabel = `${themeLabel} ${messages.menu.theme.toLowerCase()}`;
     const themeIcon = themePreference === "dark" ? <Moon aria-hidden="true" /> : themePreference === "light" ? <Sun aria-hidden="true" /> : <Monitor aria-hidden="true" />;
+    const portalNavigationValue = useMemo(() => ({ navigateTo }), [navigateTo]);
 
     return (
         <PortalI18nProvider value={i18nValue}>
+            <PortalNavigationProvider value={portalNavigationValue}>
             <div className={cn("portalShell__A1b2C3", isSettingsRoute && "portalShellSettings__K6p2T4")}>
                 <header className={cn("portalHeader__R1u5J2", pendingChangesScope !== null && "portalHeaderPendingMode__B3m8Q1")}>
                     <div className={cn("portalHeaderLoadTrack__F7m2D1", routeLoadVisible && "portalHeaderLoadTrackVisible__H8n4P5")} aria-hidden="true">
@@ -2865,6 +2923,7 @@ export function PortalShell({ children, user, language, currency, storeCurrency,
                     </div>
                 </div>
             </div>
+            </PortalNavigationProvider>
         </PortalI18nProvider>
     );
 }

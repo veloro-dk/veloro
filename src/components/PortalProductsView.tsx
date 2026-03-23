@@ -1,11 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode, type UIEvent as ReactUIEvent } from "react";
-import { useRouter } from "next/navigation";
 import { ArrowUpDown, ChevronDown, Copy, Ellipsis, Filter, GripVertical, Pencil, Plus, Search, Trash2, Upload } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
-import { PortalTableLoading } from "@/components/PortalTableLoading";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import {
     BUILT_IN_VIEWS,
     LANGUAGE_TO_LOCALE,
@@ -65,12 +64,11 @@ import { loadStoredSortKey, saveStoredSortKey } from "@/lib/tableSortStorage";
 const PRODUCT_SEED: Product[] = getDefaultProducts();
 
 export function PortalProductsView() {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const { messages, language } = usePortalI18n();
     const text = PRODUCT_TRANSLATIONS[language] ?? PRODUCT_TRANSLATIONS.en;
     const sortOptions = useMemo(() => getSortOptions(text), [text]);
     const cachedCatalogState = getCachedCatalogStateSnapshot();
-    const cachedProductCount = cachedCatalogState?.products.length ?? PRODUCT_SEED.length;
 
     const [products, setProducts] = useState<Product[]>(() => (
         cachedCatalogState
@@ -91,7 +89,7 @@ export function PortalProductsView() {
     const [, setInventorySales] = useState<InventorySale[]>(() => cachedCatalogState?.inventorySales ?? []);
     const [hasHydratedProducts, setHasHydratedProducts] = useState(false);
     const [hasHydratedViews, setHasHydratedViews] = useState(false);
-    const [catalogLoaded, setCatalogLoaded] = useState(false);
+    const [catalogLoaded, setCatalogLoaded] = useState(Boolean(cachedCatalogState));
 
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
@@ -165,8 +163,6 @@ export function PortalProductsView() {
         [workingFilters.variantValues]
     );
     const hasAnyProducts = products.length > 0;
-    const tableLoadingMode = cachedProductCount > 0 ? "populated" : "empty";
-
     const availableVariantFilters = useMemo(
         () => variantDefinitions.filter((definition) => !workingFilters.variantValues[definition.id]),
         [variantDefinitions, workingFilters.variantValues]
@@ -952,7 +948,7 @@ export function PortalProductsView() {
     };
 
     const navigateToProductEdit = (id: string) => {
-        router.push(`/products/${id}`);
+        void navigateTo(`/products/${id}`);
     };
 
     const handleRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, id: string) => {
@@ -981,7 +977,7 @@ export function PortalProductsView() {
     };
 
     const handleOpenCreateProduct = () => {
-        router.push("/products/new");
+        void navigateTo("/products/new");
     };
 
     useEffect(() => {
@@ -1272,6 +1268,10 @@ export function PortalProductsView() {
         setProductsTableScrolledX(tableScroll.scrollLeft > 0);
     }, [visibleColumns.length, visibleProducts.length, hasSelection]);
 
+    if (!catalogLoaded) {
+        return null;
+    }
+
     return (
         <section className="portalProductsPage__C4p8M2">
             <header className="portalProductsHeader__N7v2R4">
@@ -1523,12 +1523,7 @@ export function PortalProductsView() {
                 ) : null}
             </header>
 
-            {!catalogLoaded ? (
-                <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
-                    <PortalTableLoading mode={tableLoadingMode} />
-                </section>
-            ) : (
-                <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
+            <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
                 <div className="portalProductsControlsTableWrap__Q4m2R7">
                     <table className="portalProductsTable__E8n4Q7 portalProductsControlsTable__N2m8Q5">
                         <thead>
@@ -2259,7 +2254,6 @@ export function PortalProductsView() {
                     </table>
                 </div>
             </section>
-            )}
 
             <PortalModal
                 open={deleteConfirmOpen}

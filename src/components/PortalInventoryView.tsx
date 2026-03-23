@@ -1,9 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode, type UIEvent as ReactUIEvent } from "react";
 import { ArrowUpDown, ChevronDown, Filter, GripVertical, Pencil, Plus, Search } from "lucide-react";
 import { Button } from "@/components/Button";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import {
     BUILT_IN_VIEWS,
     INVENTORY_CUSTOM_VIEWS_STORAGE_KEY,
@@ -48,7 +48,6 @@ import {
 } from "@/components/inventory/viewTypes";
 import { PortalModal } from "@/components/PortalModal";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
-import { PortalTableLoading } from "@/components/PortalTableLoading";
 import { usePortalI18n } from "@/i18n/PortalI18nContext";
 import { SUPPORTED_CURRENCIES } from "@/i18n/portal";
 import { getCurrencyDisplayLabel, getLocalIsoCurrencyCodes, isIsoCurrencyCode, mergeCurrencyCodes } from "@/lib/currencies";
@@ -69,13 +68,12 @@ import { fetchCatalogStateFromApi, getCachedCatalogStateSnapshot, saveCatalogSta
 import { loadStoredSortKey, saveStoredSortKey } from "@/lib/tableSortStorage";
 
 export function PortalInventoryView() {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const { language, currency, storeCurrency } = usePortalI18n();
     const text = INVENTORY_TRANSLATIONS[language] ?? INVENTORY_TRANSLATIONS.en;
     const locale = LANGUAGE_TO_LOCALE[language] ?? "en-US";
     const defaultEntryCurrency = isIsoCurrencyCode(currency) ? currency : storeCurrency;
     const cachedCatalogState = getCachedCatalogStateSnapshot();
-    const cachedInventoryProductCount = cachedCatalogState?.products.length ?? 0;
 
     const [batches, setBatches] = useState<InventoryBatch[]>(() => cachedCatalogState?.inventoryBatches ?? []);
     const [sales, setSales] = useState<InventorySale[]>(() => cachedCatalogState?.inventorySales ?? []);
@@ -95,7 +93,7 @@ export function PortalInventoryView() {
     const [viewDraftName, setViewDraftName] = useState("");
     const [hasHydratedViews, setHasHydratedViews] = useState(false);
     const [hasHydratedColumns, setHasHydratedColumns] = useState(false);
-    const [catalogLoaded, setCatalogLoaded] = useState(false);
+    const [catalogLoaded, setCatalogLoaded] = useState(Boolean(cachedCatalogState));
     const [sortBy, setSortBy] = useState<SortKey>(() => (
         loadStoredSortKey(INVENTORY_SORT_STORAGE_KEY, INVENTORY_SORT_KEYS, "updated-desc")
     ));
@@ -633,7 +631,7 @@ export function PortalInventoryView() {
     const openAddStock = () => {
         setActionError(null);
         const query = actionProductId ? `?productId=${encodeURIComponent(actionProductId)}` : "";
-        router.push(`/products/purchase-orders/new${query}`);
+        void navigateTo(`/products/purchase-orders/new${query}`);
     };
 
     const createPurchaseOrderForSelected = () => {
@@ -644,7 +642,7 @@ export function PortalInventoryView() {
         selectedProductIds.forEach((productId) => {
             params.append("productId", productId);
         });
-        router.push(`/products/purchase-orders/new?${params.toString()}`);
+        void navigateTo(`/products/purchase-orders/new?${params.toString()}`);
     };
 
     const openSellStock = () => {
@@ -659,7 +657,7 @@ export function PortalInventoryView() {
             ? `?productId=${encodeURIComponent(prefillProductId)}`
             : "";
         setActionError(null);
-        router.push(`/products/inventory/sell${query}`);
+        void navigateTo(`/products/inventory/sell${query}`);
     };
 
     const openMaintenance = () => {
@@ -674,7 +672,7 @@ export function PortalInventoryView() {
             ? `?productId=${encodeURIComponent(prefillProductId)}`
             : "";
         setActionError(null);
-        router.push(`/products/inventory/maintenance${query}`);
+        void navigateTo(`/products/inventory/maintenance${query}`);
     };
 
     const onSellProductChange = (nextProductId: string) => {
@@ -990,7 +988,7 @@ export function PortalInventoryView() {
     };
 
     const openProductEditor = (productId: string) => {
-        router.push(`/products/${encodeURIComponent(productId)}`);
+        void navigateTo(`/products/${encodeURIComponent(productId)}`);
     };
 
     const onInventoryRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, productId: string) => {
@@ -1313,7 +1311,6 @@ export function PortalInventoryView() {
         : `Status: ${formatStatus(workingFilters.condition, text.statusLabels)}`;
     const hasAnyProducts = products.length > 0;
     const showInventoryOnboarding = products.length === 0;
-    const tableLoadingMode = cachedInventoryProductCount > 0 ? "populated" : "empty";
     const handleInventoryTableScroll = (event: ReactUIEvent<HTMLDivElement>) => {
         setInventoryTableScrolledX(event.currentTarget.scrollLeft > 0);
     };
@@ -1323,6 +1320,10 @@ export function PortalInventoryView() {
         if (!tableScroll) return;
         setInventoryTableScrolledX(tableScroll.scrollLeft > 0);
     }, [visibleColumns.length, visibleProducts.length]);
+
+    if (!catalogLoaded) {
+        return null;
+    }
 
     return (
         <section className="portalInventoryPage__P8m2Q1">
@@ -1516,11 +1517,7 @@ export function PortalInventoryView() {
 
             {actionError ? <p className="portalInventoryError__X4m2Q6">{actionError}</p> : null}
 
-            {!catalogLoaded ? (
-                <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
-                    <PortalTableLoading mode={tableLoadingMode} />
-                </section>
-            ) : showInventoryOnboarding ? (
+            {showInventoryOnboarding ? (
                 <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
                     <div className="portalProductsEmptyCard__X5m2Q8 portalProductsEmptyCardCentered__K2m8Q4">
                         <div className="portalProductsOnboardingArt__A5m2Q6" aria-hidden="true">
@@ -1530,7 +1527,7 @@ export function PortalInventoryView() {
                         </div>
                         <h3 className="typography__heading6__H5j9s0 portalProductsEmptyHeading__D2m8Q4">Keep track of your inventory</h3>
                         <p className="typography__small__Q9j2p0 portalProductsEmptyBody__J3m2Q7">When you enable inventory tracking on your products, you can view and adjust counts here.</p>
-                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/products")}>
+                        <Button type="button" kind="primary" size="xsmall" onClick={() => void navigateTo("/products")}>
                             Go to products
                         </Button>
                     </div>

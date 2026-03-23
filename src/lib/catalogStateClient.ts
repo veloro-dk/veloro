@@ -44,6 +44,7 @@ export type CatalogDeleteResponse = CatalogStateResponse & {
 
 let catalogStateCache: CatalogStateSnapshot | null = null;
 let catalogStateVersion: number | null = null;
+let catalogStateRequestPromise: Promise<CatalogStateSnapshot> | null = null;
 
 function isPositiveInteger(value: unknown): value is number {
     return typeof value === "number" && Number.isInteger(value) && value > 0;
@@ -84,6 +85,7 @@ export function getCachedCatalogStateVersion() {
 export function resetCatalogStateClientCache() {
     catalogStateCache = null;
     catalogStateVersion = null;
+    catalogStateRequestPromise = null;
 }
 
 export async function primeCatalogStateCache() {
@@ -92,13 +94,29 @@ export async function primeCatalogStateCache() {
 }
 
 export async function fetchCatalogStateFromApi() {
-    const response = await fetch("/api/catalog/state", {
-        method: "GET",
-        cache: "no-store",
-        credentials: "include",
-    });
+    if (catalogStateRequestPromise) {
+        return catalogStateRequestPromise;
+    }
 
-    return parseCatalogStateResponse(response);
+    const requestPromise = (async () => {
+        const response = await fetch("/api/catalog/state", {
+            method: "GET",
+            cache: "no-store",
+            credentials: "include",
+        });
+
+        return parseCatalogStateResponse(response);
+    })();
+
+    catalogStateRequestPromise = requestPromise;
+
+    try {
+        return await requestPromise;
+    } finally {
+        if (catalogStateRequestPromise === requestPromise) {
+            catalogStateRequestPromise = null;
+        }
+    }
 }
 
 export async function saveCatalogStateToApi(partial: Partial<CatalogStateSnapshot>) {

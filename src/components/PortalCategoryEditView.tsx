@@ -9,7 +9,7 @@ import {
     type ReactNode,
     type PointerEvent as ReactPointerEvent,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { Folder, GripVertical, PackageSearch, Plus, Search, Tags, Trash2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
@@ -158,7 +158,7 @@ function CategorySectionHeader({ title, description, action, showTooltip = true 
 }
 
 export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: PortalCategoryEditViewProps) {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const { storeCurrency } = usePortalI18n();
     const cachedCatalogState = getCachedCatalogStateSnapshot();
     const cachedCategory = cachedCatalogState?.categoryDefinitions.find((entry) => entry.id === categoryId) ?? null;
@@ -747,7 +747,7 @@ export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: Po
             return false;
         }
 
-        router.push("/products/categories");
+        void navigateTo("/products/categories");
         return true;
     }, [
         categories,
@@ -760,7 +760,7 @@ export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: Po
         manualSelectedProductIds,
         products,
         purchaseOrders,
-        router,
+        navigateTo,
         variantDefinitions,
     ]);
 
@@ -770,22 +770,11 @@ export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: Po
         discardLabelVariant: "cancel",
         saveDisabled: !canSaveCategory,
         onSave: saveCategory,
-        onDiscard: () => router.push("/products/categories"),
+        onDiscard: () => void navigateTo("/products/categories"),
     });
 
     if (!isLoaded) {
-        return (
-            <section className="portalCategoryCreatePage__L6m2Q8 portalProductCreatePage__A3m8Q1">
-                <PortalPageTitle
-                    page="categories"
-                    title="Edit category"
-                    icon={<Folder className="portalPageHeadingIcon__Q8m2D5" aria-hidden="true" />}
-                />
-                <section className="portalProductCreateMainCard__N4m8Q3 ui-surface-card portalProductCreateMissing__H9m2Q4">
-                    <p>Loading category...</p>
-                </section>
-            </section>
-        );
+        return null;
     }
 
     if (!loadedCategory) {
@@ -798,7 +787,7 @@ export function PortalCategoryEditView({ categoryId, stores, activeStoreId }: Po
                 />
                 <section className="portalProductCreateMainCard__N4m8Q3 ui-surface-card portalProductCreateMissing__H9m2Q4">
                     <p>{ERROR_MESSAGES.categoryMissing}</p>
-                    <Button type="button" kind="secondary" size="xsmall" onClick={() => router.push("/products/categories")}>
+                    <Button type="button" kind="secondary" size="xsmall" onClick={() => void navigateTo("/products/categories")}>
                         Back to categories
                     </Button>
                 </section>

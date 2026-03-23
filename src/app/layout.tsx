@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@/styles/globals.css";
 import { FormFieldPlaceholderBridge } from "@/components/FormFieldPlaceholderBridge";
 import { PortalActionNotificationsViewport } from "@/components/PortalActionNotificationsViewport";
@@ -30,6 +32,8 @@ export default function RootLayout({
         <FormFieldPlaceholderBridge />
         {children}
         <PortalActionNotificationsViewport />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

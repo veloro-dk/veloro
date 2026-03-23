@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent, type PointerEvent as ReactPointerEvent, type ReactNode, type UIEvent as ReactUIEvent } from "react";
-import { useRouter } from "next/navigation";
 import { ArrowUpDown, ChevronDown, Copy, Filter, GripVertical, Pencil, Plus, Search, Trash2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
-import { PortalTableLoading } from "@/components/PortalTableLoading";
 import { Tooltip } from "@/components/Tooltip";
 import {
     BUILT_IN_VIEWS,
@@ -59,12 +58,11 @@ import {
 import { loadStoredSortKey, saveStoredSortKey } from "@/lib/tableSortStorage";
 
 export function PortalCategoriesView() {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const { language } = usePortalI18n();
     const text = CATEGORIES_TRANSLATIONS[language] ?? CATEGORIES_TRANSLATIONS.en;
     const sortOptions = useMemo(() => getSortOptions(text), [text]);
     const cachedCatalogState = getCachedCatalogStateSnapshot();
-    const cachedCategoryCount = cachedCatalogState?.categoryDefinitions.length ?? 0;
 
     const [, setProducts] = useState<CatalogProduct[]>(() => cachedCatalogState?.products ?? getDefaultProducts());
     const [variantDefinitions, setVariantDefinitions] = useState<VariantDefinition[]>(() => cachedCatalogState?.variantDefinitions ?? getDefaultVariantDefinitions());
@@ -88,7 +86,7 @@ export function PortalCategoriesView() {
     const [deleteConfirmError, setDeleteConfirmError] = useState<string | null>(null);
     const [deleteConfirmSubmitting, setDeleteConfirmSubmitting] = useState(false);
     const [hasHydratedViews, setHasHydratedViews] = useState(false);
-    const [catalogLoaded, setCatalogLoaded] = useState(false);
+    const [catalogLoaded, setCatalogLoaded] = useState(Boolean(cachedCatalogState));
     const [createCategoryOpen, setCreateCategoryOpen] = useState(false);
     const [categoryNameDraft, setCategoryNameDraft] = useState("");
     const [categoryConditionDraft, setCategoryConditionDraft] = useState(text.modal.defaultCondition);
@@ -756,7 +754,7 @@ export function PortalCategoriesView() {
     };
 
     const navigateToCategoryEdit = (id: string) => {
-        router.push(`/products/categories/${id}`);
+        void navigateTo(`/products/categories/${id}`);
     };
 
     const handleCategoryRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, id: string) => {
@@ -1075,7 +1073,6 @@ export function PortalCategoriesView() {
         : `${text.filters.condition}: ${workingFilters.condition}`;
     const hasAnyCategories = categories.length > 0;
     const showCategoriesOnboarding = categories.length === 0;
-    const tableLoadingMode = cachedCategoryCount > 0 ? "populated" : "empty";
     const deleteConfirmTitle = `Delete ${deleteConfirmIds.length} ${deleteConfirmIds.length === 1 ? "category" : "categories"}`;
     const handleCategoriesTableScroll = (event: ReactUIEvent<HTMLDivElement>) => {
         setCategoriesTableScrolledX(event.currentTarget.scrollLeft > 0);
@@ -1086,6 +1083,10 @@ export function PortalCategoriesView() {
         if (!tableScroll) return;
         setCategoriesTableScrolledX(tableScroll.scrollLeft > 0);
     }, [visibleColumns.length, visibleCategories.length, hasSelection]);
+
+    if (!catalogLoaded) {
+        return null;
+    }
 
     return (
         <section className="portalProductsPage__C4p8M2">
@@ -1267,18 +1268,14 @@ export function PortalCategoriesView() {
                                 </div>
                             ) : null}
                         </div>
-                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/products/categories/new")}>
+                        <Button type="button" kind="primary" size="xsmall" onClick={() => void navigateTo("/products/categories/new")}>
                             {text.actions.addCategory}
                         </Button>
                     </>
                 ) : null}
             />
 
-            {!catalogLoaded ? (
-                <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
-                    <PortalTableLoading mode={tableLoadingMode} />
-                </section>
-            ) : showCategoriesOnboarding ? (
+            {showCategoriesOnboarding ? (
                 <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
                     <div className="portalProductsEmptyCard__X5m2Q8 portalProductsEmptyCardCentered__K2m8Q4">
                         <div className="portalProductsOnboardingArt__A5m2Q6" aria-hidden="true">
@@ -1288,7 +1285,7 @@ export function PortalCategoriesView() {
                         </div>
                         <h3 className="typography__heading6__H5j9s0 portalProductsEmptyHeading__D2m8Q4">Create categories for your products</h3>
                         <p className="typography__small__Q9j2p0 portalProductsEmptyBody__J3m2Q7">Use categories to organize your products before you start adding inventory.</p>
-                        <Button type="button" kind="primary" size="xsmall" onClick={() => router.push("/products/categories/new")}>
+                        <Button type="button" kind="primary" size="xsmall" onClick={() => void navigateTo("/products/categories/new")}>
                             {text.actions.addCategory}
                         </Button>
                     </div>

@@ -5,7 +5,6 @@ import { ArrowUpDown, Filter, Plus, Search } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
-import { PortalTableLoading } from "@/components/PortalTableLoading";
 import { notifyPortalAction } from "@/components/portalActionNotifications";
 import {
     createUniqueVariantId,
@@ -200,7 +199,6 @@ function getInputTypeLabel(value: VariantInputType) {
 
 export function PortalVariantsView() {
     const cachedCatalogState = getCachedCatalogStateSnapshot();
-    const cachedVariantCount = cachedCatalogState?.variantDefinitions.length ?? getDefaultVariantDefinitions().length;
     const [variants, setVariants] = useState<VariantDefinition[]>(() => cachedCatalogState?.variantDefinitions ?? getDefaultVariantDefinitions());
     const [categories, setCategories] = useState<ProductCategoryDefinition[]>(() => cachedCatalogState?.categoryDefinitions ?? getDefaultProductCategoryDefinitions());
     const [products, setProducts] = useState<CatalogProduct[]>(() => cachedCatalogState?.products ?? getDefaultProducts());
@@ -212,7 +210,7 @@ export function PortalVariantsView() {
     const [viewComposerOpen, setViewComposerOpen] = useState(false);
     const [viewDraftName, setViewDraftName] = useState("");
     const [hasHydratedViews, setHasHydratedViews] = useState(false);
-    const [catalogLoaded, setCatalogLoaded] = useState(false);
+    const [catalogLoaded, setCatalogLoaded] = useState(Boolean(cachedCatalogState));
 
     const [sortBy, setSortBy] = useState<SortKey>(() => (
         loadStoredSortKey(VARIANT_SORT_STORAGE_KEY, VARIANT_SORT_KEYS, "name-asc")
@@ -828,8 +826,11 @@ export function PortalVariantsView() {
         ? "Input type"
         : `Input type: ${getInputTypeLabel(workingFilters.condition)}`;
     const hasAnyProducts = products.length > 0;
-    const tableLoadingMode = cachedVariantCount > 0 ? "populated" : "empty";
     const showVariantsOnboarding = variants.length === 0;
+
+    if (!catalogLoaded) {
+        return null;
+    }
 
     return (
         <section className="portalVariantsPage__F3m8Q1">
@@ -842,11 +843,7 @@ export function PortalVariantsView() {
                 ) : null}
             />
 
-            {!catalogLoaded ? (
-                <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
-                    <PortalTableLoading mode={tableLoadingMode} />
-                </section>
-            ) : showVariantsOnboarding ? (
+            {showVariantsOnboarding ? (
                 <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
                     <div className="portalProductsEmptyCard__X5m2Q8 portalProductsEmptyCardCentered__K2m8Q4">
                         <div className="portalProductsOnboardingArt__A5m2Q6" aria-hidden="true">

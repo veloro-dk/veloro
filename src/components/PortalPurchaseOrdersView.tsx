@@ -1,12 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type MouseEvent as ReactMouseEvent } from "react";
-import { useRouter } from "next/navigation";
 import { ArrowUpDown, ChevronDown, Filter, Plus, Search } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
-import { PortalTableLoading } from "@/components/PortalTableLoading";
 import { notifyPortalAction } from "@/components/portalActionNotifications";
 import { fetchCatalogStateFromApi, getCachedCatalogStateSnapshot, saveCatalogStateToApi } from "@/lib/catalogStateClient";
 import type { CatalogProduct } from "@/lib/productCatalog";
@@ -250,9 +249,8 @@ function buildRows(
 }
 
 export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurchaseOrdersViewProps) {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const cached = getCachedCatalogStateSnapshot();
-    const cachedPurchaseOrderCount = cached?.purchaseOrders.length ?? 0;
     const [purchaseOrders, setPurchaseOrders] = useState<PurchaseOrder[]>(() => cached?.purchaseOrders ?? []);
     const [products, setProducts] = useState<CatalogProduct[]>(() => cached?.products ?? []);
 
@@ -263,7 +261,7 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
     const [viewComposerOpen, setViewComposerOpen] = useState(false);
     const [viewDraftName, setViewDraftName] = useState("");
     const [hasHydratedViews, setHasHydratedViews] = useState(false);
-    const [catalogLoaded, setCatalogLoaded] = useState(false);
+    const [catalogLoaded, setCatalogLoaded] = useState(Boolean(cached));
 
     const [sortBy, setSortBy] = useState<SortKey>(() => (
         loadStoredSortKey(PURCHASE_ORDERS_SORT_STORAGE_KEY, PURCHASE_ORDER_SORT_KEYS, "updated-desc")
@@ -436,7 +434,6 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
     const sortLabel = SORT_OPTIONS[sortBy];
     const hasAnyProducts = products.length > 0;
     const showPurchaseOrdersOnboarding = purchaseOrders.length === 0;
-    const tableLoadingMode = cachedPurchaseOrderCount > 0 ? "populated" : "empty";
     const tableColumnSpan = 8;
 
     const handleCreatePurchaseOrder = () => {
@@ -447,7 +444,7 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
             });
             return;
         }
-        router.push("/products/purchase-orders/new");
+        void navigateTo("/products/purchase-orders/new");
     };
 
     useEffect(() => {
@@ -536,7 +533,7 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
     };
 
     const openOrder = (orderId: string) => {
-        router.push(`/products/purchase-orders/${encodeURIComponent(orderId)}`);
+        void navigateTo(`/products/purchase-orders/${encodeURIComponent(orderId)}`);
     };
 
     const onRowClick = (event: ReactMouseEvent<HTMLTableRowElement>, orderId: string) => {
@@ -599,6 +596,10 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
         }
     };
 
+    if (!catalogLoaded) {
+        return null;
+    }
+
     return (
         <section className="portalPurchaseOrdersPage__V2m8Q4">
             <PortalPageTitle
@@ -619,11 +620,7 @@ export function PortalPurchaseOrdersView({ stores, activeStoreId }: PortalPurcha
                 ) : null}
             />
 
-            {!catalogLoaded ? (
-                <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
-                    <PortalTableLoading mode={tableLoadingMode} />
-                </section>
-            ) : showPurchaseOrdersOnboarding ? (
+            {showPurchaseOrdersOnboarding ? (
                 <section className="portalProductsTableShell__G4m7N1 ui-surface-card">
                     <div className="portalProductsEmptyCard__X5m2Q8 portalProductsEmptyCardCentered__K2m8Q4">
                         <div className="portalProductsOnboardingArt__A5m2Q6" aria-hidden="true">

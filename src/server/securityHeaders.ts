@@ -5,6 +5,7 @@ export const STRICT_TRANSPORT_SECURITY_VALUE = "max-age=31536000; includeSubDoma
 type ContentSecurityPolicyOptions = {
     nonce: string;
     includeUpgradeInsecureRequests?: boolean;
+    includeUnsafeEval?: boolean;
 };
 
 export function createCspNonce() {
@@ -14,14 +15,20 @@ export function createCspNonce() {
 export function buildContentSecurityPolicy({
     nonce,
     includeUpgradeInsecureRequests = true,
+    includeUnsafeEval = false,
 }: ContentSecurityPolicyOptions) {
+    const scriptSrc = ["script-src", "'self'", `'nonce-${nonce}'`, "'strict-dynamic'"];
+    if (includeUnsafeEval) {
+        scriptSrc.push("'unsafe-eval'");
+    }
+
     const directives = [
         "default-src 'self'",
         "base-uri 'self'",
         "form-action 'self'",
         "frame-ancestors 'none'",
         "object-src 'none'",
-        `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'`,
+        scriptSrc.join(" "),
         "style-src 'self' 'unsafe-inline'",
         `img-src 'self' data: ${COUNTRY_FLAG_CDN_ORIGIN}`,
         "font-src 'self'",

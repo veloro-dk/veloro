@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Clock3, Cog, Lightbulb, RefreshCw, Search, Store, Trash2, TriangleAlert, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/Button";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import {
     ADMIN_FEEDBACK_ITEM,
     ADMIN_LOGIN_LOGS_ITEM,
@@ -150,6 +151,7 @@ export function PortalSettingsView({
     productCodeSuffix: string;
 }) {
     const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const { language: uiLanguage, messages, setLanguage: setUiLanguage } = usePortalI18n();
     const uiText = SETTINGS_UI_TEXT[uiLanguage] ?? SETTINGS_UI_TEXT.en;
     const isAdmin = userRole === "ADMIN";
@@ -2020,7 +2022,7 @@ export function PortalSettingsView({
         setClosing(true);
         const target = resolveCloseTarget();
         window.setTimeout(() => {
-            router.push(target);
+            void navigateTo(target);
         }, SETTINGS_CLOSE_ANIMATION_MS);
     }
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
-import { useRouter } from "next/navigation";
 import { GripVertical, PackagePlus, PackageSearch, Pencil, Search, Tags, Trash2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
 import {
     COLUMN_DRAGGING_BODY_CLASS,
@@ -68,13 +68,80 @@ import { countVariantOptionUsage } from "@/lib/variantOptionUsage";
 import type { InventorySale } from "@/lib/productInventory";
 import type { PurchaseOrder } from "@/lib/purchaseOrders";
 
+function buildInitialProductEditorState(cachedCatalogState: ReturnType<typeof getCachedCatalogStateSnapshot>, productId?: string) {
+    const emptyState = {
+        catalogLoaded: !productId,
+        productMissing: false,
+        title: "",
+        description: "",
+        productTypePath: ["uncategorized"],
+        selectedCategoryIds: [] as string[],
+        variantSelections: {} as Record<string, string>,
+        listedSalePrice: "",
+        sku: "",
+        barcode: "",
+        productVariantRulesDraft: [] as CategoryVariantRule[],
+        status: "ACTIVE" as CatalogProduct["status"],
+        organizationType: "",
+        vendor: "",
+        tags: [] as string[],
+    };
+
+    if (!productId || !cachedCatalogState) {
+        return emptyState;
+    }
+
+    const existing = cachedCatalogState.products.find((product) => product.id === productId) ?? null;
+    if (!existing) {
+        return {
+            ...emptyState,
+            catalogLoaded: true,
+            productMissing: true,
+        };
+    }
+
+    const selectedCategoryIds = (existing.categoryIds ?? []).filter((categoryId) => (
+        cachedCatalogState.categoryDefinitions.some((category) => category.id === categoryId)
+    ));
+    const categoryVariantIds = new Set(
+        cachedCatalogState.categoryDefinitions
+            .filter((category) => selectedCategoryIds.includes(category.id))
+            .flatMap((category) => category.variantRules.map((rule) => rule.variantId))
+    );
+
+    return {
+        catalogLoaded: true,
+        productMissing: false,
+        title: existing.name,
+        description: existing.description ?? "",
+        productTypePath: existing.productTypePath?.length ? existing.productTypePath : ["uncategorized"],
+        selectedCategoryIds,
+        variantSelections: { ...(existing.variants ?? {}) },
+        listedSalePrice: typeof existing.listedSalePrice === "number" && Number.isFinite(existing.listedSalePrice)
+            ? String(existing.listedSalePrice)
+            : "",
+        sku: existing.sku ?? "",
+        barcode: existing.barcode ?? "",
+        productVariantRulesDraft: (existing.productVariantRules ?? [])
+            .map((rule) => ({
+                variantId: rule.variantId,
+                required: Boolean(rule.required),
+            }))
+            .filter((rule) => !categoryVariantIds.has(rule.variantId)),
+        status: existing.status ?? "ACTIVE",
+        organizationType: existing.organizationType ?? "",
+        vendor: existing.vendor ?? "",
+        tags: normalizeMultiValueList(existing.tags ?? []),
+    };
+}
+
 export function PortalProductCreateView({
     storeCurrency,
     productId,
     commenterName,
     commenterStoreName,
 }: PortalProductCreateViewProps) {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const { language, messages, storeCurrency: contextStoreCurrency } = usePortalI18n();
     const effectiveStoreCurrency = storeCurrency ?? contextStoreCurrency;
     const timelineCommenterName = (commenterName ?? "Staff").trim() || "Staff";
@@ -82,29 +149,33 @@ export function PortalProductCreateView({
     const timelineCommenterInitials = useMemo(() => getInitials(timelineCommenterName), [timelineCommenterName]);
     const cachedCatalogState = getCachedCatalogStateSnapshot();
     const isEditMode = Boolean(productId);
+    const initialEditorState = useMemo(
+        () => buildInitialProductEditorState(cachedCatalogState, productId),
+        [cachedCatalogState, productId]
+    );
 
-    const [catalogLoaded, setCatalogLoaded] = useState(false);
+    const [catalogLoaded, setCatalogLoaded] = useState(initialEditorState.catalogLoaded);
     const [products, setProducts] = useState<CatalogProduct[]>(() => cachedCatalogState?.products ?? getDefaultProducts());
     const [categories, setCategories] = useState<ProductCategoryDefinition[]>(() => cachedCatalogState?.categoryDefinitions ?? getDefaultProductCategoryDefinitions());
     const [variantDefinitions, setVariantDefinitions] = useState<VariantDefinition[]>(() => cachedCatalogState?.variantDefinitions ?? getDefaultVariantDefinitions());
     const [purchaseOrders, setPurchaseOrders] = useState<PurchaseOrder[]>(() => cachedCatalogState?.purchaseOrders ?? []);
     const [inventorySales, setInventorySales] = useState<InventorySale[]>(() => cachedCatalogState?.inventorySales ?? []);
 
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [productTypePath, setProductTypePath] = useState<string[]>(["uncategorized"]);
+    const [title, setTitle] = useState(initialEditorState.title);
+    const [description, setDescription] = useState(initialEditorState.description);
+    const [productTypePath, setProductTypePath] = useState<string[]>(initialEditorState.productTypePath);
 
     const [categorySort, setCategorySort] = useState<ProductCategorySort>("TITLE_ASC");
     const [categorySearchBy, setCategorySearchBy] = useState<ProductCategorySearchBy>("TITLE");
     const [categoryPickerQuery, setCategoryPickerQuery] = useState("");
     const [categoryBrowseModalOpen, setCategoryBrowseModalOpen] = useState(false);
-    const [selectedCategoryIds, setSelectedCategoryIds] = useState<Set<string>>(new Set());
+    const [selectedCategoryIds, setSelectedCategoryIds] = useState<Set<string>>(() => new Set(initialEditorState.selectedCategoryIds));
 
-    const [variantSelections, setVariantSelections] = useState<Record<string, string>>({});
+    const [variantSelections, setVariantSelections] = useState<Record<string, string>>(initialEditorState.variantSelections);
 
-    const [listedSalePrice, setListedSalePrice] = useState("");
-    const [sku, setSku] = useState("");
-    const [barcode, setBarcode] = useState("");
+    const [listedSalePrice, setListedSalePrice] = useState(initialEditorState.listedSalePrice);
+    const [sku, setSku] = useState(initialEditorState.sku);
+    const [barcode, setBarcode] = useState(initialEditorState.barcode);
 
     const [variantSort, setVariantSort] = useState<VariantSort>("CUSTOM");
     const [variantSearchBy, setVariantSearchBy] = useState<VariantSearchBy>("LABEL");
@@ -129,7 +200,7 @@ export function PortalProductCreateView({
     const [pendingVariantDeleteSubmitting, setPendingVariantDeleteSubmitting] = useState(false);
     const [pendingVariantDeleteError, setPendingVariantDeleteError] = useState<string | null>(null);
 
-    const [productVariantRulesDraft, setProductVariantRulesDraft] = useState<CategoryVariantRule[]>([]);
+    const [productVariantRulesDraft, setProductVariantRulesDraft] = useState<CategoryVariantRule[]>(initialEditorState.productVariantRulesDraft);
     const [productVariantDragId, setProductVariantDragId] = useState<string | null>(null);
     const [productVariantDropIndex, setProductVariantDropIndex] = useState<number | null>(null);
     const [productVariantDragPreview, setProductVariantDragPreview] = useState<{ label: string; x: number; y: number } | null>(null);
@@ -138,14 +209,14 @@ export function PortalProductCreateView({
     const productVariantRowRefs = useRef<Record<string, HTMLDivElement | null>>({});
     const productVariantPointerCleanupRef = useRef<(() => void) | null>(null);
 
-    const [status, setStatus] = useState<CatalogProduct["status"]>("ACTIVE");
-    const [organizationType, setOrganizationType] = useState("");
-    const [vendor, setVendor] = useState("");
-    const [tags, setTags] = useState<string[]>([]);
+    const [status, setStatus] = useState<CatalogProduct["status"]>(initialEditorState.status);
+    const [organizationType, setOrganizationType] = useState(initialEditorState.organizationType);
+    const [vendor, setVendor] = useState(initialEditorState.vendor);
+    const [tags, setTags] = useState<string[]>(initialEditorState.tags);
     const [tagInputValue, setTagInputValue] = useState("");
 
     const [productError, setProductError] = useState<string | null>(null);
-    const [productMissing, setProductMissing] = useState(false);
+    const [productMissing, setProductMissing] = useState(initialEditorState.productMissing);
     const [timelineCommentDraft, setTimelineCommentDraft] = useState("");
     const [postingTimelineComment, setPostingTimelineComment] = useState(false);
     const [timelineDeleteCommentState, setTimelineDeleteCommentState] = useState<{ id: string; text: string } | null>(null);
@@ -669,8 +740,8 @@ export function PortalProductCreateView({
 
     const openCategoryEdit = useCallback((categoryId: string) => {
         if (!categoryId) return;
-        router.push(`/products/categories/${categoryId}`);
-    }, [router]);
+        void navigateTo(`/products/categories/${categoryId}`);
+    }, [navigateTo]);
 
     const updateVariantSelection = (variantId: string, value: string) => {
         setVariantSelections((current) => ({
@@ -1197,7 +1268,7 @@ export function PortalProductCreateView({
 
         setProducts(nextProducts);
         setCategories(nextCategories);
-        router.push("/products");
+        void navigateTo("/products");
         return true;
     }, [
         canSaveProduct,
@@ -1220,7 +1291,7 @@ export function PortalProductCreateView({
         products,
         isEditMode,
         productId,
-        router,
+        navigateTo,
     ]);
 
     const postTimelineComment = useCallback(async () => {
@@ -1271,7 +1342,7 @@ export function PortalProductCreateView({
     const openTimelineEdit = useCallback((event: ProductTimelineEvent) => {
         if (!event.editable) return;
         if (event.type === "purchase-order" && event.purchaseOrderId) {
-            router.push(`/products/purchase-orders/${event.purchaseOrderId}`);
+            void navigateTo(`/products/purchase-orders/${event.purchaseOrderId}`);
             return;
         }
         if (event.type === "maintenance" && productId && event.lineId && event.maintenanceEntryId) {
@@ -1280,16 +1351,16 @@ export function PortalProductCreateView({
                 batchId: event.lineId,
                 maintenanceId: event.maintenanceEntryId,
             });
-            router.push(`/products/inventory/maintenance?${params.toString()}`);
+            void navigateTo(`/products/inventory/maintenance?${params.toString()}`);
             return;
         }
         if (event.type === "sale" && productId) {
             const params = new URLSearchParams({ productId });
             if (event.lineId) params.set("batchId", event.lineId);
             if (event.saleId) params.set("saleId", event.saleId);
-            router.push(`/products/inventory/sell?${params.toString()}`);
+            void navigateTo(`/products/inventory/sell?${params.toString()}`);
         }
-    }, [productId, router]);
+    }, [navigateTo, productId]);
 
     const openTimelineCommentDelete = useCallback((event: ProductTimelineEvent) => {
         if (!event.commentId || event.type !== "comment") return;
@@ -1333,7 +1404,7 @@ export function PortalProductCreateView({
         discardLabelVariant: "cancel",
         saveDisabled: !canSaveProduct || (isEditMode && (!catalogLoaded || productMissing)),
         onSave: onSaveProduct,
-        onDiscard: () => router.push("/products"),
+        onDiscard: () => void navigateTo("/products"),
     });
 
     const newVariantErrorMessage = newVariantError === "name"
@@ -1353,18 +1424,7 @@ export function PortalProductCreateView({
                 : null;
 
     if (isEditMode && !catalogLoaded) {
-        return (
-            <section className="portalProductCreatePage__A3m8Q1 portalProductCreateTarget768__R2m8Q6">
-                <PortalPageTitle
-                    page="products"
-                    title="Edit product"
-                    icon={<PackagePlus className="portalPageHeadingIcon__Q8m2D5" aria-hidden="true" />}
-                />
-                <section className="portalProductCreateMainCard__N4m8Q3 ui-surface-card portalProductCreateMissing__H9m2Q4">
-                    <p>Loading product...</p>
-                </section>
-            </section>
-        );
+        return null;
     }
 
     if (isEditMode && catalogLoaded && productMissing) {

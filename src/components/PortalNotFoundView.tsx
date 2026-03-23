@@ -3,10 +3,12 @@
 import { useRouter } from "next/navigation";
 import { TriangleAlert } from "lucide-react";
 import { Button } from "@/components/Button";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
 
 export function PortalNotFoundView() {
     const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
 
     return (
         <section className="portalNotFoundPage__M8m2Q1">
@@ -24,7 +26,7 @@ export function PortalNotFoundView() {
                 </p>
 
                 <div className="portalNotFoundActions__S2m4Q6">
-                    <Button type="button" kind="primary" size="small" onClick={() => router.push("/")}>Go to home</Button>
+                    <Button type="button" kind="primary" size="small" onClick={() => void navigateTo("/")}>Go to home</Button>
                     <Button type="button" kind="secondary" size="small" onClick={() => router.back()}>Go back</Button>
                 </div>
             </section>

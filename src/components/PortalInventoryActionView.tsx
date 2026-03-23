@@ -1,8 +1,9 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { Button } from "@/components/Button";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
 import { Tooltip } from "@/components/Tooltip";
 import { usePendingChangesHeader } from "@/components/usePendingChangesHeader";
@@ -93,16 +94,133 @@ function InventoryActionSectionHeader({ title, description, action, showTooltip 
     );
 }
 
+function buildInitialInventoryActionState({
+    cached,
+    isSellMode,
+    searchParams,
+    defaultCurrency,
+}: {
+    cached: ReturnType<typeof getCachedCatalogStateSnapshot>;
+    isSellMode: boolean;
+    searchParams: URLSearchParams;
+    defaultCurrency: string;
+}) {
+    const emptyState = {
+        catalogLoaded: false,
+        loadError: null as string | null,
+        selectedProductId: "",
+        selectedBatchId: "",
+        sellDate: formatDateOnly(new Date()),
+        sellQuantity: "1",
+        sellFinalUnitPrice: "0",
+        sellNote: "",
+        maintenanceDate: formatDateOnly(new Date()),
+        maintenanceCurrency: defaultCurrency,
+        maintenanceAmount: "",
+        maintenanceDescription: "",
+        editingSaleId: null as string | null,
+        editingMaintenanceId: null as string | null,
+    };
+
+    if (!cached) {
+        return emptyState;
+    }
+
+    const queryProductId = searchParams.get("productId");
+    const queryBatchId = searchParams.get("batchId");
+    const querySaleId = searchParams.get("saleId");
+    const queryMaintenanceId = searchParams.get("maintenanceId");
+
+    if (isSellMode && querySaleId) {
+        const existingSale = cached.inventorySales.find((sale) => sale.id === querySaleId) ?? null;
+        if (existingSale) {
+            return {
+                ...emptyState,
+                catalogLoaded: true,
+                selectedProductId: existingSale.productId,
+                selectedBatchId: existingSale.batchId,
+                sellDate: existingSale.soldAt.slice(0, 10),
+                sellQuantity: String(existingSale.quantity),
+                sellFinalUnitPrice: String(existingSale.saleUnitPrice),
+                sellNote: existingSale.notes ?? "",
+                editingSaleId: existingSale.id,
+            };
+        }
+    }
+
+    if (!isSellMode && queryMaintenanceId) {
+        const byBatch = queryBatchId
+            ? cached.inventoryBatches.find((batch) => batch.id === queryBatchId)
+            : null;
+        const matchingBatch = byBatch
+            ?? cached.inventoryBatches.find((batch) => (
+                (queryProductId ? batch.productId === queryProductId : true)
+                && (batch.maintenanceEntries ?? []).some((entry) => entry.id === queryMaintenanceId)
+            ))
+            ?? null;
+        const matchingEntry = matchingBatch?.maintenanceEntries?.find((entry) => entry.id === queryMaintenanceId) ?? null;
+
+        if (matchingBatch && matchingEntry) {
+            return {
+                ...emptyState,
+                catalogLoaded: true,
+                selectedProductId: matchingBatch.productId,
+                selectedBatchId: matchingBatch.id,
+                maintenanceDate: matchingEntry.createdAt.slice(0, 10),
+                maintenanceCurrency: matchingEntry.currency,
+                maintenanceAmount: String(matchingEntry.amount),
+                maintenanceDescription: matchingEntry.description,
+                editingMaintenanceId: matchingEntry.id,
+            };
+        }
+    }
+
+    const sellableProductIds = new Set(
+        cached.inventoryBatches
+            .filter((batch) => batch.remainingQuantity > 0)
+            .map((batch) => batch.productId)
+    );
+    const productsWithBatches = new Set(cached.inventoryBatches.map((batch) => batch.productId));
+    const fallbackProductId = isSellMode
+        ? cached.products.find((product) => sellableProductIds.has(product.id))?.id ?? ""
+        : cached.products.find((product) => productsWithBatches.has(product.id))?.id ?? "";
+    const selectedProductId = queryProductId
+        && (isSellMode ? sellableProductIds.has(queryProductId) : productsWithBatches.has(queryProductId))
+        ? queryProductId
+        : fallbackProductId;
+    const availableBatches = selectedProductId ? getSellableBatchesForProduct(selectedProductId, cached.inventoryBatches) : [];
+    const selectedBatchId = queryBatchId && availableBatches.some((batch) => batch.id === queryBatchId)
+        ? queryBatchId
+        : availableBatches[0]?.id ?? "";
+
+    return {
+        ...emptyState,
+        catalogLoaded: true,
+        selectedProductId,
+        selectedBatchId,
+    };
+}
+
 export function PortalInventoryActionView({ mode }: PortalInventoryActionViewProps) {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const searchParams = useSearchParams();
     const { language, currency, storeCurrency } = usePortalI18n();
     const cached = getCachedCatalogStateSnapshot();
     const locale = language || "en";
     const isSellMode = mode === "sell";
+    const defaultCurrency = isIsoCurrencyCode(currency) ? currency : storeCurrency;
+    const initialActionState = useMemo(
+        () => buildInitialInventoryActionState({
+            cached,
+            isSellMode,
+            searchParams: new URLSearchParams(searchParams.toString()),
+            defaultCurrency,
+        }),
+        [cached, defaultCurrency, isSellMode, searchParams]
+    );
 
-    const [catalogLoaded, setCatalogLoaded] = useState(false);
-    const [loadError, setLoadError] = useState<string | null>(null);
+    const [catalogLoaded, setCatalogLoaded] = useState(initialActionState.catalogLoaded);
+    const [loadError, setLoadError] = useState<string | null>(initialActionState.loadError);
     const [submitError, setSubmitError] = useState<string | null>(null);
     const [isSaving, setIsSaving] = useState(false);
 
@@ -112,22 +230,21 @@ export function PortalInventoryActionView({ mode }: PortalInventoryActionViewPro
     const [batches, setBatches] = useState<InventoryBatch[]>(() => cached?.inventoryBatches ?? []);
     const [inventorySales, setInventorySales] = useState<InventorySale[]>(() => cached?.inventorySales ?? []);
 
-    const defaultCurrency = isIsoCurrencyCode(currency) ? currency : storeCurrency;
     const [availableCurrencies, setAvailableCurrencies] = useState<string[]>(() => mergeCurrencyCodes(getLocalIsoCurrencyCodes(), [defaultCurrency, storeCurrency]));
     const [usdRates, setUsdRates] = useState<Record<string, number>>(FALLBACK_USD_RATES);
 
-    const [selectedProductId, setSelectedProductId] = useState("");
-    const [selectedBatchId, setSelectedBatchId] = useState("");
-    const [sellDate, setSellDate] = useState(() => formatDateOnly(new Date()));
-    const [sellQuantity, setSellQuantity] = useState("1");
-    const [sellFinalUnitPrice, setSellFinalUnitPrice] = useState("0");
-    const [sellNote, setSellNote] = useState("");
-    const [maintenanceDate, setMaintenanceDate] = useState(() => formatDateOnly(new Date()));
-    const [maintenanceCurrency, setMaintenanceCurrency] = useState(defaultCurrency);
-    const [maintenanceAmount, setMaintenanceAmount] = useState("");
-    const [maintenanceDescription, setMaintenanceDescription] = useState("");
-    const [editingSaleId, setEditingSaleId] = useState<string | null>(null);
-    const [editingMaintenanceId, setEditingMaintenanceId] = useState<string | null>(null);
+    const [selectedProductId, setSelectedProductId] = useState(initialActionState.selectedProductId);
+    const [selectedBatchId, setSelectedBatchId] = useState(initialActionState.selectedBatchId);
+    const [sellDate, setSellDate] = useState(initialActionState.sellDate);
+    const [sellQuantity, setSellQuantity] = useState(initialActionState.sellQuantity);
+    const [sellFinalUnitPrice, setSellFinalUnitPrice] = useState(initialActionState.sellFinalUnitPrice);
+    const [sellNote, setSellNote] = useState(initialActionState.sellNote);
+    const [maintenanceDate, setMaintenanceDate] = useState(initialActionState.maintenanceDate);
+    const [maintenanceCurrency, setMaintenanceCurrency] = useState(initialActionState.maintenanceCurrency);
+    const [maintenanceAmount, setMaintenanceAmount] = useState(initialActionState.maintenanceAmount);
+    const [maintenanceDescription, setMaintenanceDescription] = useState(initialActionState.maintenanceDescription);
+    const [editingSaleId, setEditingSaleId] = useState<string | null>(initialActionState.editingSaleId);
+    const [editingMaintenanceId, setEditingMaintenanceId] = useState<string | null>(initialActionState.editingMaintenanceId);
     const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
     const isEditingExistingEntry = isSellMode ? Boolean(editingSaleId) : Boolean(editingMaintenanceId);
@@ -347,7 +464,7 @@ export function PortalInventoryActionView({ mode }: PortalInventoryActionViewPro
         scope: "productCreate",
         discardLabelVariant: "cancel",
         saveDisabled,
-        onDiscard: () => router.push("/products/inventory"),
+        onDiscard: () => void navigateTo("/products/inventory"),
         onSave: async () => {
             const nextErrors = getFieldErrors();
             setFieldErrors(nextErrors);
@@ -498,7 +615,7 @@ export function PortalInventoryActionView({ mode }: PortalInventoryActionViewPro
                     });
                 }
 
-                router.push("/products/inventory");
+                void navigateTo("/products/inventory");
                 return true;
             } catch {
                 setSubmitError(isSellMode ? "Unable to save sale right now." : "Unable to save maintenance right now.");
@@ -774,20 +891,16 @@ export function PortalInventoryActionView({ mode }: PortalInventoryActionViewPro
                 }
                 await saveCatalogStateToApi({ purchaseOrders: nextPurchaseOrders });
             }
-            router.push("/products/inventory");
+            void navigateTo("/products/inventory");
         } catch {
             setSubmitError(isSellMode ? "Unable to delete sale right now." : "Unable to delete maintenance right now.");
         } finally {
             setIsSaving(false);
         }
-    }, [editingMaintenanceId, editingSaleId, isSaving, isSellMode, router, selectedBatch]);
+    }, [editingMaintenanceId, editingSaleId, isSaving, isSellMode, navigateTo, selectedBatch]);
 
     if (!catalogLoaded) {
-        return (
-            <section className="portalProductCreatePage__A3m8Q1 portalProductCreateTarget768__R2m8Q6">
-                <PortalPageTitle page="inventory" title={isSellMode ? "Sell stock" : "Add maintenance"} />
-            </section>
-        );
+        return null;
     }
 
     return (

@@ -31,6 +31,16 @@ test("buildContentSecurityPolicy includes nonce-based script policy", () => {
     assert.match(policy, /upgrade-insecure-requests/);
 });
 
+test("buildContentSecurityPolicy can allow unsafe-eval when needed for local dev", () => {
+    const policy = buildContentSecurityPolicy({
+        nonce: "abc123",
+        includeUpgradeInsecureRequests: false,
+        includeUnsafeEval: true,
+    });
+
+    assert.match(policy, /script-src 'self' 'nonce-abc123' 'strict-dynamic' 'unsafe-eval'/);
+});
+
 test("buildContentSecurityPolicy can disable upgrade-insecure-requests", () => {
     const policy = buildContentSecurityPolicy({
         nonce: "abc123",

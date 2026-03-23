@@ -68,6 +68,7 @@ export function proxy(request: NextRequest) {
     const contentSecurityPolicy = buildContentSecurityPolicy({
         nonce,
         includeUpgradeInsecureRequests: process.env.NODE_ENV === "production",
+        includeUnsafeEval: process.env.NODE_ENV !== "production",
     });
     const includeStrictTransportSecurity = shouldSetStrictTransportSecurity({
         nodeEnv: process.env.NODE_ENV,
@@ -77,6 +78,16 @@ export function proxy(request: NextRequest) {
     const requestHeaders = createRequestHeaders(request, nonce, contentSecurityPolicy);
 
     if (pathname.startsWith("/api")) {
+        return applySecurityHeaders(
+            NextResponse.next({ request: { headers: requestHeaders } }),
+            {
+                contentSecurityPolicy,
+                includeStrictTransportSecurity,
+            }
+        );
+    }
+
+    if (pathname.startsWith("/_vercel")) {
         return applySecurityHeaders(
             NextResponse.next({ request: { headers: requestHeaders } }),
             {
@@ -133,5 +144,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml).*)"],
+    matcher: ["/((?!_next/static|_next/image|_vercel|favicon.ico|robots.txt|sitemap.xml).*)"],
 };

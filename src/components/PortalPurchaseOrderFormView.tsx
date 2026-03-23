@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { ExternalLink, PackageSearch, Pencil, Search, Tags, Trash2 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { PortalModal } from "@/components/PortalModal";
+import { usePortalNavigation } from "@/components/PortalNavigationContext";
 import { PortalPageTitle } from "@/components/PortalPageTitle";
 import { notifyPortalAction } from "@/components/portalActionNotifications";
 import { PurchaseOrderSectionHeader, SupplierPhoneField } from "@/components/purchaseOrders/formSections";
@@ -73,11 +74,49 @@ import {
     type ProductSearchBy,
 } from "@/components/purchaseOrders/formHelpers";
 
+function buildInitialPurchaseOrderFormState({
+    cached,
+    orderId,
+    activeStoreId,
+    storeCurrency,
+}: {
+    cached: ReturnType<typeof getCachedCatalogStateSnapshot>;
+    orderId?: string;
+    activeStoreId: string;
+    storeCurrency: string;
+}) {
+    const purchaseOrders = cached?.purchaseOrders ?? [];
+    const existingOrder = orderId
+        ? purchaseOrders.find((order) => order.id === orderId) ?? null
+        : null;
+    const loadError = orderId && cached && !existingOrder ? "Purchase order could not be found." : null;
+    const draft = loadError
+        ? null
+        : existingOrder
+            ? cloneDraft(existingOrder)
+            : cached
+                ? buildDefaultDraft(activeStoreId, storeCurrency, purchaseOrders)
+                : null;
+    const availableCurrencies = mergeCurrencyCodes(getLocalIsoCurrencyCodes(), [storeCurrency, ...purchaseOrders.map((order) => order.supplierCurrency)]);
+
+    return {
+        isLoaded: Boolean(cached),
+        loadError,
+        draft,
+        initialSnapshot: draft ? serializeDraft(draft) : null,
+        availableCurrencies: availableCurrencies.length > 0 ? availableCurrencies : [storeCurrency],
+    };
+}
+
 export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurrency, orderId }: PortalPurchaseOrderFormViewProps) {
-    const router = useRouter();
+    const { navigateTo } = usePortalNavigation();
     const searchParams = useSearchParams();
     const { language } = usePortalI18n();
     const cached = getCachedCatalogStateSnapshot();
+    const initialFormState = useMemo(
+        () => buildInitialPurchaseOrderFormState({ cached, orderId, activeStoreId, storeCurrency }),
+        [activeStoreId, cached, orderId, storeCurrency]
+    );
 
     const [variantDefinitions, setVariantDefinitions] = useState<VariantDefinition[]>(() => cached?.variantDefinitions ?? []);
     const [categories, setCategories] = useState<ProductCategoryDefinition[]>(() => cached?.categoryDefinitions ?? []);
@@ -86,12 +125,12 @@ export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurren
     const [suppliers, setSuppliers] = useState<SupplierDirectoryEntry[]>(() => cached?.suppliers ?? []);
     const [, setInventorySales] = useState(() => cached?.inventorySales ?? []);
 
-    const [availableCurrencies, setAvailableCurrencies] = useState<string[]>(() => mergeCurrencyCodes(getLocalIsoCurrencyCodes(), [storeCurrency]));
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [loadError, setLoadError] = useState<string | null>(null);
+    const [availableCurrencies, setAvailableCurrencies] = useState<string[]>(initialFormState.availableCurrencies);
+    const [isLoaded, setIsLoaded] = useState(initialFormState.isLoaded);
+    const [loadError, setLoadError] = useState<string | null>(initialFormState.loadError);
 
-    const [draft, setDraft] = useState<PurchaseOrder | null>(null);
-    const [initialSnapshot, setInitialSnapshot] = useState<string | null>(null);
+    const [draft, setDraft] = useState<PurchaseOrder | null>(initialFormState.draft);
+    const [initialSnapshot, setInitialSnapshot] = useState<string | null>(initialFormState.initialSnapshot);
 
     const [lineErrors, setLineErrors] = useState<Record<string, LineValidationError>>({});
     const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -939,17 +978,17 @@ export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurren
             });
 
             setSubmitMessage(canFinalize ? "Purchase order saved." : "Required fields are missing. Saved as draft.");
-            router.push("/products/purchase-orders");
+            void navigateTo("/products/purchase-orders");
             return true;
         } catch {
             setSubmitError("Unable to save purchase order.");
             return false;
         }
-    }, [activeStoreId, draft, router, storeCurrency, validateDraftForFinalSave]);
+    }, [activeStoreId, draft, navigateTo, storeCurrency, validateDraftForFinalSave]);
 
     const onDiscard = useCallback(() => {
-        router.push("/products/purchase-orders");
-    }, [router]);
+        void navigateTo("/products/purchase-orders");
+    }, [navigateTo]);
 
     const pendingHeaderActive = !orderId || isDirty;
     const pendingHeaderSaveDisabled = !isLoaded || !draft || Boolean(loadError);
@@ -1023,11 +1062,7 @@ export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurren
     }, [variantsManagerOpen]);
 
     if (!isLoaded) {
-        return (
-            <section className="portalProductCreatePage__A3m8Q1 portalProductCreateTarget768__R2m8Q6">
-                <PortalPageTitle page="purchaseOrders" title={orderId ? "Edit purchase order" : "Create purchase order"} />
-            </section>
-        );
+        return null;
     }
 
     if (!draft) {
@@ -1316,7 +1351,7 @@ export function PortalPurchaseOrderFormView({ stores, activeStoreId, storeCurren
                                                     <button
                                                         type="button"
                                                         className="portalProductsNameButton__N6m2Q5"
-                                                        onClick={() => router.push(`/products/inventory/${encodeURIComponent(product.id)}`)}
+                                                        onClick={() => void navigateTo(`/products/inventory/${encodeURIComponent(product.id)}`)}
                                                     >
                                                         {getProductDisplayLabel(product)}
                                                     </button>
