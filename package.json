@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --conditions=react-server --test --import tsx \"src/**/*.test.ts\"",
+    "test": "tsx scripts/run-tests.ts",
     "perf:budgets": "tsx scripts/perf-budget.ts",
     "launch:check": "tsx scripts/launch-check.ts",
     "uptime:check": "tsx scripts/synthetic-uptime.ts",
