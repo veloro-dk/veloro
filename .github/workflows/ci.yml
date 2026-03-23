@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/veloro_ci?schema=public
+      DIRECT_URL: postgresql://postgres:postgres@localhost:5432/veloro_ci?schema=public
       APP_URL: http://localhost:3000
     steps:
       - name: Checkout
